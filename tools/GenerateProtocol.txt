@@ -1,0 +1,4 @@
+Copy and paste 
+
+Find: ^([a-zA-Z0-9]*)\s*([a-zA-Z\[\]]*)\s*[a-z]*\s*[a-z]*\s*(.*)
+Replace: /// <summary>\n/// $3\n/// </summary>\n[DataMember(Name = "$1")]\npublic $2 $1 { get; set; }\n
