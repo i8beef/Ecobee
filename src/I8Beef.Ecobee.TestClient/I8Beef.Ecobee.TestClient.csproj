@@ -50,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ecobee\I8Beef.Ecobee.csproj">
+    <ProjectReference Include="..\I8Beef.Ecobee\I8Beef.Ecobee.csproj">
       <Project>{c4087d00-afbe-4f77-ab72-a7314886ea08}</Project>
       <Name>I8Beef.Ecobee</Name>
     </ProjectReference>

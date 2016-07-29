@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Ecobee.TestClient")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("I8Beef.Ecobee")]
+[assembly: AssemblyDescription("Library for interacting with Ecobee API")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Ecobee.TestClient")]
+[assembly: AssemblyCompany("Michael Hallock")]
+[assembly: AssemblyProduct("I8Beef.Ecobee")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7b48baa2-cbc9-4e5d-95a9-57bdde67b63e")]
+[assembly: Guid("c4087d00-afbe-4f77-ab72-a7314886ea08")]
 
 // Version information for an assembly consists of the following four values:
 //
