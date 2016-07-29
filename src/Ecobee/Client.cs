@@ -16,17 +16,16 @@ namespace Ecobee
         private string _appKey;
         private string _authToken;
         private string _refreshToken;
+        private DateTime _tokenExpiration;
 
         public event EventHandler<AuthToken> AuthTokenUpdated;
 
-        public Client(string appKey, string authToken, string refreshToken)
+        public Client(string appKey, string authToken, string refreshToken, DateTime tokenExpiration)
         {
             _appKey = appKey;
             _authToken = authToken;
             _refreshToken = refreshToken;
-
-            // Immediately refresh available tokens
-            GetRefreshToken().Wait();
+            _tokenExpiration = tokenExpiration;
         }
 
         public static async Task<Pin> GetPin(string appKey)
@@ -59,6 +58,9 @@ namespace Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
+            if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
+                await GetRefreshToken();
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
@@ -79,6 +81,9 @@ namespace Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
+            if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
+                await GetRefreshToken();
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
@@ -107,6 +112,7 @@ namespace Ecobee
                 var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
                 _authToken = authToken.AccessToken;
                 _refreshToken = authToken.RefreshToken;
+                _tokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
 
                 // Raise event for callers to persist new auth tokens
                 AuthTokenUpdated?.Invoke(this, authToken);

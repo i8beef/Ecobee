@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ecobee
 {
-    internal static class JsonSerializer<TType> where TType : class
+    public static class JsonSerializer<TType> where TType : class
     {
         /// <summary>
         /// Serializes an object to JSON

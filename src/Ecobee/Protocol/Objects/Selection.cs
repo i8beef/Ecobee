@@ -44,13 +44,13 @@ namespace Ecobee.Protocol.Objects
         /// <summary>
         /// Include the thermostat location object. If not specified, defaults to false.
         /// </summary>
-        [DataMember(Name = "includeRuntime")]
+        [DataMember(Name = "includeLocation")]
         public bool IncludeLocation { get; set; }
 
         /// <summary>
         /// Include the thermostat program object. If not specified, defaults to false.
         /// </summary>
-        [DataMember(Name = "includeRuntime")]
+        [DataMember(Name = "includeProgram")]
         public bool IncludeProgram { get; set; }
 
         /// <summary>
