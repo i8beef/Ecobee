@@ -1,4 +1,6 @@
-Copy and paste 
+These are handy regexes that were used to generate the original Protocol classes.
+
+Simple copy and paste the Properties tables from the Ecobee API pages, and run these through a find and replace, and it should generate something that looks remotely like .NET code.
 
 Find: ^([a-zA-Z0-9]*)\s*([a-zA-Z\[\]]*)\s*[a-z]*\s*[a-z]*\s*(.*)
 Replace: /// <summary>\n/// $3\n/// </summary>\n[DataMember(Name = "$1")]\npublic $2 $1 { get; set; }\n
