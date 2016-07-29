@@ -12,7 +12,7 @@ See the [Ecobee API](https://www.ecobee.com/home/developer/api/documentation/v1/
 
 Run the following command in the NuGet Package Manager console to install the library:
 
-    PM> Install-Package Ecobee
+    PM> Install-Package I8Beef.Ecobee
 
 ### License
 
