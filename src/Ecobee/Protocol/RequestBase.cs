@@ -1,9 +1,24 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Ecobee.Protocol
 {
     [DataContract]
-    public class RequestBase
+    public abstract class RequestBase
     {
+        /// <summary>
+        /// Request URI.
+        /// </summary>
+        public abstract string Uri { get; }
+
+        /// <summary>
+        /// Request type (GET or POST).
+        /// </summary>
+        public abstract RequestType RequestType { get; }
+
+        /// <summary>
+        /// Type to deserialize the response to.
+        /// </summary>
+        public abstract Type ResponseType { get; }
     }
 }

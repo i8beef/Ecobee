@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Ecobee.Protocol.Thermostat
 {
     [DataContract]
-    public class ThermostatSummaryResponse : ResponseBase
+    public class ThermostatSummaryResponse : Response
     {
         public ThermostatSummaryResponse()
         {

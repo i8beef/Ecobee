@@ -1,16 +1,15 @@
-﻿using Ecobee.Protocol.Objects;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Thermostat
+namespace Ecobee.Protocol.Utility.Demand
 {
     [DataContract]
-    public class ThermostatSummaryRequest : RequestBase
+    public class ListDemandRequest : RequestBase
     {
         /// <summary>
         /// Request URI.
         /// </summary>
-        public override string Uri { get { return "/thermostatSummary"; } }
+        public override string Uri { get { return "/demandResponse"; } }
 
         /// <summary>
         /// Request type (GET or POST).
@@ -20,12 +19,12 @@ namespace Ecobee.Protocol.Thermostat
         /// <summary>
         /// Type to deserialize the response to.
         /// </summary>
-        public override Type ResponseType { get { return typeof(ThermostatSummaryResponse); } }
+        public override Type ResponseType { get { return typeof(ListDemandResponse); } }
 
         /// <summary>
-        /// The selection criteria for update.
+        /// The type of request. Always "list".
         /// </summary>
-        [DataMember(Name = "selection")]
-        public Selection Selection { get; set; }
+        [DataMember(Name = "operation")]
+        public string Operation { get { return "list"; } }
     }
 }

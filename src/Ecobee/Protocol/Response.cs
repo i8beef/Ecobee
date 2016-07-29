@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Ecobee.Protocol
 {
     [DataContract]
-    public abstract class ResponseBase
+    public class Response
     {
         /// <summary>
         /// The Status object contains the response code for the request. It will also 

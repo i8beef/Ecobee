@@ -5,12 +5,12 @@ using System.Runtime.Serialization;
 namespace Ecobee.Protocol.Thermostat
 {
     [DataContract]
-    public class ThermostatSummaryRequest : RequestBase
+    public class ThermostatRequest : PagedRequestBase
     {
         /// <summary>
         /// Request URI.
         /// </summary>
-        public override string Uri { get { return "/thermostatSummary"; } }
+        public override string Uri { get { return "/thermostat"; } }
 
         /// <summary>
         /// Request type (GET or POST).
@@ -20,7 +20,7 @@ namespace Ecobee.Protocol.Thermostat
         /// <summary>
         /// Type to deserialize the response to.
         /// </summary>
-        public override Type ResponseType { get { return typeof(ThermostatSummaryResponse); } }
+        public override Type ResponseType { get { return typeof(ThermostatResponse); } }
 
         /// <summary>
         /// The selection criteria for update.

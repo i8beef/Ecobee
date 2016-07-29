@@ -55,9 +55,9 @@ namespace Ecobee
             }
         }
 
-        public async Task<TResponse> Get<TRequest, TResponse>(string uri, TRequest request)
+        public async Task<TResponse> Get<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
-            where TResponse : ResponseBase
+            where TResponse : Response
         {
             using (var client = new HttpClient())
             {
@@ -66,7 +66,7 @@ namespace Ecobee
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
 
                 var message = JsonSerializer<TRequest>.Serialize(request);
-                var response = await client.GetAsync(_baseUri + _version + uri + "?json=" + message);
+                var response = await client.GetAsync(_baseUri + _version + request.Uri + "?json=" + message);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                     throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
@@ -75,9 +75,9 @@ namespace Ecobee
             }
         }
 
-        public async Task<TResponse> Post<TRequest, TResponse>(string uri, TRequest request)
+        public async Task<TResponse> Post<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
-            where TResponse : ResponseBase
+            where TResponse : Response
         {
             using (var client = new HttpClient())
             {
@@ -86,7 +86,7 @@ namespace Ecobee
 
                 var message = JsonSerializer<TRequest>.Serialize(request);
                 var content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(_baseUri + _version + uri + "?format=json", content);
+                var response = await client.PostAsync(_baseUri + _version + request.Uri + "?format=json", content);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
                     throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));

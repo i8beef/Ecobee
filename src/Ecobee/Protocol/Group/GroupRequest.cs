@@ -2,15 +2,15 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Thermostat
+namespace Ecobee.Protocol.Group
 {
     [DataContract]
-    public class ThermostatSummaryRequest : RequestBase
+    public class GroupRequest : RequestBase
     {
         /// <summary>
         /// Request URI.
         /// </summary>
-        public override string Uri { get { return "/thermostatSummary"; } }
+        public override string Uri { get { return "/group"; } }
 
         /// <summary>
         /// Request type (GET or POST).
@@ -20,10 +20,10 @@ namespace Ecobee.Protocol.Thermostat
         /// <summary>
         /// Type to deserialize the response to.
         /// </summary>
-        public override Type ResponseType { get { return typeof(ThermostatSummaryResponse); } }
+        public override Type ResponseType { get { return typeof(GroupResponse); } }
 
         /// <summary>
-        /// The selection criteria for update.
+        /// The selection criteria for the request.
         /// </summary>
         [DataMember(Name = "selection")]
         public Selection Selection { get; set; }
