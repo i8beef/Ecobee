@@ -34,6 +34,5 @@ namespace Ecobee.Protocol.Objects
         /// </summary>
         [DataMember(Name = "actions")]
         public IList<Action> Actions { get; set; }
-
     }
 }

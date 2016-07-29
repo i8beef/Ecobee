@@ -3,7 +3,7 @@
 namespace Ecobee.Protocol.Objects
 {
     [DataContract]
-    public class GeneralSettings
+    public class GeneralSetting
     {
         /// <summary>
         /// Boolean value representing whether or not alerts/reminders are enabled for 
