@@ -7,8 +7,8 @@
     <ProjectGuid>{7B48BAA2-CBC9-4E5D-95A9-57BDDE67B63E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ecobee.TestClient</RootNamespace>
-    <AssemblyName>Ecobee.TestClient</AssemblyName>
+    <RootNamespace>I8Beef.Ecobee.TestClient</RootNamespace>
+    <AssemblyName>I8Beef.Ecobee.TestClient</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ecobee\Ecobee.csproj">
+    <ProjectReference Include="..\Ecobee\I8Beef.Ecobee.csproj">
       <Project>{c4087d00-afbe-4f77-ab72-a7314886ea08}</Project>
-      <Name>Ecobee</Name>
+      <Name>I8Beef.Ecobee</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,8 +7,8 @@
     <ProjectGuid>{C4087D00-AFBE-4F77-AB72-A7314886EA08}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ecobee</RootNamespace>
-    <AssemblyName>Ecobee</AssemblyName>
+    <RootNamespace>I8Beef.Ecobee</RootNamespace>
+    <AssemblyName>I8Beef.Ecobee</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

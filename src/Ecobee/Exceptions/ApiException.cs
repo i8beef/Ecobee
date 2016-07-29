@@ -1,7 +1,7 @@
-﻿using Ecobee.Messages;
+﻿using I8Beef.Ecobee.Messages;
 using System;
 
-namespace Ecobee.Exceptions
+namespace I8Beef.Ecobee.Exceptions
 {
     public class ApiException : Exception
     {

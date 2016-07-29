@@ -1,4 +1,4 @@
-﻿namespace Ecobee.Protocol
+﻿namespace I8Beef.Ecobee.Protocol
 {
     public enum RequestType
     {

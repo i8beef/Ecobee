@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Hierarchy.Set
+namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
     [DataContract]
     public class SetListResponse : Response

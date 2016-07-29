@@ -1,10 +1,10 @@
-﻿using Ecobee.Messages;
-using Ecobee.Protocol.Thermostat;
+﻿using I8Beef.Ecobee.Messages;
+using I8Beef.Ecobee.Protocol.Thermostat;
 using System;
 using System.IO;
 using System.Text;
 
-namespace Ecobee.TestClient
+namespace I8Beef.Ecobee.TestClient
 {
     class Program
     {

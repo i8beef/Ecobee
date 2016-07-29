@@ -1,9 +1,9 @@
-﻿using Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Objects;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Thermostat
+namespace I8Beef.Ecobee.Protocol.Thermostat
 {
     [DataContract]
     public class ThermostatUpdateRequest : RequestBase

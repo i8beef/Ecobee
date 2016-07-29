@@ -1,8 +1,8 @@
-﻿using Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Objects;
 using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Utility.Demand
+namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
     [DataContract]
     public class IssueDemandRequest : RequestBase

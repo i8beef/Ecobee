@@ -1,11 +1,11 @@
-﻿using Ecobee.Exceptions;
-using Ecobee.Messages;
-using Ecobee.Protocol;
+﻿using I8Beef.Ecobee.Exceptions;
+using I8Beef.Ecobee.Messages;
+using I8Beef.Ecobee.Protocol;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Ecobee
+namespace I8Beef.Ecobee
 {
     public class Client
     {

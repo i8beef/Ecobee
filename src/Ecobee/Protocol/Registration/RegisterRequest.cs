@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Registration
+namespace I8Beef.Ecobee.Protocol.Registration
 {
     [DataContract]
     public class RegisterRequest : RequestBase

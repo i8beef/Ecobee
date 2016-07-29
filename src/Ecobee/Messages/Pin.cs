@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Ecobee.Messages
+namespace I8Beef.Ecobee.Messages
 {
     [DataContract]
     public class Pin

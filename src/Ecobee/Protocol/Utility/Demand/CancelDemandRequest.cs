@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Utility.Demand
+namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
     [DataContract]
     public class CancelDemandRequest : RequestBase

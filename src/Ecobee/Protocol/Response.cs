@@ -1,7 +1,7 @@
-﻿using Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Objects;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol
+namespace I8Beef.Ecobee.Protocol
 {
     [DataContract]
     public class Response

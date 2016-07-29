@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Hierarchy.Thermostat
+namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
 {
     [DataContract]
     public class ThermostatRegisterRequest : RequestBase

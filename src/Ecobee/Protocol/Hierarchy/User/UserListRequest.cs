@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Hierarchy.User
+namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
     [DataContract]
     public class UserListRequest : RequestBase

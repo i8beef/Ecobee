@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Objects
+namespace I8Beef.Ecobee.Protocol.Objects
 {
     [DataContract]
     public class Technician

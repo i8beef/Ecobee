@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Thermostat
+namespace I8Beef.Ecobee.Protocol.Thermostat
 {
     [DataContract]
     public class ThermostatResponse : PagedResponse

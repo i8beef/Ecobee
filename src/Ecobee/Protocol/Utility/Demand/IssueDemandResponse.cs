@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Utility.Demand
+namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
     [DataContract]
     public class IssueDemandResponse : Response

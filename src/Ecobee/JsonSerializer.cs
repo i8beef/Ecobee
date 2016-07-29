@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace Ecobee
+namespace I8Beef.Ecobee
 {
     public static class JsonSerializer<TType> where TType : class
     {

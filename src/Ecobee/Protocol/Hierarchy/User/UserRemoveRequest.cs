@@ -1,9 +1,9 @@
-﻿using Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Objects;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Ecobee.Protocol.Hierarchy.User
+namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
     [DataContract]
     public class UserRemoveRequest : RequestBase
