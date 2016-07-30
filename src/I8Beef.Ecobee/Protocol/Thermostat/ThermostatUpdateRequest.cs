@@ -1,4 +1,5 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Functions;
+using I8Beef.Ecobee.Protocol.Objects;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -6,6 +7,8 @@ using System.Runtime.Serialization;
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
     [DataContract]
+    [KnownType(typeof(ResumeProgramFunction))]
+    [KnownType(typeof(SetHoldFunction))]
     public class ThermostatUpdateRequest : RequestBase
     {
         public ThermostatUpdateRequest()

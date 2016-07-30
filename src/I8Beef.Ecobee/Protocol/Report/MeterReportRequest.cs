@@ -60,6 +60,5 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// </summary>
         [DataMember(Name = "meters")]
         public string Meters { get; set; }
-
     }
 }

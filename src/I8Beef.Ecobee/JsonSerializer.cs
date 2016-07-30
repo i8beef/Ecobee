@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace I8Beef.Ecobee
 {
@@ -16,7 +17,10 @@ namespace I8Beef.Ecobee
             using (var stream = new MemoryStream())
             {
                 serializer.WriteObject(stream, instance);
-                return Encoding.Default.GetString(stream.ToArray());
+                var json = Encoding.Default.GetString(stream.ToArray());
+
+                // Deal with any __type clutter from KnownType attributes (see: Functions)
+                return Regex.Replace(json, @"""__type"":""[a-zA-Z0-9\.:#]*"",", "");
             }
         }
 

@@ -172,6 +172,5 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// </summary>
         [DataMember(Name = "holdClimateRef")]
         public string HoldClimateRef { get; set; }
-
     }
 }
