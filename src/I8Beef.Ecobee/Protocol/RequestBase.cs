@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public abstract class RequestBase
     {
         /// <summary>

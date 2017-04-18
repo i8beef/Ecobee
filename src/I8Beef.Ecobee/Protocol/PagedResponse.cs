@@ -1,16 +1,16 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class PagedResponse : Response
     {
         /// <summary>
         /// The Page object is optional and will only appear for responses which can be paged.
         /// It will not appear for responses which do not contain pageable content.
         /// </summary>
-        [DataMember(Name = "page")]
+        [JsonProperty(PropertyName = "page")]
         public Page Page { get; set; }
     }
 }

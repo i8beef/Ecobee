@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatAssignRequest : RequestBase
     {
         /// <summary>
@@ -24,19 +24,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
         /// <summary>
         /// The type of request. Always "assign".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "assign"; } }
 
         /// <summary>
         /// The set path the thermostats are being moved to.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
 
         /// <summary>
         /// Comma separated list of thermostat identifiers.
         /// </summary>
-        [DataMember(Name = "thermostats")]
+        [JsonProperty(PropertyName = "thermostats")]
         public string Thermostats { get; set; }
     }
 }

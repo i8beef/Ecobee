@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Program
     {
         public Program()
@@ -15,19 +15,19 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The Schedule object defining the program schedule.
         /// </summary>
-        [DataMember(Name = "schedule")]
+        [JsonProperty(PropertyName = "schedule")]
         public IList<string[]> Schedule { get; set; }
 
         /// <summary>
         /// The list of Climate objects defining all the climates in the program schedule.
         /// </summary>
-        [DataMember(Name = "climates")]
+        [JsonProperty(PropertyName = "climates")]
         public IList<Climate> Climates { get; set; }
 
         /// <summary>
         /// The currently active climate, identified by its ClimateRef.
         /// </summary>
-        [DataMember(Name = "currentClimateRef")]
+        [JsonProperty(PropertyName = "currentClimateRef")]
         public string CurrentClimateRef { get; set; }
     }
 }

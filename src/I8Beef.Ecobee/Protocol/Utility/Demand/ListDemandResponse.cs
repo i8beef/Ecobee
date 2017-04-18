@@ -1,10 +1,10 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ListDemandResponse : Response
     {
         public ListDemandResponse()
@@ -15,7 +15,7 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// list of demand responses which have not yet expired.
         /// </summary>
-        [DataMember(Name = "drList")]
+        [JsonProperty(PropertyName = "drList")]
         public IList<DemandResponse> DrList { get; set; }
     }
 }

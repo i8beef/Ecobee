@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserUnregisterRequest : RequestBase
     {
         public UserUnregisterRequest()
@@ -31,13 +31,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "unregister".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "unregister"; } }
 
         /// <summary>
         /// The users whose privileges to unregister.
         /// </summary>
-        [DataMember(Name = "users")]
+        [JsonProperty(PropertyName = "users")]
         public IList<HierarchyUser> Users { get; set; }
     }
 }

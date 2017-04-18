@@ -1,32 +1,32 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Device
     {
         /// <summary>
         /// A unique ID for the device
         /// </summary>
-        [DataMember(Name = "deviceId")]
+        [JsonProperty(PropertyName = "deviceId")]
         public int DeviceId { get; set; }
 
         /// <summary>
         /// The user supplied device name
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The list of Sensor Objects associated with the device.
         /// </summary>
-        [DataMember(Name = "sensors")]
+        [JsonProperty(PropertyName = "sensors")]
         public Sensor Sensors { get; set; }
 
         /// <summary>
         /// The list of Output Objects associated with the device
         /// </summary>
-        [DataMember(Name = "outputs")]
+        [JsonProperty(PropertyName = "outputs")]
         public Output Outputs { get; set; }
     }
 }

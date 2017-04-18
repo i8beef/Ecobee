@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserListResponse : Response
     {
         public UserListResponse()
@@ -15,13 +15,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// list of users in the company.
         /// </summary>
-        [DataMember(Name = "users")]
+        [JsonProperty(PropertyName = "users")]
         public IList<Objects.HierarchyUser> Users { get; set; }
 
         /// <summary>
         /// of hierarchy privileges if requested.
         /// </summary>
-        [DataMember(Name = "privileges")]
+        [JsonProperty(PropertyName = "privileges")]
         public IList<Objects.HierarchyPrivilege> Privileges { get; set; }
     }
 }

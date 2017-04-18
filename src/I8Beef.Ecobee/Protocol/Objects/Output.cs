@@ -1,26 +1,26 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Output
     {
         /// <summary>
         /// The name of the outpute
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The thermostat zone the output is associated with
         /// </summary>
-        [DataMember(Name = "zone")]
+        [JsonProperty(PropertyName = "zone")]
         public int Zone { get; set; }
 
         /// <summary>
         /// The unique output identifier number.
         /// </summary>
-        [DataMember(Name = "outputId")]
+        [JsonProperty(PropertyName = "outputId")]
         public int OutputId { get; set; }
 
         /// <summary>
@@ -28,32 +28,32 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// heat3, heatPumpReversal, humidifer, none, occupancy, userDefined, ventilator, zoneCool, zoneFan, 
         /// zoneHeat.
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
         /// Whether to send an update message.
         /// </summary>
-        [DataMember(Name = "sendUpdate")]
+        [JsonProperty(PropertyName = "sendUpdate")]
         public bool SendUpdate { get; set; }
 
         /// <summary>
         /// If true, when this output is activated it will close the relay. Otherwise, activating the relay will 
         /// open the relay.
         /// </summary>
-        [DataMember(Name = "activeClosed")]
+        [JsonProperty(PropertyName = "activeClosed")]
         public bool ActiveClosed { get; set; }
 
         /// <summary>
         /// Time to activate relay - in seconds.
         /// </summary>
-        [DataMember(Name = "activationTime")]
+        [JsonProperty(PropertyName = "activationTime")]
         public int ActivationTime { get; set; }
 
         /// <summary>
         /// Time to deactivate relay - in seconds.
         /// </summary>
-        [DataMember(Name = "deactivationTime")]
+        [JsonProperty(PropertyName = "deactivationTime")]
         public int DeactivationTime { get; set; }
     }
 }

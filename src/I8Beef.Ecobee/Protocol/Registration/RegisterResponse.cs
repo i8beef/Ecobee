@@ -1,15 +1,15 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Registration
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class RegisterResponse : Response
     {
         /// <summary>
         /// thermostat identifier which was registered with the new account. Only returned 
         /// if the userName/password/acceptTerms were provided in the request.
         /// </summary>
-        [DataMember(Name = "thermostatIdentifier")]
+        [JsonProperty(PropertyName = "thermostatIdentifier")]
         public string ThermostatIdentifier { get; set; }
     }
 }

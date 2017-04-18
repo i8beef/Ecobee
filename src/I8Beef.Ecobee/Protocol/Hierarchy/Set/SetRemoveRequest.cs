@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class SetRemoveRequest : RequestBase
     {
         /// <summary>
@@ -24,13 +24,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// The type of request. Always "remove".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "remove"; } }
 
         /// <summary>
         /// The path of the set to delete.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
     }
 }

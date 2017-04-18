@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class SetAddRequest : RequestBase
     {
         /// <summary>
@@ -24,19 +24,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// The type of request. Always "add".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "add"; } }
 
         /// <summary>
         /// The name of the new set.
         /// </summary>
-        [DataMember(Name = "setName")]
+        [JsonProperty(PropertyName = "setName")]
         public string SetName { get; set; }
 
         /// <summary>
         /// The path to the parent for the new set.
         /// </summary>
-        [DataMember(Name = "parentPath")]
+        [JsonProperty(PropertyName = "parentPath")]
         public string ParentPath { get; set; }
     }
 }

@@ -1,32 +1,32 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Utility
     {
         /// <summary>
         /// The Utility company name.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The Utility company contact phone number.
         /// </summary>
-        [DataMember(Name = "phone")]
+        [JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
 
         /// <summary>
         /// The Utility company email address.
         /// </summary>
-        [DataMember(Name = "email")]
+        [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
         /// <summary>
         /// The Utility company web site.
         /// </summary>
-        [DataMember(Name = "web")]
+        [JsonProperty(PropertyName = "web")]
         public string Web { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserRemoveRequest : RequestBase
     {
         public UserRemoveRequest()
@@ -31,19 +31,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "remove".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "remove"; } }
 
         /// <summary>
         /// The path to the set to remove user privileges from.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
 
         /// <summary>
         /// The users whose privileges to remove from the set.
         /// </summary>
-        [DataMember(Name = "users")]
+        [JsonProperty(PropertyName = "users")]
         public IList<HierarchyUser> Users { get; set; }
     }
 }

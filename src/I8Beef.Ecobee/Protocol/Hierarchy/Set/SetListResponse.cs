@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class SetListResponse : Response
     {
         public SetListResponse()
@@ -14,7 +14,7 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// list of hierarchy management sets.
         /// </summary>
-        [DataMember(Name = "sets")]
+        [JsonProperty(PropertyName = "sets")]
         public IList<Objects.HierarchySet> Sets { get; set; }
     }
 }

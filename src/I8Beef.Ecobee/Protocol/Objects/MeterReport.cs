@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MeterReport
     {
         public MeterReport()
@@ -14,7 +14,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The thermostat identifier this report is for.
         /// </summary>
-        [DataMember(Name = "thermostatIdentifier")]
+        [JsonProperty(PropertyName = "thermostatIdentifier")]
         public string ThermostatIdentifier { get; set; }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// meter, the object for that meter will not be included in the list. A 
         /// thermostat with no meters will have this list empty.
         /// </summary>
-        [DataMember(Name = "meterList")]
+        [JsonProperty(PropertyName = "meterList")]
         public IList<MeterReportData> MeterList { get; set; }
     }
 }

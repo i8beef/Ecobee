@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Group
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class GroupUpdateResponse : Response
     {
         public GroupUpdateResponse()
@@ -14,7 +14,7 @@ namespace I8Beef.Ecobee.Protocol.Group
         /// <summary>
         /// The list of Groups updated by the request.
         /// </summary>
-        [DataMember(Name = "groups")]
+        [JsonProperty(PropertyName = "groups")]
         public IList<Objects.Group> Groups { get; set; }
     }
 }

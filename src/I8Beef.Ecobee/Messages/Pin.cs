@@ -1,23 +1,23 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Messages
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Pin
     {
-        [DataMember(Name = "ecobeePin")]
+        [JsonProperty(PropertyName = "ecobeePin")]
         public string EcobeePin { get; set; }
 
-        [DataMember(Name = "code")]
+        [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
-        [DataMember(Name = "scope")]
+        [JsonProperty(PropertyName = "scope")]
         public string Scope { get; set; }
 
-        [DataMember(Name = "expires_in")]
+        [JsonProperty(PropertyName = "expires_in")]
         public int ExpiresIn { get; set; }
 
-        [DataMember(Name = "interval")]
+        [JsonProperty(PropertyName = "interval")]
         public int Interval { get; set; }
     }
 }

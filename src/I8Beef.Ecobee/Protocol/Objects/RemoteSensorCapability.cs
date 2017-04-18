@@ -1,21 +1,21 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class RemoteSensorCapability
     {
         /// <summary>
         /// The unique sensor capability identifier. For example: 1
         /// </summary>
-        [DataMember(Name = "id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
         /// <summary>
         /// The type of sensor capability. Values: adc, co2, dryContact, humidity, temperature, 
         /// occupancy, unknown.
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// returned as the value "720". Occupancy values are "true" or "false". Humidity is 
         /// expressed as a % value such as "45". Unknown values are returned as "unknown".
         /// </summary>
-        [DataMember(Name = "value")]
+        [JsonProperty(PropertyName = "value")]
         public string Value { get; set; }
     }
 }

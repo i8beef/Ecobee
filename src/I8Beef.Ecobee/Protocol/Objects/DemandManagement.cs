@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class DemandManagement
     {
         public DemandManagement()
@@ -14,20 +14,20 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The date(UTC) for the beginning of this day's demand management series.
         /// </summary>
-        [DataMember(Name = "date")]
+        [JsonProperty(PropertyName = "date")]
         public string Date { get; set; }
 
         /// <summary>
         /// The hour in the day this series begins at.Range: 0-23
         /// </summary>
-        [DataMember(Name = "hour")]
+        [JsonProperty(PropertyName = "hour")]
         public int Hour { get; set; }
 
         /// <summary>
         /// The series of 12, 5 minute interval temperature adjustments in the hour. 
         /// Valid integer values are required for each interval. See Temperature values.
         /// </summary>
-        [DataMember(Name = "tempOffsets")]
+        [JsonProperty(PropertyName = "tempOffsets")]
         public IList<int> TempOffsets { get; set; }
     }
 }

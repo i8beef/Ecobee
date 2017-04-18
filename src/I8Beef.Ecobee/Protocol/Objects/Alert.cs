@@ -1,56 +1,56 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Alert
     {
-        [DataMember(Name = "acknowledgeRef")]
+        [JsonProperty(PropertyName = "acknowledgeRef")]
         public string AcknowledgeRef { get; set; }
 
-        [DataMember(Name = "date")]
+        [JsonProperty(PropertyName = "date")]
         public string Date { get; set; }
 
-        [DataMember(Name = "time")]
+        [JsonProperty(PropertyName = "time")]
         public string Time { get; set; }
 
-        [DataMember(Name = "severity")]
+        [JsonProperty(PropertyName = "severity")]
         public string Severity { get; set; }
 
-        [DataMember(Name = "text")]
+        [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
-        [DataMember(Name = "alertNumber")]
+        [JsonProperty(PropertyName = "alertNumber")]
         public int AlertNumber { get; set; }
 
-        [DataMember(Name = "alertType")]
+        [JsonProperty(PropertyName = "alertType")]
         public string AlertType { get; set; }
 
-        [DataMember(Name = "isOperatorAlert")]
+        [JsonProperty(PropertyName = "isOperatorAlert")]
         public bool IsOperatorAlert { get; set; }
 
-        [DataMember(Name = "reminder")]
+        [JsonProperty(PropertyName = "reminder")]
         public string Reminder { get; set; }
 
-        [DataMember(Name = "showIdt")]
+        [JsonProperty(PropertyName = "showIdt")]
         public bool ShowIdt { get; set; }
 
-        [DataMember(Name = "showWeb")]
+        [JsonProperty(PropertyName = "showWeb")]
         public bool ShowWeb { get; set; }
 
-        [DataMember(Name = "sendEmail")]
+        [JsonProperty(PropertyName = "sendEmail")]
         public bool SendEmail { get; set; }
 
-        [DataMember(Name = "acknowledgement")]
+        [JsonProperty(PropertyName = "acknowledgement")]
         public string Acknowledgement { get; set; }
 
-        [DataMember(Name = "remindMeLater")]
+        [JsonProperty(PropertyName = "remindMeLater")]
         public bool RemindMeLater { get; set; }
 
-        [DataMember(Name = "thermostatIdentifier")]
+        [JsonProperty(PropertyName = "thermostatIdentifier")]
         public string ThermostatIdentifier { get; set; }
 
-        [DataMember(Name = "notificationType")]
+        [JsonProperty(PropertyName = "notificationType")]
         public string NotificationType { get; set; }
     }
 }

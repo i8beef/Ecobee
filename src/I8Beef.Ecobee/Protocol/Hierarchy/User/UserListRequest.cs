@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserListRequest : RequestBase
     {
         /// <summary>
@@ -24,25 +24,25 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "list".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "list"; } }
 
         /// <summary>
         /// The management set path.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
 
         /// <summary>
         /// Whether to include the user privileges.
         /// </summary>
-        [DataMember(Name = "includePrivileges")]
+        [JsonProperty(PropertyName = "includePrivileges")]
         public bool IncludePrivileges { get; set; }
 
         /// <summary>
         /// Whether to also return the children of the children, recursively. Default: false
         /// </summary>
-        [DataMember(Name = "recursive")]
+        [JsonProperty(PropertyName = "recursive")]
         public bool Recursive { get; set; }
     }
 }

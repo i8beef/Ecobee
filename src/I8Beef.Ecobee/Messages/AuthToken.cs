@@ -1,23 +1,23 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Messages
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class AuthToken
     {
-        [DataMember(Name = "access_token")]
+        [JsonProperty(PropertyName = "access_token")]
         public string AccessToken { get; set; }
 
-        [DataMember(Name = "token_type")]
+        [JsonProperty(PropertyName = "token_type")]
         public string TokenType { get; set; }
 
-        [DataMember(Name = "expires_in")]
+        [JsonProperty(PropertyName = "expires_in")]
         public int ExpiresIn { get; set; }
 
-        [DataMember(Name = "refresh_token")]
+        [JsonProperty(PropertyName = "refresh_token")]
         public string RefreshToken { get; set; }
 
-        [DataMember(Name = "scope")]
+        [JsonProperty(PropertyName = "scope")]
         public string Scope { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class SetListRequest : RequestBase
     {
         /// <summary>
@@ -24,31 +24,31 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// The type of request. Always "list".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "list"; } }
 
         /// <summary>
         /// The management set path.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
 
         /// <summary>
         /// Whether to also return the children of the children, recursively. Default: false
         /// </summary>
-        [DataMember(Name = "recursive")]
+        [JsonProperty(PropertyName = "recursive")]
         public bool Recursive { get; set; }
 
         /// <summary>
         /// Whether to include the privileges with each set. Default: false
         /// </summary>
-        [DataMember(Name = "includePrivileges")]
+        [JsonProperty(PropertyName = "includePrivileges")]
         public bool IncludePrivileges { get; set; }
 
         /// <summary>
         /// Whether to include a list of all thermostat identifiers assigned to each set. Default: false
         /// </summary>
-        [DataMember(Name = "includeThermostats")]
+        [JsonProperty(PropertyName = "includeThermostats")]
         public bool IncludeThermostats { get; set; }
     }
 }

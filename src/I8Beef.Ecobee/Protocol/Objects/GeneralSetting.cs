@@ -1,28 +1,28 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class GeneralSetting
     {
         /// <summary>
         /// Boolean value representing whether or not alerts/reminders are enabled for 
         /// this notification type or not.
         /// </summary>
-        [DataMember(Name = "enabled")]
+        [JsonProperty(PropertyName = "enabled")]
         public bool Enabled { get; set; }
 
         /// <summary>
         /// The type of notification. Possible values are: temp
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
         /// Boolean value representing whether or not alerts/reminders should be sent 
         /// to the technician/contractor assoicated with the thermostat.
         /// </summary>
-        [DataMember(Name = "remindTechnician")]
+        [JsonProperty(PropertyName = "remindTechnician")]
         public bool RemindTechnician { get; set; }
     }
 }

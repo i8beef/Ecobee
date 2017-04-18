@@ -1,45 +1,45 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class HouseDetails
     {
         /// <summary>
         /// The style of house. Values: other, apartment, condominium, detached, loft, 
         /// multiPlex, rowHouse, semiDetached, townhouse, and 0 for unknown.
         /// </summary>
-        [DataMember(Name = "style")]
+        [JsonProperty(PropertyName = "style")]
         public string Style { get; set; }
 
         /// <summary>
         /// The size of the house in square feet.
         /// </summary>
-        [DataMember(Name = "size")]
+        [JsonProperty(PropertyName = "size")]
         public int Size { get; set; }
 
         /// <summary>
         /// The number of floors or levels in the house.
         /// </summary>
-        [DataMember(Name = "numberOfFloors")]
+        [JsonProperty(PropertyName = "numberOfFloors")]
         public int NumberOfFloors { get; set; }
 
         /// <summary>
         /// The number of rooms in the house.
         /// </summary>
-        [DataMember(Name = "numberOfRooms")]
+        [JsonProperty(PropertyName = "numberOfRooms")]
         public int NumberOfRooms { get; set; }
 
         /// <summary>
         /// The number of occupants living in the house.
         /// </summary>
-        [DataMember(Name = "numberOfOccupants")]
+        [JsonProperty(PropertyName = "numberOfOccupants")]
         public int NumberOfOccupants { get; set; }
 
         /// <summary>
         /// The age of house in years.
         /// </summary>
-        [DataMember(Name = "age")]
+        [JsonProperty(PropertyName = "age")]
         public int Age { get; set; }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Changing the value of this field alters the settings the thermostat uses for the humidifier 
         /// when in 'frost Control' mode. See the NOTE above before updating this value.
         /// </summary>
-        [DataMember(Name = "windowEfficiency")]
+        [JsonProperty(PropertyName = "windowEfficiency")]
         public int WindowEfficiency { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserAddRequest : RequestBase
     {
         public UserAddRequest()
@@ -32,19 +32,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "add".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "add"; } }
 
         /// <summary>
         /// The list of users to add.
         /// </summary>
-        [DataMember(Name = "users")]
+        [JsonProperty(PropertyName = "users")]
         public IList<HierarchyUser> Users { get; set; }
 
         /// <summary>
         /// The privileges to assign to the new users.
         /// </summary>
-        [DataMember(Name = "privileges")]
+        [JsonProperty(PropertyName = "privileges")]
         public IList<HierarchyPrivilege> Privileges { get; set; }
     }
 }

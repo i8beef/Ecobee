@@ -1,17 +1,17 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Messages
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ApiError
     {
-        [DataMember(Name = "error")]
+        [JsonProperty(PropertyName = "error")]
         public string Error { get; set; }
 
-        [DataMember(Name = "error_description")]
+        [JsonProperty(PropertyName = "error_description")]
         public string ErrorDescription { get; set; }
 
-        [DataMember(Name = "error_uri")]
+        [JsonProperty(PropertyName = "error_uri")]
         public string ErrorUri { get; set; }
 
     }

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Weather
     {
         public Weather()
@@ -14,19 +14,19 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The time stamp in UTC of the weather forecast.
         /// </summary>
-        [DataMember(Name = "timestamp")]
+        [JsonProperty(PropertyName = "timestamp")]
         public string Timestamp { get; set; }
 
         /// <summary>
         /// The weather station identifier.
         /// </summary>
-        [DataMember(Name = "weatherStation")]
+        [JsonProperty(PropertyName = "weatherStation")]
         public string WeatherStation { get; set; }
 
         /// <summary>
         /// The list of latest weather station forecasts.
         /// </summary>
-        [DataMember(Name = "forecasts")]
+        [JsonProperty(PropertyName = "forecasts")]
         public IList<WeatherForecast> Forecasts { get; set; }
     }
 }

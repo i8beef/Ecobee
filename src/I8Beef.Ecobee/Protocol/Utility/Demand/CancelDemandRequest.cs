@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class CancelDemandRequest : RequestBase
     {
         /// <summary>
@@ -24,13 +24,13 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The type of request. Always "cancel".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get; set; }
 
         /// <summary>
         /// The system generated ID of the DR.
         /// </summary>
-        [DataMember(Name = "demandResponseRef")]
+        [JsonProperty(PropertyName = "demandResponseRef")]
         public string DemandResponseRef { get; set; }
     }
 }

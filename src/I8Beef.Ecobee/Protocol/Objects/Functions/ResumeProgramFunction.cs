@@ -1,10 +1,9 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Functions
 {
-    [DataContract]
-    [KnownType(typeof(ResumeProgramParams))]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ResumeProgramFunction : Function
     {
         public ResumeProgramFunction()
@@ -15,24 +14,24 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The function type name. See the type name in the function documentation.
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public override string Type { get { return "resumeProgram"; } set { } }
 
         /// <summary>
         /// A map of key=value pairs as the parameters to the function. See 
         /// individual function documentation for the properties.
         /// </summary>
-        [DataMember(Name = "params")]
+        [JsonProperty(PropertyName = "params")]
         public override FunctionParams Params { get; set; }
     }
 
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ResumeProgramParams : FunctionParams
     {
         /// <summary>
         /// Should the thermostat be resumed to next event (false) or to it's program (true).
         /// </summary>
-        [DataMember(Name = "resumeAll")]
+        [JsonProperty(PropertyName = "resumeAll")]
         public bool ResumeAll { get; set; }
     }
 }

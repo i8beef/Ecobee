@@ -1,20 +1,20 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Status
     {
         /// <summary>
         /// The status code for this status.
         /// </summary>
-        [DataMember(Name = "code")]
+        [JsonProperty(PropertyName = "code")]
         public int Code { get; set; }
 
         /// <summary>
         /// The detailed message for this status.
         /// </summary>
-        [DataMember(Name = "message")]
+        [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
     }
 }

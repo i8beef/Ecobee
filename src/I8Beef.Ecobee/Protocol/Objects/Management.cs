@@ -1,56 +1,56 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Management
     {
         /// <summary>
         /// The administrative contact name.
         /// </summary>
-        [DataMember(Name = "administrativeContact")]
+        [JsonProperty(PropertyName = "administrativeContact")]
         public string AdministrativeContact { get; set; }
 
         /// <summary>
         /// The billing contact name.
         /// </summary>
-        [DataMember(Name = "billingContact")]
+        [JsonProperty(PropertyName = "billingContact")]
         public string BillingContact { get; set; }
 
         /// <summary>
         /// The company name.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The phone number.
         /// </summary>
-        [DataMember(Name = "phone")]
+        [JsonProperty(PropertyName = "phone")]
         public string Phone { get; set; }
 
         /// <summary>
         /// The contact email address.
         /// </summary>
-        [DataMember(Name = "email")]
+        [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
 
         /// <summary>
         /// The company web site.
         /// </summary>
-        [DataMember(Name = "web")]
+        [JsonProperty(PropertyName = "web")]
         public string Web { get; set; }
 
         /// <summary>
         /// Whether to show management alerts on the thermostat.
         /// </summary>
-        [DataMember(Name = "showAlertIdt")]
+        [JsonProperty(PropertyName = "showAlertIdt")]
         public bool ShowAlertIdt { get; set; }
 
         /// <summary>
         /// Whether to show management alerts in the web portal.
         /// </summary>
-        [DataMember(Name = "showAlertWeb")]
+        [JsonProperty(PropertyName = "showAlertWeb")]
         public bool ShowAlertWeb { get; set; }
     }
 }

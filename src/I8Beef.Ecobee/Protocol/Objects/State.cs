@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class State
     {
         public State()
@@ -14,25 +14,25 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The maximum value the sensor can generate.
         /// </summary>
-        [DataMember(Name = "maxValue")]
+        [JsonProperty(PropertyName = "maxValue")]
         public int MaxValue { get; set; }
 
         /// <summary>
         /// The minimum value the sensor can generate.
         /// </summary>
-        [DataMember(Name = "minValue")]
+        [JsonProperty(PropertyName = "minValue")]
         public int MinValue { get; set; }
 
         /// <summary>
         /// Values: coolHigh, coolLow, heatHigh, heatLow, high, low, transitionCount, normal.
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
         /// The list of StateAction objects associated with the sensor.
         /// </summary>
-        [DataMember(Name = "actions")]
+        [JsonProperty(PropertyName = "actions")]
         public IList<Action> Actions { get; set; }
     }
 }

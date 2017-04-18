@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ListDemandRequest : RequestBase
     {
         /// <summary>
@@ -24,7 +24,7 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The type of request. Always "list".
         /// </summary>
-        [DataMember(Name = "operation")]
+        [JsonProperty(PropertyName = "operation")]
         public string Operation { get { return "list"; } }
     }
 }

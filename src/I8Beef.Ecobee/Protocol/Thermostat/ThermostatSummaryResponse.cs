@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatSummaryResponse : Response
     {
         public ThermostatSummaryResponse()
@@ -15,19 +15,19 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// <summary>
         /// The list of CSV revision values.
         /// </summary>
-        [DataMember(Name = "revisionList")]
+        [JsonProperty(PropertyName = "revisionList")]
         public IList<string> RevisionList { get; set; }
 
         /// <summary>
         /// Integer Number of thermostats listed in the Revision List.
         /// </summary>
-        [DataMember(Name = "thermostatCount")]
+        [JsonProperty(PropertyName = "thermostatCount")]
         public int ThermostatCount { get; set; }
 
         /// <summary>
         /// CSV[] The list of CSV status values.
         /// </summary>
-        [DataMember(Name = "statusList")]
+        [JsonProperty(PropertyName = "statusList")]
         public IList<string> StatusList { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Runtime
     {
         public Runtime()
@@ -16,50 +16,50 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The current runtime revision. Equivalent in meaning to the runtime revision number 
         /// in the thermostat summary call.
         /// </summary>
-        [DataMember(Name = "runtimeRev")]
+        [JsonProperty(PropertyName = "runtimeRev")]
         public string RuntimeRev { get; set; }
 
         /// <summary>
         /// Whether the thermostat is currently connected to the server.
         /// </summary>
-        [DataMember(Name = "connected")]
+        [JsonProperty(PropertyName = "connected")]
         public bool Connected { get; set; }
 
         /// <summary>
         /// The UTC date/time stamp of when the thermostat first connected to the ecobee server.
         /// </summary>
-        [DataMember(Name = "firstConnected")]
+        [JsonProperty(PropertyName = "firstConnected")]
         public string FirstConnected { get; set; }
 
         /// <summary>
         /// The last recorded connection date and time.
         /// </summary>
-        [DataMember(Name = "connectDateTime")]
+        [JsonProperty(PropertyName = "connectDateTime")]
         public string ConnectDateTime { get; set; }
 
         /// <summary>
         /// The last recorded disconnection date and time.
         /// </summary>
-        [DataMember(Name = "disconnectDateTime")]
+        [JsonProperty(PropertyName = "disconnectDateTime")]
         public string DisconnectDateTime { get; set; }
 
         /// <summary>
         /// The UTC date/time stamp of when the thermostat was updated. Format: YYYY-MM-DD HH:MM:SS
         /// </summary>
-        [DataMember(Name = "lastModified")]
+        [JsonProperty(PropertyName = "lastModified")]
         public string LastModified { get; set; }
 
         /// <summary>
         /// The UTC date/time stamp of when the thermostat last posted its runtime information. 
         /// Format: YYYY-MM-DD HH:MM:SS
         /// </summary>
-        [DataMember(Name = "lastStatusModified")]
+        [JsonProperty(PropertyName = "lastStatusModified")]
         public string LastStatusModified { get; set; }
 
         /// <summary>
         /// The UTC date of the last runtime reading. Format: YYYY-MM-DD
         /// </summary>
-        [DataMember(Name = "runtimeDate")]
+        [JsonProperty(PropertyName = "runtimeDate")]
         public string RuntimeDate { get; set; }
 
         /// <summary>
@@ -67,50 +67,50 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// from this interval to obtain the beginning interval for the last 3 readings. Multiply by 5 
         /// mins to obtain the minutes of the day. Range: 0-287
         /// </summary>
-        [DataMember(Name = "runtimeInterval")]
+        [JsonProperty(PropertyName = "runtimeInterval")]
         public int RuntimeInterval { get; set; }
 
         /// <summary>
         /// The current temperature displayed on the thermostat.
         /// </summary>
-        [DataMember(Name = "actualTemperature")]
+        [JsonProperty(PropertyName = "actualTemperature")]
         public int ActualTemperature { get; set; }
 
         /// <summary>
         /// The current humidity % shown on the thermostat.
         /// </summary>
-        [DataMember(Name = "actualHumidity")]
+        [JsonProperty(PropertyName = "actualHumidity")]
         public int ActualHumidity { get; set; }
 
         /// <summary>
         /// The desired heat temperature as per the current running program or active event.
         /// </summary>
-        [DataMember(Name = "desiredHeat")]
+        [JsonProperty(PropertyName = "desiredHeat")]
         public int DesiredHeat { get; set; }
 
         /// <summary>
         /// The desired cool temperature as per the current running program or active event.
         /// </summary>
-        [DataMember(Name = "desiredCool")]
+        [JsonProperty(PropertyName = "desiredCool")]
         public int DesiredCool { get; set; }
 
         /// <summary>
         /// The desired humidity set point.
         /// </summary>
-        [DataMember(Name = "desiredHumidity")]
+        [JsonProperty(PropertyName = "desiredHumidity")]
         public int DesiredHumidity { get; set; }
 
         /// <summary>
         /// The desired dehumidification set point.
         /// </summary>
-        [DataMember(Name = "desiredDehumidity")]
+        [JsonProperty(PropertyName = "desiredDehumidity")]
         public int DesiredDehumidity { get; set; }
 
         /// <summary>
         /// The desired fan mode. Values: auto, on or null if the HVAC system is off and the thermostat 
         /// is not controlling a fan independently.
         /// </summary>
-        [DataMember(Name = "desiredFanMode")]
+        [JsonProperty(PropertyName = "desiredFanMode")]
         public string DesiredFanMode { get; set; }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// program or active events. Values are returned as an Integer array representing the canonical
         /// minimum and maximim, e.g. [450,790].
         /// </summary>
-        [DataMember(Name = "desiredHeatRange")]
+        [JsonProperty(PropertyName = "desiredHeatRange")]
         public IList<int> DesiredHeatRange { get; set; }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// or active events. Values are returned as an Integer array representing the canonical minimum and
         /// maximim, e.g. [650,920].
         /// </summary>
-        [DataMember(Name = "desiredCoolRange")]
+        [JsonProperty(PropertyName = "desiredCoolRange")]
         public IList<int> DesiredCoolRange { get; set; }
     }
 }

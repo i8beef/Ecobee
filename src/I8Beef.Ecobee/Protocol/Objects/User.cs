@@ -1,110 +1,110 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class User
     {
         /// <summary>
         /// The User login userName. Usually a valid email address.
         /// </summary>
-        [DataMember(Name = "userName")]
+        [JsonProperty(PropertyName = "userName")]
         public string UserName { get; set; }
 
         /// <summary>
         /// The User display name.
         /// </summary>
-        [DataMember(Name = "displayName")]
+        [JsonProperty(PropertyName = "displayName")]
         public string DisplayName { get; set; }
 
         /// <summary>
         /// The User first name.
         /// </summary>
-        [DataMember(Name = "firstName")]
+        [JsonProperty(PropertyName = "firstName")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// The User last name.
         /// </summary>
-        [DataMember(Name = "lastName")]
+        [JsonProperty(PropertyName = "lastName")]
         public string LastName { get; set; }
 
         /// <summary>
         /// The User title such as Mr. or Mrs.
         /// </summary>
-        [DataMember(Name = "honorific")]
+        [JsonProperty(PropertyName = "honorific")]
         public string Honorific { get; set; }
 
         /// <summary>
         /// The User date of registration.
         /// </summary>
-        [DataMember(Name = "registerDate")]
+        [JsonProperty(PropertyName = "registerDate")]
         public string RegisterDate { get; set; }
 
         /// <summary>
         /// The User time of registration.
         /// </summary>
-        [DataMember(Name = "registerTime")]
+        [JsonProperty(PropertyName = "registerTime")]
         public string RegisterTime { get; set; }
 
         /// <summary>
         /// The Thermostat identifier this User is associated with.
         /// </summary>
-        [DataMember(Name = "defaultThermostatIdentifier")]
+        [JsonProperty(PropertyName = "defaultThermostatIdentifier")]
         public string DefaultThermostatIdentifier { get; set; }
 
         /// <summary>
         /// The User management reference.
         /// </summary>
-        [DataMember(Name = "managementRef")]
+        [JsonProperty(PropertyName = "managementRef")]
         public string ManagementRef { get; set; }
 
         /// <summary>
         /// The User utility reference.
         /// </summary>
-        [DataMember(Name = "utilityRef")]
+        [JsonProperty(PropertyName = "utilityRef")]
         public string UtilityRef { get; set; }
 
         /// <summary>
         /// The User support reference.
         /// </summary>
-        [DataMember(Name = "supportRef")]
+        [JsonProperty(PropertyName = "supportRef")]
         public string SupportRef { get; set; }
 
         /// <summary>
         /// The User phone Number.
         /// </summary>
-        [DataMember(Name = "phoneNumber")]
+        [JsonProperty(PropertyName = "phoneNumber")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        [DataMember(Name = "isResidential")]
+        [JsonProperty(PropertyName = "isResidential")]
         public bool IsResidential { get; set; }
 
         /// <summary>
         /// Whether this user has a developer role.
         /// </summary>
-        [DataMember(Name = "isDeveloper")]
+        [JsonProperty(PropertyName = "isDeveloper")]
         public bool IsDeveloper { get; set; }
 
         /// <summary>
         /// Whether this user has a management role.
         /// </summary>
-        [DataMember(Name = "isManagement")]
+        [JsonProperty(PropertyName = "isManagement")]
         public bool IsManagement { get; set; }
 
         /// <summary>
         /// Whether this user has a utility role.
         /// </summary>
-        [DataMember(Name = "isUtility")]
+        [JsonProperty(PropertyName = "isUtility")]
         public bool IsUtility { get; set; }
 
         /// <summary>
         /// Whether this user has a contractor role.
         /// </summary>
-        [DataMember(Name = "isContractor")]
+        [JsonProperty(PropertyName = "isContractor")]
         public bool IsContractor { get; set; }
     }
 }

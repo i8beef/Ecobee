@@ -1,104 +1,104 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class WeatherForecast
     {
         /// <summary>
         /// The Integer value used to map to a weatherSymbol. See list of mappings above.
         /// </summary>
-        [DataMember(Name = "weatherSymbol")]
+        [JsonProperty(PropertyName = "weatherSymbol")]
         public int WeatherSymbol { get; set; }
 
         /// <summary>
         /// The time stamp of the weather forecast.
         /// </summary>
-        [DataMember(Name = "dateTime")]
+        [JsonProperty(PropertyName = "dateTime")]
         public string DateTime { get; set; }
 
         /// <summary>
         /// A text value representing the current weather condition.
         /// </summary>
-        [DataMember(Name = "condition")]
+        [JsonProperty(PropertyName = "condition")]
         public string Condition { get; set; }
 
         /// <summary>
         /// The current temperature.
         /// </summary>
-        [DataMember(Name = "temperature")]
+        [JsonProperty(PropertyName = "temperature")]
         public int Temperature { get; set; }
 
         /// <summary>
         /// The current barometric pressure.
         /// </summary>
-        [DataMember(Name = "pressure")]
+        [JsonProperty(PropertyName = "pressure")]
         public int Pressure { get; set; }
 
         /// <summary>
         /// The current humidity.
         /// </summary>
-        [DataMember(Name = "relativeHumidity")]
+        [JsonProperty(PropertyName = "relativeHumidity")]
         public int RelativeHumidity { get; set; }
 
         /// <summary>
         /// The dewpoint.
         /// </summary>
-        [DataMember(Name = "dewpoint")]
+        [JsonProperty(PropertyName = "dewpoint")]
         public int Dewpoint { get; set; }
 
         /// <summary>
         /// The visibility in meters; 0 - 70,000.
         /// </summary>
-        [DataMember(Name = "visibility")]
+        [JsonProperty(PropertyName = "visibility")]
         public int Visibility { get; set; }
 
         /// <summary>
         /// The wind speed as an integer in mph * 1000.
         /// </summary>
-        [DataMember(Name = "windSpeed")]
+        [JsonProperty(PropertyName = "windSpeed")]
         public int WindSpeed { get; set; }
 
         /// <summary>
         /// The wind gust speed.
         /// </summary>
-        [DataMember(Name = "windGust")]
+        [JsonProperty(PropertyName = "windGust")]
         public int WindGust { get; set; }
 
         /// <summary>
         /// The wind direction.
         /// </summary>
-        [DataMember(Name = "windDirection")]
+        [JsonProperty(PropertyName = "windDirection")]
         public string WindDirection { get; set; }
 
         /// <summary>
         /// The wind bearing.
         /// </summary>
-        [DataMember(Name = "windBearing")]
+        [JsonProperty(PropertyName = "windBearing")]
         public int WindBearing { get; set; }
 
         /// <summary>
         /// Probability of precipitation.
         /// </summary>
-        [DataMember(Name = "pop")]
+        [JsonProperty(PropertyName = "pop")]
         public int Pop { get; set; }
 
         /// <summary>
         /// The predicted high temperature for the day.
         /// </summary>
-        [DataMember(Name = "tempHigh")]
+        [JsonProperty(PropertyName = "tempHigh")]
         public int TempHigh { get; set; }
 
         /// <summary>
         /// The predicted low temperature for the day.
         /// </summary>
-        [DataMember(Name = "tempLow")]
+        [JsonProperty(PropertyName = "tempLow")]
         public int TempLow { get; set; }
 
         /// <summary>
         /// The cloud cover condition.
         /// </summary>
-        [DataMember(Name = "sky")]
+        [JsonProperty(PropertyName = "sky")]
         public int Sky { get; set; }
     }
 }

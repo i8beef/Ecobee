@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class IssueDemandManagementRequest : RequestBase
     {
         public IssueDemandManagementRequest()
@@ -31,13 +31,13 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [DataMember(Name = "selection")]
+        [JsonProperty(PropertyName = "selection")]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// A list of demand management objects.
         /// </summary>
-        [DataMember(Name = "dmList")]
+        [JsonProperty(PropertyName = "dmList")]
         public IList<DemandManagement> DmList { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Report
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MeterReportResponse : Response
     {
         public MeterReportResponse()
@@ -16,37 +16,37 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// <summary>
         /// report UTC start date.
         /// </summary>
-        [DataMember(Name = "startDate")]
+        [JsonProperty(PropertyName = "startDate")]
         public DateTime StartDate { get; set; }
 
         /// <summary>
         /// report start interval.
         /// </summary>
-        [DataMember(Name = "startInterval")]
+        [JsonProperty(PropertyName = "startInterval")]
         public int StartInterval { get; set; }
 
         /// <summary>
         /// report UTC end date.
         /// </summary>
-        [DataMember(Name = "endDate")]
+        [JsonProperty(PropertyName = "endDate")]
         public DateTime EndDate { get; set; }
 
         /// <summary>
         /// report end interval.
         /// </summary>
-        [DataMember(Name = "endInterval")]
+        [JsonProperty(PropertyName = "endInterval")]
         public int EndInterval { get; set; }
 
         /// <summary>
         /// CSV list of meter types from the request.
         /// </summary>
-        [DataMember(Name = "meters")]
+        [JsonProperty(PropertyName = "meters")]
         public string Meters { get; set; }
 
         /// <summary>
         /// A list of thermostat meter reports.
         /// </summary>
-        [DataMember(Name = "reportList")]
+        [JsonProperty(PropertyName = "reportList")]
         public IList<MeterReport> ReportList { get; set; }
     }
 }

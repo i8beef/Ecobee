@@ -1,14 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class IssueDemandResponse : Response
     {
         /// <summary>
         /// unique demand response reference ID.
         /// </summary>
-        [DataMember(Name = "demandResponseRef")]
+        [JsonProperty(PropertyName = "demandResponseRef")]
         public string DemandResponseRef { get; set; }
     }
 }

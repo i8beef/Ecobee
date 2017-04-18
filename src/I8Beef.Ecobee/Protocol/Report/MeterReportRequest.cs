@@ -1,10 +1,10 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Report
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class MeterReportRequest : RequestBase
     {
         /// <summary>
@@ -26,39 +26,39 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// The Selection Object. Must be selectionType = 'thermostats' and selectionMatch = a CSV of 
         /// thermostat identifiers.
         /// </summary>
-        [DataMember(Name = "selection")]
+        [JsonProperty(PropertyName = "selection")]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// The UTC report start date.
         /// </summary>
-        [DataMember(Name = "startDate")]
+        [JsonProperty(PropertyName = "startDate")]
         public DateTime StartDate { get; set; }
 
         /// <summary>
         /// The 5 minute interval to begin the report on. The interval can be determined by multiplying the 
         /// interval by 5. Range: 0-287 Default: 0
         /// </summary>
-        [DataMember(Name = "startInterval")]
+        [JsonProperty(PropertyName = "startInterval")]
         public int StartInterval { get; set; }
 
         /// <summary>
         /// The UTC report end date.
         /// </summary>
-        [DataMember(Name = "endDate")]
+        [JsonProperty(PropertyName = "endDate")]
         public DateTime EndDate { get; set; }
 
         /// <summary>
         /// The 5 minute interval to end the report on. The interval can be determined by multiplying the 
         /// interval by 5. Range: 0-287 Default: 287
         /// </summary>
-        [DataMember(Name = "endInterval")]
+        [JsonProperty(PropertyName = "endInterval")]
         public int EndInterval { get; set; }
 
         /// <summary>
         /// A CSV string of meter types. See Meter Types
         /// </summary>
-        [DataMember(Name = "meters")]
+        [JsonProperty(PropertyName = "meters")]
         public string Meters { get; set; }
     }
 }

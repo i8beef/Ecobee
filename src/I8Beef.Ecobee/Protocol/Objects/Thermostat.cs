@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Thermostat
     {
         public Thermostat()
@@ -17,158 +17,158 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The unique thermostat serial number.
         /// </summary>
-        [DataMember(Name = "identifier")]
+        [JsonProperty(PropertyName = "identifier")]
         public string Identifier { get; set; }
 
         /// <summary>
         /// A user defined name for a thermostat.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The current thermostat configuration revision.
         /// </summary>
-        [DataMember(Name = "thermostatRev")]
+        [JsonProperty(PropertyName = "thermostatRev")]
         public string ThermostatRev { get; set; }
 
         /// <summary>
         /// Whether the user registered the thermostat.
         /// </summary>
-        [DataMember(Name = "isRegistered")]
+        [JsonProperty(PropertyName = "isRegistered")]
         public bool IsRegistered { get; set; }
 
         /// <summary>
         /// The thermostat model number. Values: idtSmart, idtEms, siSmart, siEms, athenaSmart, 
         /// athenaEms, corSmart
         /// </summary>
-        [DataMember(Name = "modelNumber")]
+        [JsonProperty(PropertyName = "modelNumber")]
         public string ModelNumber { get; set; }
 
         /// <summary>
         /// The thermostat brand.
         /// </summary>
-        [DataMember(Name = "brand")]
+        [JsonProperty(PropertyName = "brand")]
         public string Brand { get; set; }
 
         /// <summary>
         /// The comma-separated list of the thermostat's additional features, if any.
         /// </summary>
-        [DataMember(Name = "features")]
+        [JsonProperty(PropertyName = "features")]
         public string Features { get; set; }
 
         /// <summary>
         /// The last modified date time for the thermostat configuration.
         /// </summary>
-        [DataMember(Name = "lastModified")]
+        [JsonProperty(PropertyName = "lastModified")]
         public string LastModified { get; set; }
 
         /// <summary>
         /// The current time in the thermostat's time zone
         /// </summary>
-        [DataMember(Name = "thermostatTime")]
+        [JsonProperty(PropertyName = "thermostatTime")]
         public string ThermostatTime { get; set; }
 
         /// <summary>
         /// The current time in UTC.
         /// </summary>
-        [DataMember(Name = "utcTime")]
+        [JsonProperty(PropertyName = "utcTime")]
         public string UtcTime { get; set; }
 
         /// <summary>
         /// The list of Alert objects tied to the thermostat
         /// </summary>
-        [DataMember(Name = "alerts")]
+        [JsonProperty(PropertyName = "alerts")]
         public IList<Alert> Alerts { get; set; }
 
         /// <summary>
         /// The thermostat Setting object linked to the thermostat
         /// </summary>
-        [DataMember(Name = "settings")]
+        [JsonProperty(PropertyName = "settings")]
         public Settings Settings { get; set; }
 
         /// <summary>
         /// The Runtime state object for the thermostat
         /// </summary>
-        [DataMember(Name = "runtime")]
+        [JsonProperty(PropertyName = "runtime")]
         public Runtime Runtime { get; set; }
 
         /// <summary>
         /// The ExtendedRuntime object for the thermostat
         /// </summary>
-        [DataMember(Name = "extendedRuntime")]
+        [JsonProperty(PropertyName = "extendedRuntime")]
         public ExtendedRuntime ExtendedRuntime { get; set; }
 
         /// <summary>
         /// The Electricity object for the thermostat
         /// </summary>
-        [DataMember(Name = "electricity")]
+        [JsonProperty(PropertyName = "electricity")]
         public Electricity Electricity { get; set; }
 
         /// <summary>
         /// The list of Device objects linked to the thermostat
         /// </summary>
-        [DataMember(Name = "devices")]
+        [JsonProperty(PropertyName = "devices")]
         public IList<Device> Devices { get; set; }
 
         /// <summary>
         /// The Location object for the thermostat
         /// </summary>
-        [DataMember(Name = "location")]
+        [JsonProperty(PropertyName = "location")]
         public Location Location { get; set; }
 
         /// <summary>
         /// The Technician object associated with the thermostat containing the technician contact 
         /// information
         /// </summary>
-        [DataMember(Name = "technician")]
+        [JsonProperty(PropertyName = "technician")]
         public Technician Technician { get; set; }
 
         /// <summary>
         /// The Utility object associated with the thermostat containing the utility company 
         /// information
         /// </summary>
-        [DataMember(Name = "utility")]
+        [JsonProperty(PropertyName = "utility")]
         public Utility Utility { get; set; }
 
         /// <summary>
         /// The Management object associated with the thermostat containing the management company 
         /// information
         /// </summary>
-        [DataMember(Name = "management")]
+        [JsonProperty(PropertyName = "management")]
         public Management Management { get; set; }
 
         /// <summary>
         /// The Weather object linked to the thermostat representing the current weather on 
         /// the thermostat.
         /// </summary>
-        [DataMember(Name = "weather")]
+        [JsonProperty(PropertyName = "weather")]
         public Weather Weather { get; set; }
 
         /// <summary>
         /// The list of Event objects linked to the thermostat representing any events that are 
         /// active or scheduled.
         /// </summary>
-        [DataMember(Name = "events")]
+        [JsonProperty(PropertyName = "events")]
         public IList<Event> Events { get; set; }
 
         /// <summary>
         /// The Program object for the thermostat
         /// </summary>
-        [DataMember(Name = "program")]
+        [JsonProperty(PropertyName = "program")]
         public Program Program { get; set; }
 
         /// <summary>
         /// The houseDetails object contains contains the information about the house the 
         /// thermostat is installed in.
         /// </summary>
-        [DataMember(Name = "houseDetails")]
+        [JsonProperty(PropertyName = "houseDetails")]
         public HouseDetails HouseDetails { get; set; }
 
         /// <summary>
         /// The OemCfg object contains information about the OEM specific thermostat.
         /// </summary>
-        [DataMember(Name = "oemCfg")]
+        [JsonProperty(PropertyName = "oemCfg")]
         public ThermostatOemCfg OemCfg { get; set; }
 
         /// <summary>
@@ -183,40 +183,40 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// aux heat. If Settings.hasForcedAir or Settings.hasBoiler is true, auxHeat value will be 
         /// returned for heating and compCool for cooling (heatPump will not show up for heating).
         /// </summary>
-        [DataMember(Name = "equipmentStatus")]
+        [JsonProperty(PropertyName = "equipmentStatus")]
         public string EquipmentStatus { get; set; }
 
         /// <summary>
         /// The NotificationSettings object containing the configuration for Alert and Reminders 
         /// for the Thermostat.
         /// </summary>
-        [DataMember(Name = "notificationSettings")]
+        [JsonProperty(PropertyName = "notificationSettings")]
         public NotificationSettings NotificationSettings { get; set; }
 
         /// <summary>
         /// The Privacy object containing the privacy settings for the Thermostat. Note: access 
         /// to this object is restricted to callers with implict authentication.
         /// </summary>
-        [DataMember(Name = "privacy")]
+        [JsonProperty(PropertyName = "privacy")]
         public ThermostatPrivacy Privacy { get; set; }
 
         /// <summary>
         /// The Version object containing the firmware version information for the Thermostat. 
         /// For example: "3.5.0.3957".
         /// </summary>
-        [DataMember(Name = "version")]
+        [JsonProperty(PropertyName = "version")]
         public Version Version { get; set; }
 
         /// <summary>
         /// The SecuritySettings object containing the security settings for the Thermostat.
         /// </summary>
-        [DataMember(Name = "securitySettings")]
+        [JsonProperty(PropertyName = "securitySettings")]
         public SecuritySettings SecuritySettings { get; set; }
 
         /// <summary>
         /// The list of RemoteSensor objects for the Thermostat.
         /// </summary>
-        [DataMember(Name = "remoteSensors")]
+        [JsonProperty(PropertyName = "remoteSensors")]
         public IList<RemoteSensor> RemoteSensors { get; set; }
     }
 }

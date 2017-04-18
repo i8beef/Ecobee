@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatResponse : PagedResponse
     {
         public ThermostatResponse()
@@ -14,7 +14,7 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// <summary>
         /// The list of thermostats returned by the request.
         /// </summary>
-        [DataMember(Name = "thermostatList")]
+        [JsonProperty(PropertyName = "thermostatList")]
         public IList<Objects.Thermostat> ThermostatList { get; set; }
     }
 }

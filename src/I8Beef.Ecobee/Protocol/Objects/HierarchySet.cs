@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class HierarchySet
     {
         public HierarchySet()
@@ -16,31 +16,31 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The name of the hierarchy set.
         /// </summary>
-        [DataMember(Name = "setName")]
+        [JsonProperty(PropertyName = "setName")]
         public string SetName { get; set; }
 
         /// <summary>
         /// The full path from the root to the hierarchy set.
         /// </summary>
-        [DataMember(Name = "setPath")]
+        [JsonProperty(PropertyName = "setPath")]
         public string SetPath { get; set; }
 
         /// <summary>
         /// The list of child hierarchy sets.
         /// </summary>
-        [DataMember(Name = "children")]
+        [JsonProperty(PropertyName = "children")]
         public IList<HierarchySet> Children { get; set; }
 
         /// <summary>
         /// The list of hierarchy privileges assigned to this hierarchy set.
         /// </summary>
-        [DataMember(Name = "privileges")]
+        [JsonProperty(PropertyName = "privileges")]
         public IList<HierarchyPrivilege> Privileges { get; set; }
 
         /// <summary>
         /// The list of thermostats assigned to this hierarchy set.
         /// </summary>
-        [DataMember(Name = "thermostats")]
+        [JsonProperty(PropertyName = "thermostats")]
         public IList<string> Thermostats { get; set; }
 
     }

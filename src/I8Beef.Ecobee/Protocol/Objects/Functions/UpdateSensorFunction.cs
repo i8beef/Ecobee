@@ -1,10 +1,9 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Functions
 {
-    [DataContract]
-    [KnownType(typeof(UpdateSensorParams))]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UpdateSensorFunction : Function
     {
         public UpdateSensorFunction()
@@ -15,36 +14,36 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The function type name. See the type name in the function documentation.
         /// </summary>
-        [DataMember(Name = "type")]
+        [JsonProperty(PropertyName = "type")]
         public override string Type { get { return "updateSensor"; } set { } }
 
         /// <summary>
         /// A map of key=value pairs as the parameters to the function. See 
         /// individual function documentation for the properties.
         /// </summary>
-        [DataMember(Name = "params")]
+        [JsonProperty(PropertyName = "params")]
         public override FunctionParams Params { get; set; }
     }
 
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class UpdateSensorParams : FunctionParams
     {
         /// <summary>
         /// The updated name to give the sensor. Has a max length of 32, but shorter is recommended.
         /// </summary>
-        [DataMember(Name = "name")]
+        [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
         /// The deviceId for the sensor, typically this indicates the enclosure and corresponds to the ThermostatRemoteSensor.id field. For example: rs:100
         /// </summary>
-        [DataMember(Name = "deviceId")]
+        [JsonProperty(PropertyName = "deviceId")]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// The idendifier for the sensor within the enclosure. Corresponds to the RemoteSensorCapability.id. For example: 1
         /// </summary>
-        [DataMember(Name = "sensorId")]
+        [JsonProperty(PropertyName = "sensorId")]
         public string SensorId { get; set; }
     }
 }

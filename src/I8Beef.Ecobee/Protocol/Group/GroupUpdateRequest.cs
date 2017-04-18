@@ -1,11 +1,11 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Group
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class GroupUpdateRequest : RequestBase
     {
         public GroupUpdateRequest()
@@ -31,13 +31,13 @@ namespace I8Beef.Ecobee.Protocol.Group
         /// <summary>
         /// The selection criteria for the request.
         /// </summary>
-        [DataMember(Name = "selection")]
+        [JsonProperty(PropertyName = "selection")]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// The list of Groups to update.
         /// </summary>
-        [DataMember(Name = "Groups")]
+        [JsonProperty(PropertyName = "Groups")]
         public IList<dynamic> Groups { get; set; }
     }
 }

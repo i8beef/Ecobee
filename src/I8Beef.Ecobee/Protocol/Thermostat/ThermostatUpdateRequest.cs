@@ -1,14 +1,11 @@
-﻿using I8Beef.Ecobee.Protocol.Functions;
-using I8Beef.Ecobee.Protocol.Objects;
+﻿using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
-    [DataContract]
-    [KnownType(typeof(ResumeProgramFunction))]
-    [KnownType(typeof(SetHoldFunction))]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatUpdateRequest : RequestBase
     {
         public ThermostatUpdateRequest()
@@ -34,19 +31,19 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [DataMember(Name = "selection")]
+        [JsonProperty(PropertyName = "selection")]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// The thermostat object with properties to update.
         /// </summary>
-        [DataMember(Name = "thermostat")]
+        [JsonProperty(PropertyName = "thermostat")]
         public dynamic Thermostat { get; set; }
 
         /// <summary>
         /// The list of functions to perform on all selected thermostats.
         /// </summary>
-        [DataMember(Name = "functions")]
+        [JsonProperty(PropertyName = "functions")]
         public IList<Function> Functions { get; set; }
     }
 }

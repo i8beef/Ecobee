@@ -1,9 +1,9 @@
 ﻿using I8Beef.Ecobee.Protocol.Objects;
-using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class Response
     {
         /// <summary>
@@ -13,7 +13,7 @@ namespace I8Beef.Ecobee.Protocol
         /// occurred. Refer to the Response Codes section for details of each error which 
         /// may be returned.
         /// </summary>
-        [DataMember(Name = "status")]
+        [JsonProperty(PropertyName = "status")]
         public Status Status { get; set; }
     }
 }

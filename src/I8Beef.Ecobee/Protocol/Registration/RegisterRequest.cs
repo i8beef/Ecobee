@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace I8Beef.Ecobee.Protocol.Registration
 {
-    [DataContract]
+    [JsonObject(MemberSerialization.OptIn)]
     public class RegisterRequest : RequestBase
     {
         /// <summary>
@@ -24,38 +24,38 @@ namespace I8Beef.Ecobee.Protocol.Registration
         /// <summary>
         /// The registration code obtained from the thermostat.
         /// </summary>
-        [DataMember(Name = "code")]
+        [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
         /// <summary>
         /// The new account login and email address. Must be a valid email address.
         /// </summary>
-        [DataMember(Name = "userName")]
+        [JsonProperty(PropertyName = "userName")]
         public string UserName { get; set; }
 
         /// <summary>
         /// The password for the account. The password must be at least 8 characters.
         /// </summary>
-        [DataMember(Name = "password")]
+        [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
 
         /// <summary>
         /// When 'true', confirmation that the user accepted the ecobee terms of use 
         /// and privacy policy. If 'false' or not provided, the request will fail.
         /// </summary>
-        [DataMember(Name = "acceptTerms")]
+        [JsonProperty(PropertyName = "acceptTerms")]
         public bool AcceptTerms { get; set; }
 
         /// <summary>
         /// The User's first name. Cannot be longer than 40 characters
         /// </summary>
-        [DataMember(Name = "firstName")]
+        [JsonProperty(PropertyName = "firstName")]
         public string FirstName { get; set; }
 
         /// <summary>
         /// The User's last name (surname). Cannot be longer than 40 characters
         /// </summary>
-        [DataMember(Name = "lastName")]
+        [JsonProperty(PropertyName = "lastName")]
         public string LastName { get; set; }
     }
 }
