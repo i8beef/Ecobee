@@ -35,7 +35,7 @@ namespace I8Beef.Ecobee
                 var response = await client.GetAsync(_baseUri + "authorize?response_type=ecobeePin&client_id=" + appKey + "&scope=smartWrite");
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
+                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
                 return JsonSerializer<Pin>.Deserialize(responseString);
             }
@@ -48,7 +48,7 @@ namespace I8Beef.Ecobee
                 var response = await client.PostAsync(_baseUri + "token?grant_type=ecobeePin&code=" + authToken + "&client_id=" + appKey, null);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
+                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
                 return JsonSerializer<AuthToken>.Deserialize(responseString);
             }
@@ -71,7 +71,7 @@ namespace I8Beef.Ecobee
                 var response = await client.GetAsync(_baseUri + _version + request.Uri + "?json=" + message);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
+                    throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
 
                 return JsonSerializer<TResponse>.Deserialize(responseString);
             }
@@ -94,7 +94,7 @@ namespace I8Beef.Ecobee
                 var response = await client.PostAsync(_baseUri + _version + request.Uri + "?format=json", content);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
+                    throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
 
                 return JsonSerializer<TResponse>.Deserialize(responseString);
             }
@@ -107,7 +107,7 @@ namespace I8Beef.Ecobee
                 var response = await client.PostAsync(_baseUri + "token?grant_type=refresh_token&refresh_token=" + _refreshToken + "&client_id=" + _appKey, null);
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<ApiError>.Deserialize(responseString));
+                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
                 var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
                 _authToken = authToken.AccessToken;

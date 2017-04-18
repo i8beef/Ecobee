@@ -1,16 +1,16 @@
-﻿using I8Beef.Ecobee.Messages;
+﻿using I8Beef.Ecobee.Protocol;
 using System;
 
 namespace I8Beef.Ecobee.Exceptions
 {
     public class ApiException : Exception
     {
-        public ApiError Error { get; set; }
+        public Response Response { get; set; }
 
-        public ApiException(ApiError error)
-            : base(error.ErrorDescription)
+        public ApiException(Response response)
+            : base(response.Status.Code + ": " + response.Status.Message)
         {
-            Error = error;
+            Response = response;
         }
     }
 }

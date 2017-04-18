@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
+    <Compile Include="Exceptions\ApiAuthException.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Messages\ApiError.cs" />
     <Compile Include="Messages\Pin.cs" />
