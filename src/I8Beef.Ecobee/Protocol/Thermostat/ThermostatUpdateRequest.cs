@@ -41,7 +41,7 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// The thermostat object with properties to update.
         /// </summary>
         [DataMember(Name = "thermostat")]
-        public Objects.Thermostat Thermostat { get; set; }
+        public dynamic Thermostat { get; set; }
 
         /// <summary>
         /// The list of functions to perform on all selected thermostats.

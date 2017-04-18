@@ -10,7 +10,7 @@ namespace I8Beef.Ecobee.Protocol.Group
     {
         public GroupUpdateRequest()
         {
-            Groups = new List<Objects.Group>();
+            Groups = new List<dynamic>();
         }
 
         /// <summary>
@@ -38,6 +38,6 @@ namespace I8Beef.Ecobee.Protocol.Group
         /// The list of Groups to update.
         /// </summary>
         [DataMember(Name = "Groups")]
-        public IList<Objects.Group> Groups { get; set; }
+        public IList<dynamic> Groups { get; set; }
     }
 }
