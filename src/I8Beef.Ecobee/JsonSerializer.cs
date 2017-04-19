@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace I8Beef.Ecobee
 {
@@ -11,6 +12,7 @@ namespace I8Beef.Ecobee
         {
             var settings = new JsonSerializerSettings
             {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 DateFormatString = "yyyy-MM-dd"
             };
     
@@ -24,6 +26,7 @@ namespace I8Beef.Ecobee
         {
             var settings = new JsonSerializerSettings
             {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 DateFormatString = "yyyy-MM-dd"
             };
 
