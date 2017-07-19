@@ -1,10 +1,17 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
     [JsonObject(MemberSerialization.OptIn)]
     public class Device
     {
+        public Device()
+        {
+            Sensors = new List<Sensor>();
+            Outputs = new List<Output>();
+        }
+
         /// <summary>
         /// A unique ID for the device
         /// </summary>
@@ -21,12 +28,12 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The list of Sensor Objects associated with the device.
         /// </summary>
         [JsonProperty(PropertyName = "sensors")]
-        public Sensor Sensors { get; set; }
+        public IList<Sensor> Sensors { get; set; }
 
         /// <summary>
         /// The list of Output Objects associated with the device
         /// </summary>
         [JsonProperty(PropertyName = "outputs")]
-        public Output Outputs { get; set; }
+        public IList<Output> Outputs { get; set; }
     }
 }
