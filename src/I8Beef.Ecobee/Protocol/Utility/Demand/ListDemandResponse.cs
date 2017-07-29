@@ -1,12 +1,18 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
+﻿using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
+    /// <summary>
+    /// Ecobee API list demand response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ListDemandResponse : Response
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ListDemandResponse"/> class.
+        /// </summary>
         public ListDemandResponse()
         {
             DrList = new List<DemandResponse>();

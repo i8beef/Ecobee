@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Registration
 {
+    /// <summary>
+    /// Ecobee API Register request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RegisterRequest : RequestBase
     {
@@ -40,7 +43,7 @@ namespace I8Beef.Ecobee.Protocol.Registration
         public string Password { get; set; }
 
         /// <summary>
-        /// When 'true', confirmation that the user accepted the ecobee terms of use 
+        /// When 'true', confirmation that the user accepted the ecobee terms of use
         /// and privacy policy. If 'false' or not provided, the request will fail.
         /// </summary>
         [JsonProperty(PropertyName = "acceptTerms")]

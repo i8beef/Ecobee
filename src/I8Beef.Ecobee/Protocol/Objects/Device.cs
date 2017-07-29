@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API device.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Device
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Device"/> class.
+        /// </summary>
         public Device()
         {
             Sensors = new List<Sensor>();

@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API climate.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Climate
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Climate"/> class.
+        /// </summary>
         public Climate()
         {
             Sensors = new List<Sensor>();
@@ -18,8 +24,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string Name { get; set; }
 
         /// <summary>
-        /// The unique climate identifier. Changing the identifier is not possible and it is generated on the server for each climate. 
-        /// If this value is not supplied a new climate will be created.For the default climates and existing user created climates the 
+        /// The unique climate identifier. Changing the identifier is not possible and it is generated on the server for each climate.
+        /// If this value is not supplied a new climate will be created.For the default climates and existing user created climates the
         /// climateRef should be supplied.
         /// </summary>
         [JsonProperty(PropertyName = "climateRef")]
@@ -92,7 +98,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public int HeatTemp { get; set; }
 
         /// <summary>
-        /// The list of sensors in use for the specific climate.The sensors listed here are used for temperature 
+        /// The list of sensors in use for the specific climate.The sensors listed here are used for temperature
         /// averaging within that climate.Only the sensorId and name are listed in the climate.
         /// </summary>
         [JsonProperty(PropertyName = "sensors")]

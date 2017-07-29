@@ -50,7 +50,7 @@ namespace I8Beef.Ecobee.TestClient
             var client = new Client(appKey, accessToken, refreshToken, tokenExpiration);
             client.AuthTokenUpdated += (o, e) =>
             {
-                WriteTokenFile(e);
+                WriteTokenFile(e.AuthToken);
             };
 
             Console.WriteLine("Getting thermostat information");

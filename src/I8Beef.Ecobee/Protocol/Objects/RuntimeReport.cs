@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API runtime report.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RuntimeReport
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RuntimeReport"/> class.
+        /// </summary>
         public RuntimeReport()
         {
             RowList = new List<string>();

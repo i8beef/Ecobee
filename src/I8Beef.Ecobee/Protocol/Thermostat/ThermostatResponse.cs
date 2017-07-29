@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatResponse : PagedResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThermostatResponse"/> class.
+        /// </summary>
         public ThermostatResponse()
         {
             ThermostatList = new List<Objects.Thermostat>();

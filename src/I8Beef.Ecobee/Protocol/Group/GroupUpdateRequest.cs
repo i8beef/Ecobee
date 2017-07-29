@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Group
 {
+    /// <summary>
+    /// Ecobee API group update request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class GroupUpdateRequest : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GroupUpdateRequest"/> class.
+        /// </summary>
         public GroupUpdateRequest()
         {
             Groups = new List<dynamic>();

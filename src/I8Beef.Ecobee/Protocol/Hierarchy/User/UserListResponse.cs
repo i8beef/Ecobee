@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
+    /// <summary>
+    /// Ecobee API user list response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class UserListResponse : Response
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserListResponse"/> class.
+        /// </summary>
         public UserListResponse()
         {
             Users = new List<Objects.HierarchyUser>();

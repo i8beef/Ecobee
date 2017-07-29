@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API Weather.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Weather
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Weather"/> class.
+        /// </summary>
         public Weather()
         {
             Forecasts = new List<WeatherForecast>();

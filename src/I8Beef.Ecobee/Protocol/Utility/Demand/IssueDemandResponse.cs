@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
+    /// <summary>
+    /// Ecobee API issue demand response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class IssueDemandResponse : Response
     {

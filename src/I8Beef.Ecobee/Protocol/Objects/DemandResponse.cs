@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API demand response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class DemandResponse
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DemandResponse"/> class.
+        /// </summary>
         public DemandResponse()
         {
             Thermostats = new List<string>();
@@ -66,7 +72,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool SendEmail { get; set; }
 
         /// <summary>
-        /// Whether to randomize the start time of the event for each thermostat in order 
+        /// Whether to randomize the start time of the event for each thermostat in order
         /// to mitigate severe electric grid load drops when the event starts. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "randomizeStartTime")]
@@ -79,8 +85,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool RandomStartTimeSeconds { get; set; }
 
         /// <summary>
-        /// Whether to randomize the end time of the event for each thermostat in order to mitigate 
-        /// electric grid load spikes when the event ends and thermostats resume normal program 
+        /// Whether to randomize the end time of the event for each thermostat in order to mitigate
+        /// electric grid load spikes when the event ends and thermostats resume normal program
         /// operation. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "randomizeEndTime")]
@@ -105,16 +111,19 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public IList<string> Thermostats { get; set; }
 
         /// <summary>
+        /// External ref.
         /// </summary>
         [JsonProperty(PropertyName = "externalRef")]
         public string ExternalRef { get; set; }
 
         /// <summary>
+        /// External ref type.
         /// </summary>
         [JsonProperty(PropertyName = "externalRefType")]
         public string ExternalRefType { get; set; }
 
         /// <summary>
+        /// The priority of the demand.
         /// </summary>
         [JsonProperty(PropertyName = "priority")]
         public long Priority { get; set; }

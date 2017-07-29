@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API electricity device.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ElectricityDevice
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ElectricityDevice"/> class.
+        /// </summary>
         public ElectricityDevice()
         {
             Tiers = new List<ElectricityTier>();
@@ -18,7 +24,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string Name { get; set; }
 
         /// <summary>
-        /// The list of Electricity Tiers containing the break down of daily 
+        /// The list of Electricity Tiers containing the break down of daily
         /// electricity consumption of the device for the day, broken down per pricing tier.
         /// </summary>
         [JsonProperty(PropertyName = "tiers")]
@@ -31,14 +37,14 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string LastUpdate { get; set; }
 
         /// <summary>
-        /// The last three daily electricity cost reads from the device in 
+        /// The last three daily electricity cost reads from the device in
         /// cents with a three decimal place precision.
         /// </summary>
         [JsonProperty(PropertyName = "cost")]
         public string Cost { get; set; }
 
         /// <summary>
-        /// The last three daily electricity consumption reads from the 
+        /// The last three daily electricity consumption reads from the
         /// device in KWh with a three decimal place precision.
         /// </summary>
         [JsonProperty(PropertyName = "consumption")]

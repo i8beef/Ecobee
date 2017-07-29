@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API runtime sensor report.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RuntimeSensorReport
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RuntimeSensorReport"/> class.
+        /// </summary>
         public RuntimeSensorReport()
         {
             Sensors = new List<RuntimeSensorMetadata>();
@@ -26,8 +32,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public IList<RuntimeSensorMetadata> Sensors { get; set; }
 
         /// <summary>
-        /// The list of column names returned in the data property. The sensor data column names 
-        /// match the sensorId within the sensor metadata. The first two columns are the date and 
+        /// The list of column names returned in the data property. The sensor data column names
+        /// match the sensorId within the sensor metadata. The first two columns are the date and
         /// time, the following are the defined sensorIds.
         /// </summary>
         [JsonProperty(PropertyName = "columns")]

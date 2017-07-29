@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API user.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class User
     {
@@ -78,7 +81,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// 
+        /// Whether this user has a residential role.
         /// </summary>
         [JsonProperty(PropertyName = "isResidential")]
         public bool IsResidential { get; set; }

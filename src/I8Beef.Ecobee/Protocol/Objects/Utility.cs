@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API Utility.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Utility
     {

@@ -1,9 +1,12 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
+﻿using System;
+using I8Beef.Ecobee.Protocol.Objects;
 using Newtonsoft.Json;
-using System;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat summary request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatSummaryRequest : RequestBase
     {

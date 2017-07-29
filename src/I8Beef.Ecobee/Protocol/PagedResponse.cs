@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol
 {
+    /// <summary>
+    /// Paged Ecobee API response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class PagedResponse : Response
     {

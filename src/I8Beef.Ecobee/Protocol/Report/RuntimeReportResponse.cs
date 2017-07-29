@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Report
 {
+    /// <summary>
+    /// Ecobee API runtime report response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RuntimeReportResponse : Response
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RuntimeReportResponse"/> class.
+        /// </summary>
         public RuntimeReportResponse()
         {
             ReportList = new List<RuntimeReport>();

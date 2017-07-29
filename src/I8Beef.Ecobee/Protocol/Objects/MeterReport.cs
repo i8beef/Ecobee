@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API meter report.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class MeterReport
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeterReport"/> class.
+        /// </summary>
         public MeterReport()
         {
             MeterList = new List<MeterReportData>();
@@ -18,8 +24,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string ThermostatIdentifier { get; set; }
 
         /// <summary>
-        /// The list of meter data for the meters requested. If the thermostat has no 
-        /// meter, the object for that meter will not be included in the list. A 
+        /// The list of meter data for the meters requested. If the thermostat has no
+        /// meter, the object for that meter will not be included in the list. A
         /// thermostat with no meters will have this list empty.
         /// </summary>
         [JsonProperty(PropertyName = "meterList")]

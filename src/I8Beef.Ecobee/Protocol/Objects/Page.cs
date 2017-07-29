@@ -2,11 +2,14 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API page.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Page
     {
         /// <summary>
-        /// The page retrieved or, in the case of a request parameter, 
+        /// The page retrieved or, in the case of a request parameter,
         /// the specific page requested.
         /// </summary>
         [JsonProperty(PropertyName = "page")]

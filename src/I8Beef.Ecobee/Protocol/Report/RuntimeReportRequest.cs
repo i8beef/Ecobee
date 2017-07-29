@@ -1,9 +1,12 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
+﻿using System;
+using I8Beef.Ecobee.Protocol.Objects;
 using Newtonsoft.Json;
-using System;
 
 namespace I8Beef.Ecobee.Protocol.Report
 {
+    /// <summary>
+    /// Ecobee API runtime report request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RuntimeReportRequest : RequestBase
     {
@@ -23,11 +26,11 @@ namespace I8Beef.Ecobee.Protocol.Report
         public override Type ResponseType { get { return typeof(RuntimeReportResponse); } }
 
         /// <summary>
-        /// The Selection Object. Must be selectionType = 'thermostats' and selectionMatch = a CSV of 
+        /// The Selection Object. Must be selectionType = 'thermostats' and selectionMatch = a CSV of
         /// thermostat identifiers.
         /// </summary>
         [JsonProperty(PropertyName = "selection")]
-        public Selection selection { get; set; }
+        public Selection Selection { get; set; }
 
         /// <summary>
         /// The UTC report start date.
@@ -36,7 +39,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         public DateTime StartDate { get; set; }
 
         /// <summary>
-        /// The 5 minute interval to begin the report on. The interval can be determined by multiplying the 
+        /// The 5 minute interval to begin the report on. The interval can be determined by multiplying the
         /// interval by 5. Range: 0-287 Default: 0
         /// </summary>
         [JsonProperty(PropertyName = "startInterval")]
@@ -49,7 +52,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// The 5 minute interval to end the report on. The interval can be determined by multiplying the 
+        /// The 5 minute interval to end the report on. The interval can be determined by multiplying the
         /// interval by 5. Range: 0-287 Default: 287
         /// </summary>
         [JsonProperty(PropertyName = "endInterval")]

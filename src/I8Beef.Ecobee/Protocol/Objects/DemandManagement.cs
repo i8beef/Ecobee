@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API demand management.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class DemandManagement
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DemandManagement"/> class.
+        /// </summary>
         public DemandManagement()
         {
             TempOffsets = new List<int>();
@@ -24,7 +30,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public int Hour { get; set; }
 
         /// <summary>
-        /// The series of 12, 5 minute interval temperature adjustments in the hour. 
+        /// The series of 12, 5 minute interval temperature adjustments in the hour.
         /// Valid integer values are required for each interval. See Temperature values.
         /// </summary>
         [JsonProperty(PropertyName = "tempOffsets")]

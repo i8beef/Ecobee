@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
+    /// <summary>
+    /// Ecobee API user unregister request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class UserUnregisterRequest : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserUnregisterRequest"/> class.
+        /// </summary>
         public UserUnregisterRequest()
         {
             Users = new List<HierarchyUser>();

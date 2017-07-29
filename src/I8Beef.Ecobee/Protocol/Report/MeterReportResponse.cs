@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Report
 {
+    /// <summary>
+    /// Ecobee API meter report response.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class MeterReportResponse : Response
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MeterReportResponse"/> class.
+        /// </summary>
         public MeterReportResponse()
         {
             ReportList = new List<MeterReport>();

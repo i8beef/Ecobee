@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API location.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Location
     {

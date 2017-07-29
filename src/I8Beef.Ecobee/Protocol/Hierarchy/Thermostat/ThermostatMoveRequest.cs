@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat move request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatMoveRequest : RequestBase
     {
@@ -40,8 +43,8 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
         public string ToPath { get; set; }
 
         /// <summary>
-        /// Comma separated list of thermostat identifiers. The thermostats must reside in the 
-        /// from set. If this property is not provided, all thermostats will be moved which 
+        /// Comma separated list of thermostat identifiers. The thermostats must reside in the
+        /// from set. If this property is not provided, all thermostats will be moved which
         /// reside in the from set.
         /// </summary>
         [JsonProperty(PropertyName = "thermostats")]

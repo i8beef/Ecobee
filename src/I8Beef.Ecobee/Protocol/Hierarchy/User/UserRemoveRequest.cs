@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
+    /// <summary>
+    /// Ecobee API user remove request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class UserRemoveRequest : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserRemoveRequest"/> class.
+        /// </summary>
         public UserRemoveRequest()
         {
             Users = new List<HierarchyUser>();

@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API notification settings.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class NotificationSettings
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotificationSettings"/> class.
+        /// </summary>
         public NotificationSettings()
         {
             EmailAddresses = new List<string>();
@@ -15,16 +21,16 @@ namespace I8Beef.Ecobee.Protocol.Objects
         }
 
         /// <summary>
-        /// The list of email addresses alerts and reminders will be sent to. The full 
-        /// list of email addresses must be sent in any update request. If any are missing 
-        /// from that list they will be deleted. If an empty list is sent, any email addresses 
+        /// The list of email addresses alerts and reminders will be sent to. The full
+        /// list of email addresses must be sent in any update request. If any are missing
+        /// from that list they will be deleted. If an empty list is sent, any email addresses
         /// will be deleted.
         /// </summary>
         [JsonProperty(PropertyName = "emailAddresses")]
         public IList<string> EmailAddresses { get; set; }
 
         /// <summary>
-        /// Boolean values representing whether or not alerts and reminders will be sent 
+        /// Boolean values representing whether or not alerts and reminders will be sent
         /// to the email addresses listed above when triggered.
         /// </summary>
         [JsonProperty(PropertyName = "emailNotificationsEnabled")]

@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Utility.Demand
 {
+    /// <summary>
+    /// Ecobee API list deman request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ListDemandRequest : RequestBase
     {

@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API Version.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Version
     {

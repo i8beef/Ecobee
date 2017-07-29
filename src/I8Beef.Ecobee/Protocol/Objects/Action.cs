@@ -2,13 +2,16 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API action.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Action
     {
         /// <summary>
-        /// Values: activateRelay, adjustTemp, doNothing, shutdownAC, shutdownAuxHeat, 
-        /// shutdownSystem, shutdownCompression, switchToOccupied, switchToUnoccupied, 
-        /// turnOffDehumidifer, turnOffHumidifier, turnOnCool, turnOnDehumidifier, 
+        /// Values: activateRelay, adjustTemp, doNothing, shutdownAC, shutdownAuxHeat,
+        /// shutdownSystem, shutdownCompression, switchToOccupied, switchToUnoccupied,
+        /// turnOffDehumidifer, turnOffHumidifier, turnOnCool, turnOnDehumidifier,
         /// turnOnFan, turnOnHeat, turnOnHumidifier.
         /// </summary>
         [JsonProperty(PropertyName = "type")]

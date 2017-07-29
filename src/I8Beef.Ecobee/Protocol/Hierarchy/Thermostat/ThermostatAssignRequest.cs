@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat assign request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatAssignRequest : RequestBase
     {

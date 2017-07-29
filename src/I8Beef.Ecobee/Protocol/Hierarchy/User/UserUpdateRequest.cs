@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.User
 {
+    /// <summary>
+    /// Ecobee API user update request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class UserUpdateRequest : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserUpdateRequest"/> class.
+        /// </summary>
         public UserUpdateRequest()
         {
             Users = new List<HierarchyUser>();

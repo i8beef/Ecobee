@@ -1,12 +1,15 @@
-﻿using I8Beef.Ecobee.Exceptions;
-using I8Beef.Ecobee.Messages;
-using I8Beef.Ecobee.Protocol;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using I8Beef.Ecobee.Exceptions;
+using I8Beef.Ecobee.Messages;
+using I8Beef.Ecobee.Protocol;
 
 namespace I8Beef.Ecobee
 {
+    /// <summary>
+    /// Ecobee client implementation.
+    /// </summary>
     public class Client
     {
         private const string _baseUri = "https://api.ecobee.com/";
@@ -18,8 +21,13 @@ namespace I8Beef.Ecobee
         private string _refreshToken;
         private DateTime _tokenExpiration;
 
-        public event EventHandler<AuthToken> AuthTokenUpdated;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <param name="appKey">Ecobee application key.</param>
+        /// <param name="authToken">Ecobee authorization token.</param>
+        /// <param name="refreshToken">Ecobee refresh token.</param>
+        /// <param name="tokenExpiration">Ecobee token expiration time.</param>
         public Client(string appKey, string authToken, string refreshToken, DateTime tokenExpiration)
         {
             _appKey = appKey;
@@ -28,6 +36,16 @@ namespace I8Beef.Ecobee
             _tokenExpiration = tokenExpiration;
         }
 
+        /// <summary>
+        /// Event evoked when authorization token is updated.
+        /// </summary>
+        public event EventHandler<AuthTokenUpdatedEventArgs> AuthTokenUpdated;
+
+        /// <summary>
+        /// Get a pin from Ecobee API for pairing.
+        /// </summary>
+        /// <param name="appKey">Ecobee application key.</param>
+        /// <returns>A <see cref="Pin"/>.</returns>
         public static async Task<Pin> GetPin(string appKey)
         {
             using (var client = new HttpClient())
@@ -41,6 +59,12 @@ namespace I8Beef.Ecobee
             }
         }
 
+        /// <summary>
+        /// Get an access token.
+        /// </summary>
+        /// <param name="appKey">Ecobee application key.</param>
+        /// <param name="authToken">Original authorization token.</param>
+        /// <returns>A <see cref="AuthToken"/>.</returns>
         public static async Task<AuthToken> GetAccessToken(string appKey, string authToken)
         {
             using (var client = new HttpClient())
@@ -54,6 +78,13 @@ namespace I8Beef.Ecobee
             }
         }
 
+        /// <summary>
+        /// Peforms a GET operation against the Ecobee API.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
+        /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
+        /// <param name="request">The request to send to the Ecobee API.</param>
+        /// <returns>The response from the Ecobee API.</returns>
         public async Task<TResponse> Get<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
             where TResponse : Response
@@ -77,6 +108,13 @@ namespace I8Beef.Ecobee
             }
         }
 
+        /// <summary>
+        /// Peforms a POST operation against the Ecobee API.
+        /// </summary>
+        /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
+        /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
+        /// <param name="request">The request to send to the Ecobee API.</param>
+        /// <returns>The response from the Ecobee API.</returns>
         public async Task<TResponse> Post<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
             where TResponse : Response
@@ -100,6 +138,10 @@ namespace I8Beef.Ecobee
             }
         }
 
+        /// <summary>
+        /// Requests a refresh token from the Ecobee API.
+        /// </summary>
+        /// <returns>A <see cref="Task"/>.</returns>
         private async Task GetRefreshToken()
         {
             using (var client = new HttpClient())
@@ -115,7 +157,7 @@ namespace I8Beef.Ecobee
                 _tokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
 
                 // Raise event for callers to persist new auth tokens
-                AuthTokenUpdated?.Invoke(this, authToken);
+                AuthTokenUpdated?.Invoke(this, new AuthTokenUpdatedEventArgs(authToken));
             }
         }
     }

@@ -3,12 +3,30 @@ using System.Collections.Generic;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat summary status.
+    /// </summary>
     public class ThermostatSummaryStatus
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThermostatSummaryStatus"/> class.
+        /// </summary>
         public ThermostatSummaryStatus()
         {
             EquipmentStatus = new List<string>();
         }
+
+        /// <summary>
+        /// The thermostat identifier.
+        /// </summary>
+        public string ThermostatIdentifier { get; set; }
+
+        /// <summary>
+        /// If no equipment is currently running no data is returned. Possible values are: heatPump,
+        /// heatPump2, heatPump3, compCool1, compCool2, auxHeat1, auxHeat2, auxHeat3, fan, humidifier,
+        /// dehumidifier, ventilator, economizer, compHotWater, auxHotWater.
+        /// </summary>
+        public IList<string> EquipmentStatus { get; set; }
 
         /// <summary>
         /// Creates a new ThermostatSummaryStatus from a string containing 2 parts segmented by a ':'.
@@ -27,17 +45,5 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
                 EquipmentStatus = parts[1].Split(',')
             };
         }
-
-        /// <summary>
-        /// The thermostat identifier.
-        /// </summary>
-        public string ThermostatIdentifier { get; set; }
-
-        /// <summary>
-        /// If no equipment is currently running no data is returned. Possible values are: heatPump, 
-        /// heatPump2, heatPump3, compCool1, compCool2, auxHeat1, auxHeat2, auxHeat3, fan, humidifier, 
-        /// dehumidifier, ventilator, economizer, compHotWater, auxHotWater.
-        /// </summary>
-        public IList<string> EquipmentStatus { get; set; }
     }
 }

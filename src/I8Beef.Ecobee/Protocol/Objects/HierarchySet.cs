@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API hierarchy set.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class HierarchySet
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HierarchySet"/> class.
+        /// </summary>
         public HierarchySet()
         {
             Children = new List<HierarchySet>();
@@ -42,6 +48,5 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// </summary>
         [JsonProperty(PropertyName = "thermostats")]
         public IList<string> Thermostats { get; set; }
-
     }
 }

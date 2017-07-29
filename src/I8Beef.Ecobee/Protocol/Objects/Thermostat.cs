@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API Thermostat.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Thermostat
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Thermostat"/> class.
+        /// </summary>
         public Thermostat()
         {
             Alerts = new List<Alert>();
@@ -39,7 +45,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool IsRegistered { get; set; }
 
         /// <summary>
-        /// The thermostat model number. Values: idtSmart, idtEms, siSmart, siEms, athenaSmart, 
+        /// The thermostat model number. Values: idtSmart, idtEms, siSmart, siEms, athenaSmart,
         /// athenaEms, corSmart
         /// </summary>
         [JsonProperty(PropertyName = "modelNumber")]
@@ -118,35 +124,35 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public Location Location { get; set; }
 
         /// <summary>
-        /// The Technician object associated with the thermostat containing the technician contact 
+        /// The Technician object associated with the thermostat containing the technician contact
         /// information
         /// </summary>
         [JsonProperty(PropertyName = "technician")]
         public Technician Technician { get; set; }
 
         /// <summary>
-        /// The Utility object associated with the thermostat containing the utility company 
+        /// The Utility object associated with the thermostat containing the utility company
         /// information
         /// </summary>
         [JsonProperty(PropertyName = "utility")]
         public Utility Utility { get; set; }
 
         /// <summary>
-        /// The Management object associated with the thermostat containing the management company 
+        /// The Management object associated with the thermostat containing the management company
         /// information
         /// </summary>
         [JsonProperty(PropertyName = "management")]
         public Management Management { get; set; }
 
         /// <summary>
-        /// The Weather object linked to the thermostat representing the current weather on 
+        /// The Weather object linked to the thermostat representing the current weather on
         /// the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "weather")]
         public Weather Weather { get; set; }
 
         /// <summary>
-        /// The list of Event objects linked to the thermostat representing any events that are 
+        /// The list of Event objects linked to the thermostat representing any events that are
         /// active or scheduled.
         /// </summary>
         [JsonProperty(PropertyName = "events")]
@@ -159,7 +165,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public Program Program { get; set; }
 
         /// <summary>
-        /// The houseDetails object contains contains the information about the house the 
+        /// The houseDetails object contains contains the information about the house the
         /// thermostat is installed in.
         /// </summary>
         [JsonProperty(PropertyName = "houseDetails")]
@@ -172,36 +178,36 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public ThermostatOemCfg OemCfg { get; set; }
 
         /// <summary>
-        /// The status of all equipment controlled by this Thermostat. Only running equipment 
+        /// The status of all equipment controlled by this Thermostat. Only running equipment
         /// is listed in the CSV String.
-        /// 
-        /// Values: heatPump, heatPump2, heatPump3, compCool1, compCool2, auxHeat1, auxHeat2, 
+        ///
+        /// Values: heatPump, heatPump2, heatPump3, compCool1, compCool2, auxHeat1, auxHeat2,
         /// auxHeat3, fan, humidifier, dehumidifier, ventilator, economizer, compHotWater, auxHotWater.
-        /// 
-        /// Note: If no equipment is currently running an empty String is returned.If Settings.hasHeatPump 
-        /// is true, heatPump value will be returned for heating, compCool for cooling, and auxHeat for 
-        /// aux heat. If Settings.hasForcedAir or Settings.hasBoiler is true, auxHeat value will be 
+        ///
+        /// Note: If no equipment is currently running an empty String is returned.If Settings.hasHeatPump
+        /// is true, heatPump value will be returned for heating, compCool for cooling, and auxHeat for
+        /// aux heat. If Settings.hasForcedAir or Settings.hasBoiler is true, auxHeat value will be
         /// returned for heating and compCool for cooling (heatPump will not show up for heating).
         /// </summary>
         [JsonProperty(PropertyName = "equipmentStatus")]
         public string EquipmentStatus { get; set; }
 
         /// <summary>
-        /// The NotificationSettings object containing the configuration for Alert and Reminders 
+        /// The NotificationSettings object containing the configuration for Alert and Reminders
         /// for the Thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "notificationSettings")]
         public NotificationSettings NotificationSettings { get; set; }
 
         /// <summary>
-        /// The Privacy object containing the privacy settings for the Thermostat. Note: access 
+        /// The Privacy object containing the privacy settings for the Thermostat. Note: access
         /// to this object is restricted to callers with implict authentication.
         /// </summary>
         [JsonProperty(PropertyName = "privacy")]
         public ThermostatPrivacy Privacy { get; set; }
 
         /// <summary>
-        /// The Version object containing the firmware version information for the Thermostat. 
+        /// The Version object containing the firmware version information for the Thermostat.
         /// For example: "3.5.0.3957".
         /// </summary>
         [JsonProperty(PropertyName = "version")]

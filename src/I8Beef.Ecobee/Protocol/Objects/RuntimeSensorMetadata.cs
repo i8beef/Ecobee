@@ -2,12 +2,15 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API runtime sensor metadata.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RuntimeSensorMetadata
     {
         /// <summary>
-        /// The unique sensor identifier. It is composed of deviceName + deviceId + sensorId 
-        /// (from thermostat.device[].sensor[]) separated by colons. This value corresponds to 
+        /// The unique sensor identifier. It is composed of deviceName + deviceId + sensorId
+        /// (from thermostat.device[].sensor[]) separated by colons. This value corresponds to
         /// the column name for the sensor reading values.
         /// </summary>
         [JsonProperty(PropertyName = "sensorId")]
@@ -20,7 +23,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string SensorName { get; set; }
 
         /// <summary>
-        /// The type of sensor. See Sensor Types. Values: co2, ctclamp, dryContact, humidity, 
+        /// The type of sensor. See Sensor Types. Values: co2, ctclamp, dryContact, humidity,
         /// plug, temperature
         /// </summary>
         [JsonProperty(PropertyName = "sensorType")]

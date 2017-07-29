@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API function base class.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class Function
     {
@@ -12,7 +15,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public abstract string Type { get; set; }
 
         /// <summary>
-        /// A map of key=value pairs as the parameters to the function. See 
+        /// A map of key=value pairs as the parameters to the function. See
         /// individual function documentation for the properties.
         /// </summary>
         [JsonProperty(PropertyName = "params")]

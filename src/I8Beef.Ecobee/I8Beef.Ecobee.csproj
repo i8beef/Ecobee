@@ -20,6 +20,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\I8Beef.Ecobee.xml</DocumentationFile>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +31,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Label="I8Beef.CodeAnalysis.RuleSet">
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>$(SolutionDir)packages/I8Beef.CodeAnalysis.RuleSet.1.0.10/tools/I8Beef.CodeAnalysis.RuleSet.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -44,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthTokenUpdatedEventArgs.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Exceptions\ApiException.cs" />
     <Compile Include="Exceptions\ApiAuthException.cs" />
@@ -52,16 +60,26 @@
     <Compile Include="Messages\Pin.cs" />
     <Compile Include="Messages\AuthToken.cs" />
     <Compile Include="Protocol\Objects\FunctionParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\AcknowledgeParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\ControlPlugParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\CreateVacationParams.cs" />
     <Compile Include="Protocol\Objects\Functions\DeleteVacationFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\CreateVacationFunction.cs" />
+    <Compile Include="Protocol\Objects\Functions\DeleteVacationParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\ResetPreferencesParams.cs" />
     <Compile Include="Protocol\Objects\Functions\ResumeProgramFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\AcknowledgeFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\ControlPlugFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\ResetPreferencesFunction.cs" />
+    <Compile Include="Protocol\Objects\Functions\ResumeProgramParams.cs" />
     <Compile Include="Protocol\Objects\Functions\SendMessageFunction.cs" />
+    <Compile Include="Protocol\Objects\Functions\SendMessageParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\SetHoldParams.cs" />
+    <Compile Include="Protocol\Objects\Functions\SetOccupiedParams.cs" />
     <Compile Include="Protocol\Objects\Functions\UpdateSensorFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\SetOccupiedFunction.cs" />
     <Compile Include="Protocol\Objects\Functions\SetHoldFunction.cs" />
+    <Compile Include="Protocol\Objects\Functions\UpdateSensorParams.cs" />
     <Compile Include="Protocol\Thermostat\ThermostatSummaryStatus.cs" />
     <Compile Include="Protocol\Thermostat\ThermostatSummaryRevision.cs" />
     <Compile Include="Protocol\Group\GroupUpdateRequest.cs" />
@@ -160,6 +178,15 @@
   <ItemGroup>
     <None Include="I8Beef.Ecobee.nuspec" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(SolutionDir)packages/I8Beef.CodeAnalysis.RuleSet.1.0.10/tools/stylecop.json" Label="I8Beef.CodeAnalysis.RuleSet">
+      <Link>stylecop.json</Link>
+    </AdditionalFiles>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

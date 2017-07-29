@@ -1,13 +1,19 @@
-﻿using I8Beef.Ecobee.Protocol.Objects;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using I8Beef.Ecobee.Protocol.Objects;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Thermostat
 {
+    /// <summary>
+    /// Ecobee API thermostat update request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class ThermostatUpdateRequest : RequestBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ThermostatUpdateRequest"/> class.
+        /// </summary>
         public ThermostatUpdateRequest()
         {
             Functions = new List<Function>();

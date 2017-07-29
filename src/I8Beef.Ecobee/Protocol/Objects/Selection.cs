@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API selection.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Selection
     {
@@ -120,8 +123,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool IncludeNotificationSettings { get; set; }
 
         /// <summary>
-        /// Include the current thermostat privacy settings. Note: access to this object is restricted to 
-        /// callers with implict authentication, setting this value to true without proper credentials will 
+        /// Include the current thermostat privacy settings. Note: access to this object is restricted to
+        /// callers with implict authentication, setting this value to true without proper credentials will
         /// result in an authentication exception.
         /// </summary>
         [JsonProperty(PropertyName = "includePrivacy")]
@@ -140,7 +143,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool IncludeSecuritySettings { get; set; }
 
         /// <summary>
-        /// Include the list of current thermostatRemoteSensor objects for the selected Thermostat(s). If not specified, 
+        /// Include the list of current thermostatRemoteSensor objects for the selected Thermostat(s). If not specified,
         /// defaults to false.
         /// </summary>
         [JsonProperty(PropertyName = "includeSensors")]

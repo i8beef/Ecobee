@@ -1,11 +1,17 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API runtime.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Runtime
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Runtime"/> class.
+        /// </summary>
         public Runtime()
         {
             DesiredHeatRange = new List<int>();
@@ -13,7 +19,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         }
 
         /// <summary>
-        /// The current runtime revision. Equivalent in meaning to the runtime revision number 
+        /// The current runtime revision. Equivalent in meaning to the runtime revision number
         /// in the thermostat summary call.
         /// </summary>
         [JsonProperty(PropertyName = "runtimeRev")]
@@ -50,7 +56,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string LastModified { get; set; }
 
         /// <summary>
-        /// The UTC date/time stamp of when the thermostat last posted its runtime information. 
+        /// The UTC date/time stamp of when the thermostat last posted its runtime information.
         /// Format: YYYY-MM-DD HH:MM:SS
         /// </summary>
         [JsonProperty(PropertyName = "lastStatusModified")]
@@ -63,8 +69,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string RuntimeDate { get; set; }
 
         /// <summary>
-        /// The last 5 minute interval which was updated by the thermostat telemetry update. Subtract 2 
-        /// from this interval to obtain the beginning interval for the last 3 readings. Multiply by 5 
+        /// The last 5 minute interval which was updated by the thermostat telemetry update. Subtract 2
+        /// from this interval to obtain the beginning interval for the last 3 readings. Multiply by 5
         /// mins to obtain the minutes of the day. Range: 0-287
         /// </summary>
         [JsonProperty(PropertyName = "runtimeInterval")]
@@ -107,14 +113,14 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public int DesiredDehumidity { get; set; }
 
         /// <summary>
-        /// The desired fan mode. Values: auto, on or null if the HVAC system is off and the thermostat 
+        /// The desired fan mode. Values: auto, on or null if the HVAC system is off and the thermostat
         /// is not controlling a fan independently.
         /// </summary>
         [JsonProperty(PropertyName = "desiredFanMode")]
         public string DesiredFanMode { get; set; }
 
         /// <summary>
-        /// This field provides the possible valid range for which a desiredHeat setpoint can be set to. 
+        /// This field provides the possible valid range for which a desiredHeat setpoint can be set to.
         /// This value takes into account the thermostat heat temperature limits as well the running
         /// program or active events. Values are returned as an Integer array representing the canonical
         /// minimum and maximim, e.g. [450,790].
@@ -123,7 +129,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public IList<int> DesiredHeatRange { get; set; }
 
         /// <summary>
-        /// This field provides the possible valid range for which a desiredCool setpoint can be set to. 
+        /// This field provides the possible valid range for which a desiredCool setpoint can be set to.
         /// This value takes into account the thermostat cool temperature limits as well the running program
         /// or active events. Values are returned as an Integer array representing the canonical minimum and
         /// maximim, e.g. [650,920].

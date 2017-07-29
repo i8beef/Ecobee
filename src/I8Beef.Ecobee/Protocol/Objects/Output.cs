@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API output.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Output
     {
@@ -24,8 +27,8 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public int OutputId { get; set; }
 
         /// <summary>
-        /// The type of output. Values: compressor1, compressor2, dehumidifier, economizer, fan, heat1, heat2, 
-        /// heat3, heatPumpReversal, humidifer, none, occupancy, userDefined, ventilator, zoneCool, zoneFan, 
+        /// The type of output. Values: compressor1, compressor2, dehumidifier, economizer, fan, heat1, heat2,
+        /// heat3, heatPumpReversal, humidifer, none, occupancy, userDefined, ventilator, zoneCool, zoneFan,
         /// zoneHeat.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
@@ -38,7 +41,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool SendUpdate { get; set; }
 
         /// <summary>
-        /// If true, when this output is activated it will close the relay. Otherwise, activating the relay will 
+        /// If true, when this output is activated it will close the relay. Otherwise, activating the relay will
         /// open the relay.
         /// </summary>
         [JsonProperty(PropertyName = "activeClosed")]

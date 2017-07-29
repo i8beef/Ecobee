@@ -1,18 +1,24 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API remote sensor.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class RemoteSensor
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RemoteSensor"/> class.
+        /// </summary>
         public RemoteSensor()
         {
             Capability = new List<RemoteSensorCapability>();
         }
 
         /// <summary>
-        /// The unique sensor identifier. It is composed of deviceName + deviceId separated 
+        /// The unique sensor identifier. It is composed of deviceName + deviceId separated
         /// by colons, for example: rs:100
         /// </summary>
         [JsonProperty(PropertyName = "id")]
@@ -25,21 +31,21 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string Name { get; set; }
 
         /// <summary>
-        /// The type of sensor. Values: thermostat, ecobee3_remote_sensor, monitor_sensor, 
+        /// The type of sensor. Values: thermostat, ecobee3_remote_sensor, monitor_sensor,
         /// control_sensor.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// The unique 4-digit alphanumeric sensor code. For ecobee3 remote sensors this 
+        /// The unique 4-digit alphanumeric sensor code. For ecobee3 remote sensors this
         /// corresponds to the code found on the back of the physical sensor.
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
 
         /// <summary>
-        /// This flag indicates whether the remote sensor is currently in use by a comfort 
+        /// This flag indicates whether the remote sensor is currently in use by a comfort
         /// setting. See Climate for more information.
         /// </summary>
         [JsonProperty(PropertyName = "inUse")]

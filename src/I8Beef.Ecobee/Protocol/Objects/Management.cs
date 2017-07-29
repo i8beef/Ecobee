@@ -2,6 +2,9 @@
 
 namespace I8Beef.Ecobee.Protocol.Objects
 {
+    /// <summary>
+    /// Ecobee API management.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class Management
     {

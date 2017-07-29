@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
 {
+    /// <summary>
+    /// Ecobee API set move request.
+    /// </summary>
     [JsonObject(MemberSerialization.OptIn)]
     public class SetMoveRequest : RequestBase
     {
