@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using I8Beef.Ecobee.Exceptions;
 using I8Beef.Ecobee.Messages;
@@ -14,6 +15,7 @@ namespace I8Beef.Ecobee
     {
         private const string _baseUri = "https://api.ecobee.com/";
         private const int _version = 1;
+        private static HttpClient _httpClient = new HttpClient();
         private TimeSpan _timeout = TimeSpan.FromSeconds(30);
 
         private string _appKey;
@@ -45,18 +47,21 @@ namespace I8Beef.Ecobee
         /// Get a pin from Ecobee API for pairing.
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Pin"/>.</returns>
-        public static async Task<Pin> GetPinAsync(string appKey)
+        public static async Task<Pin> GetPinAsync(string appKey, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(_baseUri + "authorize?response_type=ecobeePin&client_id=" + appKey + "&scope=smartWrite");
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + "authorize?response_type=ecobeePin&client_id=" + appKey + "&scope=smartWrite");
+            requestMessage.Headers.ExpectContinue = false;
 
-                return JsonSerializer<Pin>.Deserialize(responseString);
-            }
+            var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
+                .ConfigureAwait(false);
+            var responseString = await response.Content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+
+            return JsonSerializer<Pin>.Deserialize(responseString);
         }
 
         /// <summary>
@@ -64,18 +69,21 @@ namespace I8Beef.Ecobee
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
         /// <param name="authToken">Original authorization token.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="AuthToken"/>.</returns>
-        public static async Task<AuthToken> GetAccessTokenAsync(string appKey, string authToken)
+        public static async Task<AuthToken> GetAccessTokenAsync(string appKey, string authToken, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync(_baseUri + "token?grant_type=ecobeePin&code=" + authToken + "&client_id=" + appKey, null);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authToken + "&client_id=" + appKey);
+            requestMessage.Headers.ExpectContinue = false;
 
-                return JsonSerializer<AuthToken>.Deserialize(responseString);
-            }
+            var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
+                .ConfigureAwait(false);
+            var responseString = await response.Content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+
+            return JsonSerializer<AuthToken>.Deserialize(responseString);
         }
 
         /// <summary>
@@ -84,28 +92,33 @@ namespace I8Beef.Ecobee
         /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
         /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
         /// <param name="request">The request to send to the Ecobee API.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
+        public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
             where TRequest : RequestBase
             where TResponse : Response
         {
             if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
-                await GetRefreshTokenAsync();
-
-            using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json");
-
-                var message = JsonSerializer<TRequest>.Serialize(request);
-                var response = await client.GetAsync(_baseUri + _version + request.Uri + "?json=" + message);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
-
-                return JsonSerializer<TResponse>.Deserialize(responseString);
+                await GetRefreshTokenAsync(cancellationToken)
+                    .ConfigureAwait(false);
             }
+
+            var message = JsonSerializer<TRequest>.Serialize(request);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + _version + request.Uri + "?json=" + message);
+            requestMessage.Headers.ExpectContinue = false;
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
+            requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
+
+            var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
+                .ConfigureAwait(false);
+            var responseString = await response.Content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
+
+            return JsonSerializer<TResponse>.Deserialize(responseString);
         }
 
         /// <summary>
@@ -114,51 +127,60 @@ namespace I8Beef.Ecobee
         /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
         /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
         /// <param name="request">The request to send to the Ecobee API.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
             where TRequest : RequestBase
             where TResponse : Response
         {
             if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
-                await GetRefreshTokenAsync();
-
-            using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
-                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-                var message = JsonSerializer<TRequest>.Serialize(request);
-                var content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync(_baseUri + _version + request.Uri + "?format=json", content);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
-
-                return JsonSerializer<TResponse>.Deserialize(responseString);
+                await GetRefreshTokenAsync(cancellationToken)
+                   .ConfigureAwait(false);
             }
+
+            var message = JsonSerializer<TRequest>.Serialize(request);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + _version + request.Uri + "?format=json");
+            requestMessage.Headers.ExpectContinue = false;
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
+            requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+            requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
+
+            var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
+                .ConfigureAwait(false);
+            var responseString = await response.Content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new ApiException(JsonSerializer<Response>.Deserialize(responseString));
+
+            return JsonSerializer<TResponse>.Deserialize(responseString);
         }
 
         /// <summary>
         /// Requests a refresh token from the Ecobee API.
         /// </summary>
+        /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Task"/>.</returns>
-        private async Task GetRefreshTokenAsync()
+        private async Task GetRefreshTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync(_baseUri + "token?grant_type=refresh_token&refresh_token=" + _refreshToken + "&client_id=" + _appKey, null);
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + _refreshToken + "&client_id=" + _appKey);
+            requestMessage.Headers.ExpectContinue = false;
 
-                var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
-                _authToken = authToken.AccessToken;
-                _refreshToken = authToken.RefreshToken;
-                _tokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
+            var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
+                .ConfigureAwait(false);
+            var responseString = await response.Content.ReadAsStringAsync()
+                .ConfigureAwait(false);
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
-                // Raise event for callers to persist new auth tokens
-                AuthTokenUpdated?.Invoke(this, new AuthTokenUpdatedEventArgs(authToken));
-            }
+            var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
+            _authToken = authToken.AccessToken;
+            _refreshToken = authToken.RefreshToken;
+            _tokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
+
+            // Raise event for callers to persist new auth tokens
+            AuthTokenUpdated?.Invoke(this, new AuthTokenUpdatedEventArgs(authToken));
         }
     }
 }
