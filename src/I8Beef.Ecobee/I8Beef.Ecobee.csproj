@@ -1,199 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C4087D00-AFBE-4F77-AB72-A7314886EA08}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>I8Beef.Ecobee</RootNamespace>
-    <AssemblyName>I8Beef.Ecobee</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Michael Hallock</Authors>
+    <Company>Michael Hallock</Company>
+    <Description>Library for interacting with Ecobee API</Description>
+    <Copyright>Copyright ©  2016</Copyright>
+    <PackageLicenseUrl>https://github.com/i8beef/Ecobee/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/i8beef/Ecobee</PackageProjectUrl>
+    <PackageTags>Ecobee Thermostat</PackageTags>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0.0</Version>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\I8Beef.Ecobee.xml</DocumentationFile>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Debug\netstandard2.0\I8Beef.Ecobee.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <DocumentationFile>bin\Release\netstandard2.0\I8Beef.Ecobee.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Label="I8Beef.CodeAnalysis.RuleSet">
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>$(SolutionDir)packages/I8Beef.CodeAnalysis.RuleSet.1.0.10/tools/I8Beef.CodeAnalysis.RuleSet.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="I8Beef.CodeAnalysis.RuleSet" Version="1.0.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AuthTokenUpdatedEventArgs.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Exceptions\ApiException.cs" />
-    <Compile Include="Exceptions\ApiAuthException.cs" />
-    <Compile Include="JsonSerializer.cs" />
-    <Compile Include="Messages\ApiError.cs" />
-    <Compile Include="Messages\Pin.cs" />
-    <Compile Include="Messages\AuthToken.cs" />
-    <Compile Include="Protocol\Objects\FunctionParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\AcknowledgeParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\ControlPlugParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\CreateVacationParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\DeleteVacationFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\CreateVacationFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\DeleteVacationParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\ResetPreferencesParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\ResumeProgramFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\AcknowledgeFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\ControlPlugFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\ResetPreferencesFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\ResumeProgramParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\SendMessageFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\SendMessageParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\SetHoldParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\SetOccupiedParams.cs" />
-    <Compile Include="Protocol\Objects\Functions\UpdateSensorFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\SetOccupiedFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\SetHoldFunction.cs" />
-    <Compile Include="Protocol\Objects\Functions\UpdateSensorParams.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatSummaryStatus.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatSummaryRevision.cs" />
-    <Compile Include="Protocol\Group\GroupUpdateRequest.cs" />
-    <Compile Include="Protocol\Group\GroupRequest.cs" />
-    <Compile Include="Protocol\Group\GroupUpdateResponse.cs" />
-    <Compile Include="Protocol\Group\GroupResponse.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetMoveRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetRenameRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetRemoveRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetAddRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetListRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Set\SetListResponse.cs" />
-    <Compile Include="Protocol\Hierarchy\Thermostat\ThermostatMoveRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Thermostat\ThermostatAssignRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Thermostat\ThermostatUnregisterRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\Thermostat\ThermostatRegisterRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserUnregisterRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserUpdateRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserRemoveRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserAddRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserListRequest.cs" />
-    <Compile Include="Protocol\Hierarchy\User\UserListResponse.cs" />
-    <Compile Include="Protocol\Objects\DemandResponse.cs" />
-    <Compile Include="Protocol\Objects\ElectricityTier.cs" />
-    <Compile Include="Protocol\Objects\ElectricityDevice.cs" />
-    <Compile Include="Protocol\Objects\MeterReportData.cs" />
-    <Compile Include="Protocol\Objects\RemoteSensorCapability.cs" />
-    <Compile Include="Protocol\Objects\RuntimeSensorReport.cs" />
-    <Compile Include="Protocol\Objects\RuntimeSensorMetadata.cs" />
-    <Compile Include="Protocol\Objects\RuntimeReport.cs" />
-    <Compile Include="Protocol\Objects\State.cs" />
-    <Compile Include="Protocol\Objects\Action.cs" />
-    <Compile Include="Protocol\Objects\Climate.cs" />
-    <Compile Include="Protocol\Objects\Alert.cs" />
-    <Compile Include="Protocol\Objects\Selection.cs" />
-    <Compile Include="Protocol\Objects\Page.cs" />
-    <Compile Include="Protocol\Objects\Sensor.cs" />
-    <Compile Include="Protocol\Objects\DemandManagement.cs" />
-    <Compile Include="Protocol\Objects\Event.cs" />
-    <Compile Include="Protocol\Objects\Device.cs" />
-    <Compile Include="Protocol\Objects\Output.cs" />
-    <Compile Include="Protocol\Objects\Electricity.cs" />
-    <Compile Include="Protocol\Objects\EquipmentSetting.cs" />
-    <Compile Include="Protocol\Objects\ExtendedRuntime.cs" />
-    <Compile Include="Protocol\Objects\Function.cs" />
-    <Compile Include="Protocol\Objects\GeneralSetting.cs" />
-    <Compile Include="Protocol\Objects\Group.cs" />
-    <Compile Include="Protocol\Objects\HierarchyPrivilege.cs" />
-    <Compile Include="Protocol\Objects\HierarchySet.cs" />
-    <Compile Include="Protocol\Objects\HierarchyUser.cs" />
-    <Compile Include="Protocol\Objects\HouseDetails.cs" />
-    <Compile Include="Protocol\Objects\LimitSetting.cs" />
-    <Compile Include="Protocol\Objects\Location.cs" />
-    <Compile Include="Protocol\Objects\Management.cs" />
-    <Compile Include="Protocol\Objects\MeterReport.cs" />
-    <Compile Include="Protocol\Objects\NotificationSettings.cs" />
-    <Compile Include="Protocol\Objects\Program.cs" />
-    <Compile Include="Protocol\Objects\RemoteSensor.cs" />
-    <Compile Include="Protocol\Objects\Runtime.cs" />
-    <Compile Include="Protocol\Objects\SecuritySettings.cs" />
-    <Compile Include="Protocol\Objects\Settings.cs" />
-    <Compile Include="Protocol\Objects\ThermostatOemCfg.cs" />
-    <Compile Include="Protocol\Objects\ThermostatPrivacy.cs" />
-    <Compile Include="Protocol\Objects\User.cs" />
-    <Compile Include="Protocol\Objects\WeatherForecast.cs" />
-    <Compile Include="Protocol\Objects\Utility.cs" />
-    <Compile Include="Protocol\Objects\Weather.cs" />
-    <Compile Include="Protocol\Objects\Version.cs" />
-    <Compile Include="Protocol\Objects\Thermostat.cs" />
-    <Compile Include="Protocol\Objects\Technician.cs" />
-    <Compile Include="Protocol\Objects\Status.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\PagedRequestBase.cs" />
-    <Compile Include="Protocol\PagedResponse.cs" />
-    <Compile Include="Protocol\Registration\RegisterRequest.cs" />
-    <Compile Include="Protocol\Registration\RegisterResponse.cs" />
-    <Compile Include="Protocol\Report\RuntimeReportRequest.cs" />
-    <Compile Include="Protocol\Report\MeterReportRequest.cs" />
-    <Compile Include="Protocol\Report\RuntimeReportResponse.cs" />
-    <Compile Include="Protocol\Report\MeterReportResponse.cs" />
-    <Compile Include="Protocol\RequestBase.cs" />
-    <Compile Include="Protocol\RequestType.cs" />
-    <Compile Include="Protocol\Response.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatUpdateRequest.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatRequest.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatResponse.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatSummaryResponse.cs" />
-    <Compile Include="Protocol\Thermostat\ThermostatSummaryRequest.cs" />
-    <Compile Include="Protocol\Utility\Demand\IssueDemandManagementRequest.cs" />
-    <Compile Include="Protocol\Utility\Demand\CancelDemandRequest.cs" />
-    <Compile Include="Protocol\Utility\Demand\IssueDemandRequest.cs" />
-    <Compile Include="Protocol\Utility\Demand\ListDemandRequest.cs" />
-    <Compile Include="Protocol\Utility\Demand\IssueDemandResponse.cs" />
-    <Compile Include="Protocol\Utility\Demand\ListDemandResponse.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="I8Beef.Ecobee.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.2\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="$(SolutionDir)packages/I8Beef.CodeAnalysis.RuleSet.1.0.10/tools/stylecop.json" Label="I8Beef.CodeAnalysis.RuleSet">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
