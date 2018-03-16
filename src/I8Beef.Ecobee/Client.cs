@@ -46,7 +46,7 @@ namespace I8Beef.Ecobee
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
         /// <returns>A <see cref="Pin"/>.</returns>
-        public static async Task<Pin> GetPin(string appKey)
+        public static async Task<Pin> GetPinAsync(string appKey)
         {
             using (var client = new HttpClient())
             {
@@ -65,7 +65,7 @@ namespace I8Beef.Ecobee
         /// <param name="appKey">Ecobee application key.</param>
         /// <param name="authToken">Original authorization token.</param>
         /// <returns>A <see cref="AuthToken"/>.</returns>
-        public static async Task<AuthToken> GetAccessToken(string appKey, string authToken)
+        public static async Task<AuthToken> GetAccessTokenAsync(string appKey, string authToken)
         {
             using (var client = new HttpClient())
             {
@@ -85,12 +85,12 @@ namespace I8Beef.Ecobee
         /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
         /// <param name="request">The request to send to the Ecobee API.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        public async Task<TResponse> Get<TRequest, TResponse>(TRequest request)
+        public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
             where TResponse : Response
         {
             if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
-                await GetRefreshToken();
+                await GetRefreshTokenAsync();
 
             using (var client = new HttpClient())
             {
@@ -115,12 +115,12 @@ namespace I8Beef.Ecobee
         /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
         /// <param name="request">The request to send to the Ecobee API.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        public async Task<TResponse> Post<TRequest, TResponse>(TRequest request)
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
             where TRequest : RequestBase
             where TResponse : Response
         {
             if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
-                await GetRefreshToken();
+                await GetRefreshTokenAsync();
 
             using (var client = new HttpClient())
             {
@@ -142,7 +142,7 @@ namespace I8Beef.Ecobee
         /// Requests a refresh token from the Ecobee API.
         /// </summary>
         /// <returns>A <see cref="Task"/>.</returns>
-        private async Task GetRefreshToken()
+        private async Task GetRefreshTokenAsync()
         {
             using (var client = new HttpClient())
             {

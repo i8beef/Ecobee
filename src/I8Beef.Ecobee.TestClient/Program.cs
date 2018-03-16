@@ -27,14 +27,14 @@ namespace I8Beef.Ecobee.TestClient
             else
             {
                 Console.WriteLine("Getting new tokens");
-                var pin = Client.GetPin(appKey).Result;
+                var pin = Client.GetPinAsync(appKey).Result;
 
                 Console.WriteLine("Pin: " + pin.EcobeePin);
                 Console.WriteLine("You have " + pin.ExpiresIn + " minutes to enter this on the Ecobee site.");
 
                 Console.ReadLine();
 
-                var authToken = Client.GetAccessToken(appKey, pin.Code).Result;
+                var authToken = Client.GetAccessTokenAsync(appKey, pin.Code).Result;
                 WriteTokenFile(authToken);
 
                 accessToken = authToken.AccessToken;
@@ -63,7 +63,7 @@ namespace I8Beef.Ecobee.TestClient
                 }
             };
 
-            var response = client.Get<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).Result;
+            var response = client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).Result;
 
             Console.WriteLine();
             Console.WriteLine(JsonSerializer<ThermostatSummaryResponse>.Serialize(response));
