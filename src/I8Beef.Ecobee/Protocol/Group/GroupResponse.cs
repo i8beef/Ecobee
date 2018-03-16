@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Group
     public class GroupResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GroupResponse"/> class.
-        /// </summary>
-        public GroupResponse()
-        {
-            Groups = new List<Objects.Group>();
-        }
-
-        /// <summary>
         /// The list of Groups returned by the request.
         /// </summary>
         [JsonProperty(PropertyName = "groups")]

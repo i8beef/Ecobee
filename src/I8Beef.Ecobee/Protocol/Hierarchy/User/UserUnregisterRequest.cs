@@ -37,13 +37,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "unregister".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "unregister"; } }
 
         /// <summary>
         /// The users whose privileges to unregister.
         /// </summary>
-        [JsonProperty(PropertyName = "users")]
+        [JsonProperty(PropertyName = "users", Required = Required.Always)]
         public IList<HierarchyUser> Users { get; set; }
     }
 }

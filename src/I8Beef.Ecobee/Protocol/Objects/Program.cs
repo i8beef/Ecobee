@@ -21,13 +21,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The Schedule object defining the program schedule.
         /// </summary>
-        [JsonProperty(PropertyName = "schedule")]
+        [JsonProperty(PropertyName = "schedule", Required = Required.Always)]
         public IList<string[]> Schedule { get; set; }
 
         /// <summary>
         /// The list of Climate objects defining all the climates in the program schedule.
         /// </summary>
-        [JsonProperty(PropertyName = "climates")]
+        [JsonProperty(PropertyName = "climates", Required = Required.Always)]
         public IList<Climate> Climates { get; set; }
 
         /// <summary>

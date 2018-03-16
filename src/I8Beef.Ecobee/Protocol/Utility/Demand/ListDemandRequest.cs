@@ -27,7 +27,7 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The type of request. Always "list".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "list"; } }
     }
 }

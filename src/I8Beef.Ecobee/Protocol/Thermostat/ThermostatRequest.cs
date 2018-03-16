@@ -28,7 +28,7 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
     }
 }

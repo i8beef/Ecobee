@@ -10,20 +10,9 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Thermostat
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Thermostat"/> class.
-        /// </summary>
-        public Thermostat()
-        {
-            Alerts = new List<Alert>();
-            Devices = new List<Device>();
-            Events = new List<Event>();
-            RemoteSensors = new List<RemoteSensor>();
-        }
-
-        /// <summary>
         /// The unique thermostat serial number.
         /// </summary>
-        [JsonProperty(PropertyName = "identifier")]
+        [JsonProperty(PropertyName = "identifier", Required = Required.Always)]
         public string Identifier { get; set; }
 
         /// <summary>
@@ -80,6 +69,12 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// </summary>
         [JsonProperty(PropertyName = "utcTime")]
         public string UtcTime { get; set; }
+
+        /// <summary>
+        /// The thermostat audio configuration
+        /// </summary>
+        [JsonProperty(PropertyName = "audio")]
+        public Audio Audio { get; set; }
 
         /// <summary>
         /// The list of Alert objects tied to the thermostat

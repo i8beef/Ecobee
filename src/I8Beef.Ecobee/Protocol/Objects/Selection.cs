@@ -11,13 +11,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The type of match data supplied: Values: none, thermostats, user, managementSet.
         /// </summary>
-        [JsonProperty(PropertyName = "selectionType")]
+        [JsonProperty(PropertyName = "selectionType", Required = Required.Always)]
         public string SelectionType { get; set; }
 
         /// <summary>
         /// The match data based on selectionType(e.g.a list of thermostat idendifiers in the case of a selectionType of thermostats)
         /// </summary>
-        [JsonProperty(PropertyName = "selectionMatch")]
+        [JsonProperty(PropertyName = "selectionMatch", Required = Required.Always)]
         public string SelectionMatch { get; set; }
 
         /// <summary>

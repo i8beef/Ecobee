@@ -35,7 +35,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The text of the alert.
         /// </summary>
-        [JsonProperty(PropertyName = "text")]
+        [JsonProperty(PropertyName = "text", Required = Required.Always)]
         public string Text { get; set; }
 
         /// <summary>

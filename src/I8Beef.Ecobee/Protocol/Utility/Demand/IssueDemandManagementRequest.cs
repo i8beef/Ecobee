@@ -37,13 +37,13 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// A list of demand management objects.
         /// </summary>
-        [JsonProperty(PropertyName = "dmList")]
+        [JsonProperty(PropertyName = "dmList", Required = Required.Always)]
         public IList<DemandManagement> DmList { get; set; }
     }
 }

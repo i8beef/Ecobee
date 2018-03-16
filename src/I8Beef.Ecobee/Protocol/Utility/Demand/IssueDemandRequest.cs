@@ -28,19 +28,19 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// The type of request. Always "create".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get; set; }
 
         /// <summary>
         /// The demand response object to create.
         /// </summary>
-        [JsonProperty(PropertyName = "demandResponse")]
+        [JsonProperty(PropertyName = "demandResponse", Required = Required.Always)]
         public DemandResponse DemandResponse { get; set; }
     }
 }

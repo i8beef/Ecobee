@@ -12,15 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
     public class UserUpdateRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserUpdateRequest"/> class.
-        /// </summary>
-        public UserUpdateRequest()
-        {
-            Users = new List<HierarchyUser>();
-            Privileges = new List<HierarchyPrivilege>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/hierarchy/user"; } }
@@ -38,7 +29,7 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "update".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "update"; } }
 
         /// <summary>

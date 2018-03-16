@@ -29,13 +29,13 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// The Selection Object. Must be selectionType = 'thermostats' and selectionMatch = a CSV of
         /// thermostat identifiers.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
 
         /// <summary>
         /// The UTC report start date.
         /// </summary>
-        [JsonProperty(PropertyName = "startDate")]
+        [JsonProperty(PropertyName = "startDate", Required = Required.Always)]
         public DateTime StartDate { get; set; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// <summary>
         /// The UTC report end date.
         /// </summary>
-        [JsonProperty(PropertyName = "endDate")]
+        [JsonProperty(PropertyName = "endDate", Required = Required.Always)]
         public DateTime EndDate { get; set; }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// <summary>
         /// A CSV string of column names. See Report Columns. No spaces in CSV.
         /// </summary>
-        [JsonProperty(PropertyName = "columns")]
+        [JsonProperty(PropertyName = "columns", Required = Required.Always)]
         public string Columns { get; set; }
 
         /// <summary>

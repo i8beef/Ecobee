@@ -12,15 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Report
     public class RuntimeReportResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RuntimeReportResponse"/> class.
-        /// </summary>
-        public RuntimeReportResponse()
-        {
-            ReportList = new List<RuntimeReport>();
-            SensorList = new List<RuntimeSensorReport>();
-        }
-
-        /// <summary>
         /// report UTC start date.
         /// </summary>
         [JsonProperty(PropertyName = "startDate")]

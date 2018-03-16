@@ -17,7 +17,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         public UserAddRequest()
         {
             Users = new List<HierarchyUser>();
-            Privileges = new List<HierarchyPrivilege>();
         }
 
         /// <summary>
@@ -38,13 +37,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "add".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "add"; } }
 
         /// <summary>
         /// The list of users to add.
         /// </summary>
-        [JsonProperty(PropertyName = "users")]
+        [JsonProperty(PropertyName = "users", Required = Required.Always)]
         public IList<HierarchyUser> Users { get; set; }
 
         /// <summary>

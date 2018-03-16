@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
     public class ThermostatUpdateRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ThermostatUpdateRequest"/> class.
-        /// </summary>
-        public ThermostatUpdateRequest()
-        {
-            Functions = new List<Function>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/thermostat"; } }
@@ -37,7 +29,7 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
         /// <summary>
         /// The selection criteria for update.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
 
         /// <summary>

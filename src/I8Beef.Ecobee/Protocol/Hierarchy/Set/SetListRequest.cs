@@ -27,13 +27,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// The type of request. Always "list".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "list"; } }
 
         /// <summary>
         /// The management set path.
         /// </summary>
-        [JsonProperty(PropertyName = "setPath")]
+        [JsonProperty(PropertyName = "setPath", Required = Required.Always)]
         public string SetPath { get; set; }
 
         /// <summary>

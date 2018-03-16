@@ -28,7 +28,7 @@ namespace I8Beef.Ecobee.Protocol.Group
         /// <summary>
         /// The selection criteria for the request.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
     }
 }

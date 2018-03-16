@@ -10,15 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
     public class UserListResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserListResponse"/> class.
-        /// </summary>
-        public UserListResponse()
-        {
-            Users = new List<Objects.HierarchyUser>();
-            Privileges = new List<Objects.HierarchyPrivilege>();
-        }
-
-        /// <summary>
         /// list of users in the company.
         /// </summary>
         [JsonProperty(PropertyName = "users")]

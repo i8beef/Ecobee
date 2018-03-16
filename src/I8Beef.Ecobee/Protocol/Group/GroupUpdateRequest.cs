@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Group
     public class GroupUpdateRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GroupUpdateRequest"/> class.
-        /// </summary>
-        public GroupUpdateRequest()
-        {
-            Groups = new List<dynamic>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/group"; } }
@@ -37,7 +29,7 @@ namespace I8Beef.Ecobee.Protocol.Group
         /// <summary>
         /// The selection criteria for the request.
         /// </summary>
-        [JsonProperty(PropertyName = "selection")]
+        [JsonProperty(PropertyName = "selection", Required = Required.Always)]
         public Selection Selection { get; set; }
 
         /// <summary>

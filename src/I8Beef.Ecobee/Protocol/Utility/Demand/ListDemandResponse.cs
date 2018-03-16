@@ -11,14 +11,6 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
     public class ListDemandResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListDemandResponse"/> class.
-        /// </summary>
-        public ListDemandResponse()
-        {
-            DrList = new List<DemandResponse>();
-        }
-
-        /// <summary>
         /// list of demand responses which have not yet expired.
         /// </summary>
         [JsonProperty(PropertyName = "drList")]

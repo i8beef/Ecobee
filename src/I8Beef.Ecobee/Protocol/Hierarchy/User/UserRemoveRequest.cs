@@ -37,19 +37,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// <summary>
         /// The type of request. Always "remove".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "remove"; } }
 
         /// <summary>
         /// The path to the set to remove user privileges from.
         /// </summary>
-        [JsonProperty(PropertyName = "setPath")]
+        [JsonProperty(PropertyName = "setPath", Required = Required.Always)]
         public string SetPath { get; set; }
 
         /// <summary>
         /// The users whose privileges to remove from the set.
         /// </summary>
-        [JsonProperty(PropertyName = "users")]
+        [JsonProperty(PropertyName = "users", Required = Required.Always)]
         public IList<HierarchyUser> Users { get; set; }
     }
 }
