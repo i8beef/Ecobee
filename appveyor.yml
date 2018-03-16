@@ -1,0 +1,25 @@
+version: 2.0.0.{build}
+image: Visual Studio 2017
+configuration: Release
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+nuget:
+  disable_publish_on_pr: true
+before_build:
+- ps: nuget restore src/I8Beef.Ecobee.sln
+build:
+  publish_nuget: true
+  publish_nuget_symbols: true
+  verbosity: minimal
+deploy:
+- provider: NuGet
+  api_key:
+    secure: uUwd5REW/cQoHZsuIfr4+4J7VnmcbfqnSf534He3yOvpKFFGiWMzX7UMWQjbYWbc
+  on:
+    branch: release
