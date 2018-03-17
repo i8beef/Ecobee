@@ -12,13 +12,13 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The name of the plug. Ensure each plug has a unique name.
         /// </summary>
-        [JsonProperty(PropertyName = "plugName")]
+        [JsonProperty(PropertyName = "plugName", Required = Required.Always)]
         public string PlugName { get; set; }
 
         /// <summary>
         /// The state to put the plug into. Valid values: on, off, resume.
         /// </summary>
-        [JsonProperty(PropertyName = "plugState")]
+        [JsonProperty(PropertyName = "plugState", Required = Required.Always)]
         public string PlugState { get; set; }
 
         /// <summary>

@@ -12,19 +12,19 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The vacation event name. It must be unique.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; set; }
 
         /// <summary>
         /// The temperature to set the cool vacation hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "coolHoldTemp")]
+        [JsonProperty(PropertyName = "coolHoldTemp", Required = Required.Always)]
         public int CoolHoldTemp { get; set; }
 
         /// <summary>
         /// The temperature to set the heat vacation hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "heatHoldTemp")]
+        [JsonProperty(PropertyName = "heatHoldTemp", Required = Required.Always)]
         public int HeatHoldTemp { get; set; }
 
         /// <summary>

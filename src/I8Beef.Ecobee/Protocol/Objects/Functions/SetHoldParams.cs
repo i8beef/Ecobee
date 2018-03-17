@@ -12,14 +12,20 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The temperature to set the cool hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "coolHoldTemp")]
+        [JsonProperty(PropertyName = "coolHoldTemp", Required = Required.Always)]
         public int CoolHoldTemp { get; set; }
 
         /// <summary>
         /// The temperature to set the heat hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "heatHoldTemp")]
+        [JsonProperty(PropertyName = "heatHoldTemp", Required = Required.Always)]
         public int HeatHoldTemp { get; set; }
+
+        /// <summary>
+        /// The fan state.
+        /// </summary>
+        [JsonProperty(PropertyName = "fan")]
+        public string Fan { get; set; }
 
         /// <summary>
         /// The Climate to use as reference for setting the coolHoldTemp, heatHoldTemp and fan

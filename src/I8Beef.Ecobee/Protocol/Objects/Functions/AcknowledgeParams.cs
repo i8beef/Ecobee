@@ -12,19 +12,19 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The thermostat identifier to acknowledge the alert for.
         /// </summary>
-        [JsonProperty(PropertyName = "thermostatIdentifier")]
+        [JsonProperty(PropertyName = "thermostatIdentifier", Required = Required.Always)]
         public string ThermostatIdentifier { get; set; }
 
         /// <summary>
         /// The acknowledge ref of alert.
         /// </summary>
-        [JsonProperty(PropertyName = "ackRef")]
+        [JsonProperty(PropertyName = "ackRef", Required = Required.Always)]
         public string AckRef { get; set; }
 
         /// <summary>
         /// The type of acknowledgement. Valid values: accept, decline, defer, unacknowledged.
         /// </summary>
-        [JsonProperty(PropertyName = "ackType")]
+        [JsonProperty(PropertyName = "ackType", Required = Required.Always)]
         public string AckType { get; set; }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The message text to send. Text will be truncated to 500 characters if longer.
         /// </summary>
-        [JsonProperty(PropertyName = "text")]
+        [JsonProperty(PropertyName = "text", Required = Required.Always)]
         public string Text { get; set; }
     }
 }

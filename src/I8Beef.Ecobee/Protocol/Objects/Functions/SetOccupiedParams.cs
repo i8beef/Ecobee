@@ -12,7 +12,7 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The climate to use for the temperature, occupied (true) or unoccupied (false).
         /// </summary>
-        [JsonProperty(PropertyName = "occupied")]
+        [JsonProperty(PropertyName = "occupied", Required = Required.Always)]
         public bool Occupied { get; set; }
 
         /// <summary>
