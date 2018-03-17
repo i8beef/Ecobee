@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
     public class SetListResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SetListResponse"/> class.
-        /// </summary>
-        public SetListResponse()
-        {
-            Sets = new List<Objects.HierarchySet>();
-        }
-
-        /// <summary>
         /// list of hierarchy management sets.
         /// </summary>
         [JsonProperty(PropertyName = "sets")]

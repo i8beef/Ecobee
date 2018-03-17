@@ -27,19 +27,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
         /// <summary>
         /// The type of request. Always "move".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "move"; } }
 
         /// <summary>
         /// The set path the thermostats are being moved from.
         /// </summary>
-        [JsonProperty(PropertyName = "setPath")]
+        [JsonProperty(PropertyName = "setPath", Required = Required.Always)]
         public string SetPath { get; set; }
 
         /// <summary>
         /// The set path the thermostats are being moved to.
         /// </summary>
-        [JsonProperty(PropertyName = "toPath")]
+        [JsonProperty(PropertyName = "toPath", Required = Required.Always)]
         public string ToPath { get; set; }
 
         /// <summary>

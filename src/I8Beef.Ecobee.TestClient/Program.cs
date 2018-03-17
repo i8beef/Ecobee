@@ -1,6 +1,8 @@
 ﻿using I8Beef.Ecobee.Messages;
+using I8Beef.Ecobee.Protocol;
 using I8Beef.Ecobee.Protocol.Thermostat;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -27,14 +29,14 @@ namespace I8Beef.Ecobee.TestClient
             else
             {
                 Console.WriteLine("Getting new tokens");
-                var pin = Client.GetPin(appKey).Result;
+                var pin = Client.GetPinAsync(appKey).Result;
 
                 Console.WriteLine("Pin: " + pin.EcobeePin);
                 Console.WriteLine("You have " + pin.ExpiresIn + " minutes to enter this on the Ecobee site.");
 
                 Console.ReadLine();
 
-                var authToken = Client.GetAccessToken(appKey, pin.Code).Result;
+                var authToken = Client.GetAccessTokenAsync(appKey, pin.Code).Result;
                 WriteTokenFile(authToken);
 
                 accessToken = authToken.AccessToken;
@@ -53,7 +55,8 @@ namespace I8Beef.Ecobee.TestClient
                 WriteTokenFile(e.AuthToken);
             };
 
-            Console.WriteLine("Getting thermostat information");
+            // Get thermostat summary
+            Console.WriteLine("Getting thermostat summary");
 
             var request = new ThermostatSummaryRequest
             {
@@ -63,10 +66,67 @@ namespace I8Beef.Ecobee.TestClient
                 }
             };
 
-            var response = client.Get<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).Result;
-
+            var response = client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).Result;
             Console.WriteLine();
             Console.WriteLine(JsonSerializer<ThermostatSummaryResponse>.Serialize(response));
+
+            // Set the HvacMode
+            //Console.WriteLine("Setting thermostat HVAC mode");
+
+            //var updateRequest = new ThermostatUpdateRequest
+            //{
+            //    Selection = new Protocol.Objects.Selection
+            //    {
+            //        SelectionType = "registered"
+            //    },
+            //    Thermostat = new { Settings = new { HvacMode = "auto" } }
+            //};
+
+            //var updateResponse = client.PostAsync<ThermostatUpdateRequest, Response>(updateRequest).Result;
+            //Console.WriteLine();
+            //Console.WriteLine(JsonSerializer<Response>.Serialize(updateResponse));
+
+            // Get thermostat settings
+            //Console.WriteLine("Getting thermostat information");
+
+            //var theroRequest = new ThermostatRequest
+            //{
+            //    Selection = new Protocol.Objects.Selection
+            //    {
+            //        SelectionType = "registered",
+            //        IncludeSettings = true
+            //    }
+            //};
+
+            //var thermoResponse = client.GetAsync<ThermostatRequest, ThermostatResponse>(theroRequest).Result;
+            //Console.WriteLine();
+            //Console.WriteLine(JsonSerializer<ThermostatResponse>.Serialize(thermoResponse));
+
+            //
+            Console.WriteLine("Setting thermostat fan hold");
+
+            var themroFanRequest = new ThermostatUpdateRequest
+            {
+                Selection = new Protocol.Objects.Selection
+                {
+                    SelectionType = "registered"
+                },
+                Functions = new List<Protocol.Objects.Function>
+                {
+                    new Protocol.Functions.SetHoldFunction
+                    {
+                        Params = new Protocol.Functions.SetHoldParams
+                        {
+                            HoldType = "nextTransition",
+                            Fan = "on"
+                        }
+                    }
+                }
+            };
+
+            var themroFanResponse = client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest).Result;
+            Console.WriteLine();
+            Console.WriteLine(JsonSerializer<Response>.Serialize(themroFanResponse));
 
             Console.ReadLine();
         }

@@ -11,7 +11,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The User login userName. Usually a valid email address.
         /// </summary>
-        [JsonProperty(PropertyName = "userName")]
+        [JsonProperty(PropertyName = "userName", Required = Required.Always)]
         public string UserName { get; set; }
 
         /// <summary>

@@ -10,19 +10,9 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class HierarchySet
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HierarchySet"/> class.
-        /// </summary>
-        public HierarchySet()
-        {
-            Children = new List<HierarchySet>();
-            Privileges = new List<HierarchyPrivilege>();
-            Thermostats = new List<string>();
-        }
-
-        /// <summary>
         /// The name of the hierarchy set.
         /// </summary>
-        [JsonProperty(PropertyName = "setName")]
+        [JsonProperty(PropertyName = "setName", Required = Required.Always)]
         public string SetName { get; set; }
 
         /// <summary>

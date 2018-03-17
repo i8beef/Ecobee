@@ -46,7 +46,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The type of notification. Possible values are: hvac, furnaceFilter, humidifierFilter,
         /// dehumidifierFilter, ventilator, ac, airFilter, airCleaner, uvLamp
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public string Type { get; set; }
 
         /// <summary>

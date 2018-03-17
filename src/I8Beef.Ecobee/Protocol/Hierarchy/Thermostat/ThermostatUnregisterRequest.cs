@@ -27,13 +27,13 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Thermostat
         /// <summary>
         /// The type of request. Always "unregister".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "unregister"; } }
 
         /// <summary>
         /// Comma separated list of thermostat identifiers.
         /// </summary>
-        [JsonProperty(PropertyName = "thermostats")]
+        [JsonProperty(PropertyName = "thermostats", Required = Required.Always)]
         public string Thermostats { get; set; }
     }
 }

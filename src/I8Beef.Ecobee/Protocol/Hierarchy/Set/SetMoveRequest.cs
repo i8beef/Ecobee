@@ -27,19 +27,19 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// <summary>
         /// The type of request. Always "move".
         /// </summary>
-        [JsonProperty(PropertyName = "operation")]
+        [JsonProperty(PropertyName = "operation", Required = Required.Always)]
         public string Operation { get { return "move"; } }
 
         /// <summary>
         /// The path of the set to move.
         /// </summary>
-        [JsonProperty(PropertyName = "setPath")]
+        [JsonProperty(PropertyName = "setPath", Required = Required.Always)]
         public string SetPath { get; set; }
 
         /// <summary>
         /// The path of the new parent to move to.
         /// </summary>
-        [JsonProperty(PropertyName = "toPath")]
+        [JsonProperty(PropertyName = "toPath", Required = Required.Always)]
         public string ToPath { get; set; }
     }
 }

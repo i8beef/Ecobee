@@ -20,14 +20,14 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The function type name. See the type name in the function documentation.
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public override string Type { get { return "createVacation"; } set { } }
 
         /// <summary>
         /// A map of key=value pairs as the parameters to the function. See
         /// individual function documentation for the properties.
         /// </summary>
-        [JsonProperty(PropertyName = "params")]
+        [JsonProperty(PropertyName = "params", Required = Required.Always)]
         public override FunctionParams Params { get; set; }
     }
 }

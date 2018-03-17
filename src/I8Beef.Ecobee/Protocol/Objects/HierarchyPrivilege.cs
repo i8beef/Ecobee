@@ -11,7 +11,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The path of the management set.
         /// </summary>
-        [JsonProperty(PropertyName = "setPath")]
+        [JsonProperty(PropertyName = "setPath", Required = Required.Always)]
         public string SetPath { get; set; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The user name of the user associated with this privilege.
         /// </summary>
-        [JsonProperty(PropertyName = "userName")]
+        [JsonProperty(PropertyName = "userName", Required = Required.Always)]
         public string UserName { get; set; }
 
         /// <summary>

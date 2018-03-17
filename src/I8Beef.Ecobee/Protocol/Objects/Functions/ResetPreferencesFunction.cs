@@ -20,7 +20,7 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The function type name. See the type name in the function documentation.
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public override string Type { get { return "resetPreferences"; } set { } }
 
         /// <summary>

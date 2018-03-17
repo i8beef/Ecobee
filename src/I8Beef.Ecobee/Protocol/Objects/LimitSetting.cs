@@ -27,7 +27,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The type of notification. Possible values are: lowTemp, highTemp, lowHumidity,
         /// highHumidity, auxHeat, auxOutdoor
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public string Type { get; set; }
 
         /// <summary>

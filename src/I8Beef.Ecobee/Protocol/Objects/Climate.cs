@@ -10,17 +10,9 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Climate
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Climate"/> class.
-        /// </summary>
-        public Climate()
-        {
-            Sensors = new List<Sensor>();
-        }
-
-        /// <summary>
         /// The unique climate name.The name may be changed without affecting the program integrity so long as uniqueness is maintained.
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
         public string Name { get; set; }
 
         /// <summary>

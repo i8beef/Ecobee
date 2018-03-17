@@ -18,7 +18,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The type of notification. Possible values are: temp
         /// </summary>
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public string Type { get; set; }
 
         /// <summary>

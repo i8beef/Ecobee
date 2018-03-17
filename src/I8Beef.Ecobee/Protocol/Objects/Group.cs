@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Group
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Group"/> class.
-        /// </summary>
-        public Group()
-        {
-            Thermostats = new List<string>();
-        }
-
-        /// <summary>
         /// The unique reference Id for the Group. If not supplied in the POST call, and new
         /// groupRef will be generated.
         /// </summary>
@@ -27,7 +19,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// <summary>
         /// The name for the Group.
         /// </summary>
-        [JsonProperty(PropertyName = "groupName")]
+        [JsonProperty(PropertyName = "groupName", Required = Required.Always)]
         public string GroupName { get; set; }
 
         /// <summary>

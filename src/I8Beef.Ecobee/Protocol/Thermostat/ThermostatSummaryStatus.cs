@@ -9,14 +9,6 @@ namespace I8Beef.Ecobee.Protocol.Thermostat
     public class ThermostatSummaryStatus
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ThermostatSummaryStatus"/> class.
-        /// </summary>
-        public ThermostatSummaryStatus()
-        {
-            EquipmentStatus = new List<string>();
-        }
-
-        /// <summary>
         /// The thermostat identifier.
         /// </summary>
         public string ThermostatIdentifier { get; set; }

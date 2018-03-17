@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Report
     public class MeterReportResponse : Response
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MeterReportResponse"/> class.
-        /// </summary>
-        public MeterReportResponse()
-        {
-            ReportList = new List<MeterReport>();
-        }
-
-        /// <summary>
         /// report UTC start date.
         /// </summary>
         [JsonProperty(PropertyName = "startDate")]

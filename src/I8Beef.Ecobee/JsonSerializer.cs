@@ -20,7 +20,8 @@ namespace I8Beef.Ecobee
             var settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                DateFormatString = "yyyy-MM-dd"
+                DateFormatString = "yyyy-MM-dd",
+                NullValueHandling = NullValueHandling.Ignore
             };
 
             return JsonConvert.SerializeObject(instance, settings);
@@ -36,7 +37,8 @@ namespace I8Beef.Ecobee
             var settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                DateFormatString = "yyyy-MM-dd"
+                DateFormatString = "yyyy-MM-dd",
+                NullValueHandling = NullValueHandling.Ignore
             };
 
             return JsonConvert.DeserializeObject<TType>(json, settings);
