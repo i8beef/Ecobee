@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,9 +19,15 @@ namespace I8Beef.Ecobee
         private TimeSpan _timeout = TimeSpan.FromSeconds(30);
 
         private string _appKey;
-        private string _authToken;
-        private string _refreshToken;
-        private DateTime _tokenExpiration;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <param name="appKey">Ecobee application key.</param>
+        public Client(string appKey)
+        {
+            _appKey = appKey;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -33,15 +39,30 @@ namespace I8Beef.Ecobee
         public Client(string appKey, string authToken, string refreshToken, DateTime tokenExpiration)
         {
             _appKey = appKey;
-            _authToken = authToken;
-            _refreshToken = refreshToken;
-            _tokenExpiration = tokenExpiration;
+            AuthToken = authToken;
+            RefreshToken = refreshToken;
+            TokenExpiration = tokenExpiration;
         }
 
         /// <summary>
         /// Event evoked when authorization token is updated.
         /// </summary>
         public event EventHandler<AuthTokenUpdatedEventArgs> AuthTokenUpdated;
+
+        /// <summary>
+        /// Ecobee authorization token.
+        /// </summary>
+        public string AuthToken { get; set; }
+
+        /// <summary>
+        /// Ecobee refresh token.
+        /// </summary>
+        public string RefreshToken { get; set; }
+
+        /// <summary>
+        /// Ecobee token expiration time.
+        /// </summary>
+        public DateTime TokenExpiration { get; set; }
 
         /// <summary>
         /// Get a pin from Ecobee API for pairing.
@@ -98,7 +119,7 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
+            if (DateTime.Compare(DateTime.Now, TokenExpiration) >= 0)
             {
                 await GetRefreshTokenAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -107,7 +128,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + _version + request.Uri + "?json=" + message);
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
 
@@ -133,7 +154,7 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            if (DateTime.Compare(DateTime.Now, _tokenExpiration) >= 0)
+            if (DateTime.Compare(DateTime.Now, TokenExpiration) >= 0)
             {
                 await GetRefreshTokenAsync(cancellationToken)
                    .ConfigureAwait(false);
@@ -142,7 +163,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + _version + request.Uri + "?format=json");
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _authToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
@@ -164,7 +185,7 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="Task"/>.</returns>
         private async Task GetRefreshTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + _refreshToken + "&client_id=" + _appKey);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + RefreshToken + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
 
             var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
@@ -175,9 +196,9 @@ namespace I8Beef.Ecobee
                 throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
             var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
-            _authToken = authToken.AccessToken;
-            _refreshToken = authToken.RefreshToken;
-            _tokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
+            AuthToken = authToken.AccessToken;
+            RefreshToken = authToken.RefreshToken;
+            TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
 
             // Raise event for callers to persist new auth tokens
             AuthTokenUpdated?.Invoke(this, new AuthTokenUpdatedEventArgs(authToken));
