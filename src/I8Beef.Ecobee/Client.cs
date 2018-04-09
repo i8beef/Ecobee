@@ -19,50 +19,40 @@ namespace I8Beef.Ecobee
         private TimeSpan _timeout = TimeSpan.FromSeconds(30);
 
         private string _appKey;
+        private StoredAuthToken _storedAuthToken;
+        private Func<StoredAuthToken> _getStoredAuthTokenFunc;
+        private Action<StoredAuthToken> _setStoredAuthTokenFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
-        public Client(string appKey)
+        /// <param name="storedAuthToken">Ecobee authorization token data.</param>
+        /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
+        /// <remarks>For single tenant Ecobee token storage. Auth tokens are stored per instance.</remarks>
+        public Client(string appKey, StoredAuthToken storedAuthToken, Action<StoredAuthToken> setStoredAuthTokenFunc)
         {
             _appKey = appKey;
+            _storedAuthToken = storedAuthToken;
+            _setStoredAuthTokenFunc = setStoredAuthTokenFunc;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
-        /// <param name="authToken">Ecobee authorization token.</param>
-        /// <param name="refreshToken">Ecobee refresh token.</param>
-        /// <param name="tokenExpiration">Ecobee token expiration time.</param>
-        public Client(string appKey, string authToken, string refreshToken, DateTime tokenExpiration)
+        /// <param name="getStoredAuthTokenFunc">Lambda function responsible for retrieving current Ecobee auth token data from permanent storage.</param>
+        /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
+        /// <remarks>
+        /// For multi-tenant Ecobee token storage. For example when multiple client instances (i.e. separate devices), but same user, need to share the same
+        /// token data. In this case tokens must be retrieved on demand from a common data repository (e.g. database).
+        /// </remarks>
+        public Client(string appKey, Func<StoredAuthToken> getStoredAuthTokenFunc, Action<StoredAuthToken> setStoredAuthTokenFunc)
         {
             _appKey = appKey;
-            AuthToken = authToken;
-            RefreshToken = refreshToken;
-            TokenExpiration = tokenExpiration;
+            _getStoredAuthTokenFunc = getStoredAuthTokenFunc;
+            _setStoredAuthTokenFunc = setStoredAuthTokenFunc;
         }
-
-        /// <summary>
-        /// Event evoked when authorization token is updated.
-        /// </summary>
-        public event EventHandler<AuthTokenUpdatedEventArgs> AuthTokenUpdated;
-
-        /// <summary>
-        /// Ecobee authorization token.
-        /// </summary>
-        public string AuthToken { get; set; }
-
-        /// <summary>
-        /// Ecobee refresh token.
-        /// </summary>
-        public string RefreshToken { get; set; }
-
-        /// <summary>
-        /// Ecobee token expiration time.
-        /// </summary>
-        public DateTime TokenExpiration { get; set; }
 
         /// <summary>
         /// Get a pin from Ecobee API for pairing.
@@ -89,12 +79,12 @@ namespace I8Beef.Ecobee
         /// Get an access token.
         /// </summary>
         /// <param name="appKey">Ecobee application key.</param>
-        /// <param name="authToken">Original authorization token.</param>
+        /// <param name="authCode">Code previously provided by Ecobee.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="AuthToken"/>.</returns>
-        public static async Task<AuthToken> GetAccessTokenAsync(string appKey, string authToken, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<StoredAuthToken> GetAccessTokenAsync(string appKey, string authCode, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authToken + "&client_id=" + appKey);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authCode + "&client_id=" + appKey);
             requestMessage.Headers.ExpectContinue = false;
 
             var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
@@ -104,7 +94,14 @@ namespace I8Beef.Ecobee
             if (response.StatusCode != System.Net.HttpStatusCode.OK)
                 throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
-            return JsonSerializer<AuthToken>.Deserialize(responseString);
+            var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
+            var storedAuthToken = new StoredAuthToken
+            {
+                AuthToken = authToken.AccessToken,
+                RefreshToken = authToken.RefreshToken,
+                TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
+            };
+            return storedAuthToken;
         }
 
         /// <summary>
@@ -119,7 +116,9 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            if (DateTime.Compare(DateTime.Now, TokenExpiration) >= 0)
+            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+
+            if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
                 await GetRefreshTokenAsync(cancellationToken)
                     .ConfigureAwait(false);
@@ -128,7 +127,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + _version + request.Uri + "?json=" + message);
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AuthToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
 
@@ -154,7 +153,9 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            if (DateTime.Compare(DateTime.Now, TokenExpiration) >= 0)
+            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+
+            if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
                 await GetRefreshTokenAsync(cancellationToken)
                    .ConfigureAwait(false);
@@ -163,7 +164,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + _version + request.Uri + "?format=json");
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AuthToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
@@ -185,7 +186,9 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="Task"/>.</returns>
         private async Task GetRefreshTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + RefreshToken + "&client_id=" + _appKey);
+            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + _storedAuthToken.RefreshToken + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
 
             var response = await _httpClient.SendAsync(requestMessage, cancellationToken)
@@ -196,12 +199,13 @@ namespace I8Beef.Ecobee
                 throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
 
             var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
-            AuthToken = authToken.AccessToken;
-            RefreshToken = authToken.RefreshToken;
-            TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn);
-
-            // Raise event for callers to persist new auth tokens
-            AuthTokenUpdated?.Invoke(this, new AuthTokenUpdatedEventArgs(authToken));
+            var storedAuthToken = new StoredAuthToken
+            {
+                AuthToken = authToken.AccessToken,
+                RefreshToken = authToken.RefreshToken,
+                TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
+            };
+            _setStoredAuthTokenFunc?.Invoke(storedAuthToken);
         }
     }
 }
