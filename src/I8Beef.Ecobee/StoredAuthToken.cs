@@ -8,9 +8,9 @@ namespace I8Beef.Ecobee
     public class StoredAuthToken
     {
         /// <summary>
-        /// Ecobee authorization token.
+        /// Ecobee access token.
         /// </summary>
-        public string AuthToken { get; set; }
+        public string AccessToken { get; set; }
 
         /// <summary>
         /// Ecobee refresh token.
