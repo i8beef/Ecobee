@@ -81,7 +81,7 @@ namespace I8Beef.Ecobee
         /// <param name="appKey">Ecobee application key.</param>
         /// <param name="authCode">Code previously provided by Ecobee.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="AuthToken"/>.</returns>
+        /// <returns>A <see cref="StoredAuthToken"/>.</returns>
         public static async Task<StoredAuthToken> GetAccessTokenAsync(string appKey, string authCode, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authCode + "&client_id=" + appKey);
@@ -97,7 +97,7 @@ namespace I8Beef.Ecobee
             var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
             var storedAuthToken = new StoredAuthToken
             {
-                AuthToken = authToken.AccessToken,
+                AccessToken = authToken.AccessToken,
                 RefreshToken = authToken.RefreshToken,
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
@@ -128,7 +128,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + _version + request.Uri + "?json=" + message);
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AuthToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AccessToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
 
@@ -166,7 +166,7 @@ namespace I8Beef.Ecobee
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + _version + request.Uri + "?format=json");
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AuthToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _storedAuthToken.AccessToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
@@ -188,9 +188,6 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="Task"/>.</returns>
         private async Task GetRefreshTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (_getStoredAuthTokenFunc != null)
-                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
-
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + _storedAuthToken.RefreshToken + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
 
@@ -204,7 +201,7 @@ namespace I8Beef.Ecobee
             var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
             var storedAuthToken = new StoredAuthToken
             {
-                AuthToken = authToken.AccessToken,
+                AccessToken = authToken.AccessToken,
                 RefreshToken = authToken.RefreshToken,
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
