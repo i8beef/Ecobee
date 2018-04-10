@@ -116,7 +116,8 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+            if (_getStoredAuthTokenFunc != null)
+                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
 
             if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
@@ -153,7 +154,8 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+            if (_getStoredAuthTokenFunc != null)
+                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
 
             if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
@@ -186,7 +188,8 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="Task"/>.</returns>
         private async Task GetRefreshTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            _storedAuthToken = _getStoredAuthTokenFunc?.Invoke();
+            if (_getStoredAuthTokenFunc != null)
+                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + _storedAuthToken.RefreshToken + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
