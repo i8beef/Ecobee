@@ -23,7 +23,7 @@ namespace I8Beef.Ecobee.TestClient
                 storedAuthToken = new StoredAuthToken
                 {
                     TokenExpiration = DateTime.Parse(tokenText[0]),
-                    AuthToken = tokenText[1],
+                    AccessToken = tokenText[1],
                     RefreshToken = tokenText[2]
                 };
             }
@@ -41,7 +41,7 @@ namespace I8Beef.Ecobee.TestClient
                 WriteTokenFile(storedAuthToken);
             }
 
-            Console.WriteLine("Access Token: " + storedAuthToken.AuthToken);
+            Console.WriteLine("Access Token: " + storedAuthToken.AccessToken);
             Console.WriteLine("Refresh Token: " + storedAuthToken.RefreshToken);
             Console.WriteLine("Hold onto these");
 
@@ -128,7 +128,7 @@ namespace I8Beef.Ecobee.TestClient
         {
             var text = new StringBuilder();
             text.AppendLine($"{storedAuthToken.TokenExpiration:MM/dd/yy hh:mm:ss tt}");
-            text.AppendLine(storedAuthToken.AuthToken);
+            text.AppendLine(storedAuthToken.AccessToken);
             text.AppendLine(storedAuthToken.RefreshToken);
 
             // Cache the returned tokens
