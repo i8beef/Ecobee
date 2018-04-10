@@ -1,6 +1,6 @@
 using System;
 
-namespace I8Beef.Ecobee.Messages
+namespace I8Beef.Ecobee
 {
     /// <summary>
     /// Ecobee authorization token data that needs to be stored.
