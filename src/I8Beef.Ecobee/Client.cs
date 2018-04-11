@@ -20,8 +20,8 @@ namespace I8Beef.Ecobee
 
         private string _appKey;
         private StoredAuthToken _storedAuthToken;
-        private Func<StoredAuthToken> _getStoredAuthTokenFunc;
-        private Action<StoredAuthToken> _setStoredAuthTokenFunc;
+        private Func<CancellationToken, Task<StoredAuthToken>> _getStoredAuthTokenFunc;
+        private Func<StoredAuthToken, CancellationToken, Task> _setStoredAuthTokenFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -30,7 +30,7 @@ namespace I8Beef.Ecobee
         /// <param name="storedAuthToken">Ecobee authorization token data.</param>
         /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
         /// <remarks>For single tenant Ecobee token storage. Auth tokens are stored per instance.</remarks>
-        public Client(string appKey, StoredAuthToken storedAuthToken, Action<StoredAuthToken> setStoredAuthTokenFunc)
+        public Client(string appKey, StoredAuthToken storedAuthToken, Func<StoredAuthToken, CancellationToken, Task> setStoredAuthTokenFunc)
         {
             _appKey = appKey;
             _storedAuthToken = storedAuthToken;
@@ -47,7 +47,7 @@ namespace I8Beef.Ecobee
         /// For multi-tenant Ecobee token storage. For example when multiple client instances (i.e. separate devices), but same user, need to share the same
         /// token data. In this case tokens must be retrieved on demand from a common data repository (e.g. database).
         /// </remarks>
-        public Client(string appKey, Func<StoredAuthToken> getStoredAuthTokenFunc, Action<StoredAuthToken> setStoredAuthTokenFunc)
+        public Client(string appKey, Func<CancellationToken, Task<StoredAuthToken>> getStoredAuthTokenFunc, Func<StoredAuthToken, CancellationToken, Task> setStoredAuthTokenFunc)
         {
             _appKey = appKey;
             _getStoredAuthTokenFunc = getStoredAuthTokenFunc;
@@ -118,7 +118,10 @@ namespace I8Beef.Ecobee
             where TResponse : Response
         {
             if (_getStoredAuthTokenFunc != null)
-                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
+            {
+                _storedAuthToken = await _getStoredAuthTokenFunc.Invoke(cancellationToken)
+                    .ConfigureAwait(false);
+            }
 
             if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
@@ -156,7 +159,10 @@ namespace I8Beef.Ecobee
             where TResponse : Response
         {
             if (_getStoredAuthTokenFunc != null)
-                _storedAuthToken = _getStoredAuthTokenFunc.Invoke();
+            {
+                _storedAuthToken = await _getStoredAuthTokenFunc.Invoke(cancellationToken)
+                    .ConfigureAwait(false);
+            }
 
             if (DateTime.Compare(DateTime.Now, _storedAuthToken.TokenExpiration) >= 0)
             {
@@ -207,7 +213,7 @@ namespace I8Beef.Ecobee
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
             _storedAuthToken = storedAuthToken;
-            _setStoredAuthTokenFunc?.Invoke(storedAuthToken);
+            await _setStoredAuthTokenFunc?.Invoke(storedAuthToken, cancellationToken);
         }
     }
 }
