@@ -46,7 +46,7 @@ namespace I8Beef.Ecobee.TestClient
             Console.WriteLine("Hold onto these");
 
             // Setup client
-            var client = new Client(appKey, storedAuthToken, (o) => { WriteTokenFile(o); });
+            var client = new Client(appKey, storedAuthToken, async (authToken, cancellationToken) => { WriteTokenFile(authToken); });
 
             // Get thermostat summary
             Console.WriteLine("Getting thermostat summary");
@@ -133,6 +133,6 @@ namespace I8Beef.Ecobee.TestClient
 
             // Cache the returned tokens
             File.WriteAllText(@"token.txt", text.ToString());
-        }
+        }        
     }
 }
