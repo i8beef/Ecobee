@@ -101,6 +101,7 @@ namespace I8Beef.Ecobee
                 RefreshToken = authToken.RefreshToken,
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
+            
             return storedAuthToken;
         }
 
