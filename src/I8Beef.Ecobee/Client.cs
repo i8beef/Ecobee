@@ -213,7 +213,11 @@ namespace I8Beef.Ecobee
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
             _storedAuthToken = storedAuthToken;
-            await _setStoredAuthTokenFunc?.Invoke(storedAuthToken, cancellationToken);
+            if (_setStoredAuthTokenFunc != null)
+            {
+                await _setStoredAuthTokenFunc.Invoke(storedAuthToken, cancellationToken)
+                    .ConfigureAwait(false);
+            }
         }
     }
 }
