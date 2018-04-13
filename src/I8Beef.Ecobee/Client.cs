@@ -41,7 +41,7 @@ namespace I8Beef.Ecobee
         /// <param name="appKey">Ecobee application key.</param>
         /// <param name="getStoredAuthTokenFunc">Lambda function responsible for retrieving current Ecobee auth token data from permanent storage.</param>
         /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
-        /// <param name="timeout">Timeout for all HTTP calls in seconds, default 100.</param>
+        /// <param name="timeout">Timeout for all HTTP calls.</param>
         public Client(
             string appKey,
             Func<CancellationToken, Task<StoredAuthToken>> getStoredAuthTokenFunc,
