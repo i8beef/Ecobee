@@ -28,17 +28,31 @@ namespace I8Beef.Ecobee
         /// <param name="appKey">Ecobee application key.</param>
         /// <param name="getStoredAuthTokenFunc">Lambda function responsible for retrieving current Ecobee auth token data from permanent storage.</param>
         /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
+        public Client(
+            string appKey,
+            Func<CancellationToken, Task<StoredAuthToken>> getStoredAuthTokenFunc,
+            Func<StoredAuthToken, CancellationToken, Task> setStoredAuthTokenFunc)
+            : this(appKey, getStoredAuthTokenFunc, setStoredAuthTokenFunc, TimeSpan.FromSeconds(100))
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Client"/> class.
+        /// </summary>
+        /// <param name="appKey">Ecobee application key.</param>
+        /// <param name="getStoredAuthTokenFunc">Lambda function responsible for retrieving current Ecobee auth token data from permanent storage.</param>
+        /// <param name="setStoredAuthTokenFunc">Lambda function responsible for saving current Ecobee auth token data to permanent storage.</param>
         /// <param name="timeout">Timeout for all HTTP calls in seconds, default 100.</param>
         public Client(
             string appKey,
             Func<CancellationToken, Task<StoredAuthToken>> getStoredAuthTokenFunc,
             Func<StoredAuthToken, CancellationToken, Task> setStoredAuthTokenFunc,
-            int timeout = 100)
+            TimeSpan timeout)
         {
+            _getStoredAuthTokenFunc = getStoredAuthTokenFunc ?? throw new ArgumentNullException(nameof(getStoredAuthTokenFunc));
+            _setStoredAuthTokenFunc = setStoredAuthTokenFunc ?? throw new ArgumentNullException(nameof(setStoredAuthTokenFunc));
+
             _appKey = appKey;
-            _timeout = TimeSpan.FromSeconds(timeout);
-            _getStoredAuthTokenFunc = getStoredAuthTokenFunc;
-            _setStoredAuthTokenFunc = setStoredAuthTokenFunc;
+            _timeout = timeout;
         }
 
         /// <summary>
@@ -113,7 +127,8 @@ namespace I8Beef.Ecobee
                 TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
             };
 
-            await _setStoredAuthTokenFunc.Invoke(storedAuthToken, cancellationToken);
+            await _setStoredAuthTokenFunc(storedAuthToken, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -128,12 +143,13 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            var authToken = await GetCurrentAuthTokenAsync(cancellationToken);
+            var storedAuthToken = await GetCurrentAuthTokenAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + _version + request.Uri + "?json=" + message);
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authToken.AccessToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", storedAuthToken.AccessToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
 
@@ -159,12 +175,13 @@ namespace I8Beef.Ecobee
             where TRequest : RequestBase
             where TResponse : Response
         {
-            var authToken = await GetCurrentAuthTokenAsync(cancellationToken);
+            var storedAuthToken = await GetCurrentAuthTokenAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var message = JsonSerializer<TRequest>.Serialize(request);
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + _version + request.Uri + "?format=json");
             requestMessage.Headers.ExpectContinue = false;
-            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", authToken.AccessToken);
+            requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", storedAuthToken.AccessToken);
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
@@ -186,7 +203,9 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="StoredAuthToken"/>.</returns>
         private async Task<StoredAuthToken> GetCurrentAuthTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken);
+            var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken)
+               .ConfigureAwait(false);
+
             if (storedAuthToken == null)
             {
                 throw new NullReferenceException("Auth token storage delegate failed to provide token.");

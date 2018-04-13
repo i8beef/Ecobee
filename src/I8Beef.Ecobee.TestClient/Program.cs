@@ -16,6 +16,11 @@ namespace I8Beef.Ecobee.TestClient
 
         static void Main(string[] args)
         {
+            MainAsync(args).GetAwaiter().GetResult();
+        }
+
+        private static async Task MainAsync(string[] args)
+        {
             // Setup client
             var appKey = "";
             var client = new Client(appKey, ReadTokenFileAsync, WriteTokenFileAsync);
@@ -23,14 +28,19 @@ namespace I8Beef.Ecobee.TestClient
             if (!File.Exists(@"token.txt"))
             {
                 Console.WriteLine("Getting new tokens");
-                var pin = client.GetPinAsync().GetAwaiter().GetResult();
+                var pin = await client.GetPinAsync();
 
                 Console.WriteLine("Pin: " + pin.EcobeePin);
                 Console.WriteLine("You have " + pin.ExpiresIn + " minutes to enter this on the Ecobee site and hit enter.");
 
                 Console.ReadLine();
 
-                client.GetAccessTokenAsync(pin.Code).GetAwaiter().GetResult();
+                await client.GetAccessTokenAsync(pin.Code);
+            }
+            else
+            {
+                Console.WriteLine("Loading existing tokens");
+                var storedAuthToken = await ReadTokenFileAsync();
             }
 
             Console.WriteLine("Access Token: " + _currentAuthToken.AccessToken);
@@ -48,7 +58,7 @@ namespace I8Beef.Ecobee.TestClient
                 }
             };
 
-            var response = client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).GetAwaiter().GetResult();
+            var response = await client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request);
             Console.WriteLine();
             Console.WriteLine(JsonSerializer<ThermostatSummaryResponse>.Serialize(response));
 
@@ -64,7 +74,7 @@ namespace I8Beef.Ecobee.TestClient
             //    Thermostat = new { Settings = new { HvacMode = "auto" } }
             //};
 
-            //var updateResponse = client.PostAsync<ThermostatUpdateRequest, Response>(updateRequest).GetAwaiter().GetResult();
+            //var updateResponse = await client.PostAsync<ThermostatUpdateRequest, Response>(updateRequest);
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<Response>.Serialize(updateResponse));
 
@@ -80,7 +90,7 @@ namespace I8Beef.Ecobee.TestClient
             //    }
             //};
 
-            //var thermoResponse = client.GetAsync<ThermostatRequest, ThermostatResponse>(theroRequest).GetAwaiter().GetResult();
+            //var thermoResponse = await client.GetAsync<ThermostatRequest, ThermostatResponse>(theroRequest);
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<ThermostatResponse>.Serialize(thermoResponse));
 
@@ -106,7 +116,7 @@ namespace I8Beef.Ecobee.TestClient
             //    }
             //};
 
-            //var themroFanResponse = client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest).GetAwaiter().GetResult();
+            //var themroFanResponse = await client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest);
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<Response>.Serialize(themroFanResponse));
 
