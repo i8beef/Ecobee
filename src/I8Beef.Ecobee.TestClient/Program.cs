@@ -5,48 +5,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace I8Beef.Ecobee.TestClient
 {
     class Program
     {
+        private static StoredAuthToken _currentAuthToken;
+
         static void Main(string[] args)
         {
+            // Setup client
             var appKey = "";
-            StoredAuthToken storedAuthToken;
+            var client = new Client(appKey, ReadTokenFileAsync, WriteTokenFileAsync);
 
-            if (File.Exists(@"token.txt"))
-            {
-                Console.WriteLine("Reading cached tokens");
-                var tokenText = File.ReadAllLines(@"token.txt");
-
-                storedAuthToken = new StoredAuthToken
-                {
-                    TokenExpiration = DateTime.Parse(tokenText[0]),
-                    AccessToken = tokenText[1],
-                    RefreshToken = tokenText[2]
-                };
-            }
-            else
+            if (!File.Exists(@"token.txt"))
             {
                 Console.WriteLine("Getting new tokens");
-                var pin = Client.GetPinAsync(appKey).Result;
+                var pin = client.GetPinAsync().GetAwaiter().GetResult();
 
                 Console.WriteLine("Pin: " + pin.EcobeePin);
-                Console.WriteLine("You have " + pin.ExpiresIn + " minutes to enter this on the Ecobee site.");
+                Console.WriteLine("You have " + pin.ExpiresIn + " minutes to enter this on the Ecobee site and hit enter.");
 
                 Console.ReadLine();
 
-                storedAuthToken = Client.GetAccessTokenAsync(appKey, pin.Code).Result;
-                WriteTokenFile(storedAuthToken);
+                client.GetAccessTokenAsync(pin.Code).GetAwaiter().GetResult();
             }
 
-            Console.WriteLine("Access Token: " + storedAuthToken.AccessToken);
-            Console.WriteLine("Refresh Token: " + storedAuthToken.RefreshToken);
+            Console.WriteLine("Access Token: " + _currentAuthToken.AccessToken);
+            Console.WriteLine("Refresh Token: " + _currentAuthToken.RefreshToken);
             Console.WriteLine("Hold onto these");
-
-            // Setup client
-            var client = new Client(appKey, storedAuthToken, async (authToken, cancellationToken) => { WriteTokenFile(authToken); });
 
             // Get thermostat summary
             Console.WriteLine("Getting thermostat summary");
@@ -59,7 +48,7 @@ namespace I8Beef.Ecobee.TestClient
                 }
             };
 
-            var response = client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).Result;
+            var response = client.GetAsync<ThermostatSummaryRequest, ThermostatSummaryResponse>(request).GetAwaiter().GetResult();
             Console.WriteLine();
             Console.WriteLine(JsonSerializer<ThermostatSummaryResponse>.Serialize(response));
 
@@ -75,7 +64,7 @@ namespace I8Beef.Ecobee.TestClient
             //    Thermostat = new { Settings = new { HvacMode = "auto" } }
             //};
 
-            //var updateResponse = client.PostAsync<ThermostatUpdateRequest, Response>(updateRequest).Result;
+            //var updateResponse = client.PostAsync<ThermostatUpdateRequest, Response>(updateRequest).GetAwaiter().GetResult();
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<Response>.Serialize(updateResponse));
 
@@ -91,7 +80,7 @@ namespace I8Beef.Ecobee.TestClient
             //    }
             //};
 
-            //var thermoResponse = client.GetAsync<ThermostatRequest, ThermostatResponse>(theroRequest).Result;
+            //var thermoResponse = client.GetAsync<ThermostatRequest, ThermostatResponse>(theroRequest).GetAwaiter().GetResult();
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<ThermostatResponse>.Serialize(thermoResponse));
 
@@ -117,22 +106,41 @@ namespace I8Beef.Ecobee.TestClient
             //    }
             //};
 
-            //var themroFanResponse = client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest).Result;
+            //var themroFanResponse = client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest).GetAwaiter().GetResult();
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<Response>.Serialize(themroFanResponse));
 
             Console.ReadLine();
         }
 
-        public static void WriteTokenFile(StoredAuthToken storedAuthToken)
+        public static async Task WriteTokenFileAsync(StoredAuthToken storedAuthToken, CancellationToken cancellationToken = default(CancellationToken))
         {
+            // Cache the returned tokens
+            _currentAuthToken = storedAuthToken;
+
+            // Write token to persistent store
             var text = new StringBuilder();
             text.AppendLine($"{storedAuthToken.TokenExpiration:MM/dd/yy hh:mm:ss tt}");
             text.AppendLine(storedAuthToken.AccessToken);
             text.AppendLine(storedAuthToken.RefreshToken);
 
-            // Cache the returned tokens
-            File.WriteAllText(@"token.txt", text.ToString());
-        }        
+            await File.WriteAllTextAsync(@"token.txt", text.ToString());
+        }
+
+        public static async Task<StoredAuthToken> ReadTokenFileAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (_currentAuthToken == null && File.Exists(@"token.txt"))
+            {
+                var tokenText = await File.ReadAllLinesAsync(@"token.txt");
+                _currentAuthToken = new StoredAuthToken
+                {
+                    TokenExpiration = DateTime.Parse(tokenText[0]),
+                    AccessToken = tokenText[1],
+                    RefreshToken = tokenText[2]
+                };
+            }
+
+            return _currentAuthToken;
+        }
     }
 }
