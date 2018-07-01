@@ -65,7 +65,7 @@ namespace I8Beef.Ecobee
         /// The HttpClient has a Timout feature that has been poorly implemented in that it raises an ambiguous exception on timeout.
         /// This wraps the HttpClient.SendAsync() and adds a proper timeout option.
         /// </remarks>
-        private async Task<HttpResponseMessage> SendAsyncWithTimeout(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<HttpResponseMessage> SendWithTimeoutAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default(CancellationToken))
         {
             var timoutCts = new CancellationTokenSource(_timeout);
             var aggregateCts = CancellationTokenSource.CreateLinkedTokenSource(timoutCts.Token, cancellationToken);
@@ -91,7 +91,7 @@ namespace I8Beef.Ecobee
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + "authorize?response_type=ecobeePin&client_id=" + _appKey + "&scope=smartWrite");
             requestMessage.Headers.ExpectContinue = false;
 
-            var response = await SendAsyncWithTimeout(requestMessage, cancellationToken)
+            var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
                 .ConfigureAwait(false);
             var responseString = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
@@ -112,7 +112,7 @@ namespace I8Beef.Ecobee
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authCode + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
 
-            var response = await SendAsyncWithTimeout(requestMessage, cancellationToken)
+            var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
                 .ConfigureAwait(false);
             var responseString = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
@@ -153,7 +153,7 @@ namespace I8Beef.Ecobee
             requestMessage.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             requestMessage.Headers.TryAddWithoutValidation("Content-Type", "application/json");
 
-            var response = await SendAsyncWithTimeout(requestMessage, cancellationToken)
+            var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
                 .ConfigureAwait(false);
             var responseString = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
@@ -186,7 +186,7 @@ namespace I8Beef.Ecobee
 
             requestMessage.Content = new StringContent(message, System.Text.Encoding.UTF8, "application/json");
 
-            var response = await SendAsyncWithTimeout(requestMessage, cancellationToken)
+            var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
                 .ConfigureAwait(false);
             var responseString = await response.Content.ReadAsStringAsync()
                 .ConfigureAwait(false);
@@ -216,7 +216,7 @@ namespace I8Beef.Ecobee
                 var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + storedAuthToken.RefreshToken + "&client_id=" + _appKey);
                 requestMessage.Headers.ExpectContinue = false;
 
-                var response = await SendAsyncWithTimeout(requestMessage, cancellationToken)
+                var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
                     .ConfigureAwait(false);
                 var responseString = await response.Content.ReadAsStringAsync()
                     .ConfigureAwait(false);
