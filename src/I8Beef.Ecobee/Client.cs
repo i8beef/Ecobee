@@ -8,10 +8,8 @@ using I8Beef.Ecobee.Protocol;
 
 namespace I8Beef.Ecobee
 {
-    /// <summary>
-    /// Ecobee client implementation.
-    /// </summary>
-    public class Client
+    /// <inheritdoc />
+    public class Client : IClient
     {
         private const string _baseUri = "https://api.ecobee.com/";
         private const int _version = 1;
@@ -81,11 +79,7 @@ namespace I8Beef.Ecobee
             }
         }
 
-        /// <summary>
-        /// Get a pin from Ecobee API for pairing.
-        /// </summary>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="Pin"/>.</returns>
+        /// <inheritdoc />
         public async Task<Pin> GetPinAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + "authorize?response_type=ecobeePin&client_id=" + _appKey + "&scope=smartWrite");
@@ -101,12 +95,7 @@ namespace I8Beef.Ecobee
             return JsonSerializer<Pin>.Deserialize(responseString);
         }
 
-        /// <summary>
-        /// Get an access token using the specified auth code.
-        /// </summary>
-        /// <param name="authCode">Code previously provided by Ecobee.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A <see cref="Task"/>.</returns>
+        /// <inheritdoc />
         public async Task GetAccessTokenAsync(string authCode, CancellationToken cancellationToken = default(CancellationToken))
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authCode + "&client_id=" + _appKey);
@@ -131,14 +120,7 @@ namespace I8Beef.Ecobee
                 .ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// Peforms a GET operation against the Ecobee API.
-        /// </summary>
-        /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
-        /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
-        /// <param name="request">The request to send to the Ecobee API.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The response from the Ecobee API.</returns>
+        /// <inheritdoc />
         public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
             where TRequest : RequestBase
             where TResponse : Response
@@ -163,14 +145,7 @@ namespace I8Beef.Ecobee
             return JsonSerializer<TResponse>.Deserialize(responseString);
         }
 
-        /// <summary>
-        /// Peforms a POST operation against the Ecobee API.
-        /// </summary>
-        /// <typeparam name="TRequest">The type of request to send to the Ecobee API.</typeparam>
-        /// <typeparam name="TResponse">The type of response from the Ecobee API.</typeparam>
-        /// <param name="request">The request to send to the Ecobee API.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>The response from the Ecobee API.</returns>
+        /// <inheritdoc />
         public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
             where TRequest : RequestBase
             where TResponse : Response
