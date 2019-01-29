@@ -14,6 +14,7 @@ namespace I8Beef.Ecobee
         private const string _baseUri = "https://api.ecobee.com/";
         private const int _version = 1;
         private static HttpClient _httpClient = new HttpClient { Timeout = Timeout.InfiniteTimeSpan };
+        private static SemaphoreSlim tokenReadLock = new SemaphoreSlim(1, 1);
         private TimeSpan _timeout;
 
         private string _appKey;
@@ -178,39 +179,47 @@ namespace I8Beef.Ecobee
         /// <returns>A <see cref="StoredAuthToken"/>.</returns>
         private async Task<StoredAuthToken> GetCurrentAuthTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
-            var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken)
-               .ConfigureAwait(false);
-
-            if (storedAuthToken == null)
+            await tokenReadLock.WaitAsync();
+            try
             {
-                throw new NullReferenceException("Auth token storage delegate failed to provide token.");
-            }
+                var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken)
+                   .ConfigureAwait(false);
 
-            if (DateTime.Compare(DateTime.Now, storedAuthToken.TokenExpiration) >= 0)
-            {
-                var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + storedAuthToken.RefreshToken + "&client_id=" + _appKey);
-                requestMessage.Headers.ExpectContinue = false;
-
-                var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
-                    .ConfigureAwait(false);
-                var responseString = await response.Content.ReadAsStringAsync()
-                    .ConfigureAwait(false);
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
-
-                var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
-                storedAuthToken = new StoredAuthToken
+                if (storedAuthToken == null)
                 {
-                    AccessToken = authToken.AccessToken,
-                    RefreshToken = authToken.RefreshToken,
-                    TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
-                };
+                    throw new NullReferenceException("Auth token storage delegate failed to provide token.");
+                }
 
-                await _setStoredAuthTokenFunc(storedAuthToken, cancellationToken)
-                    .ConfigureAwait(false);
+                if (DateTime.Compare(DateTime.Now, storedAuthToken.TokenExpiration) >= 0)
+                {
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + storedAuthToken.RefreshToken + "&client_id=" + _appKey);
+                    requestMessage.Headers.ExpectContinue = false;
+
+                    var response = await SendWithTimeoutAsync(requestMessage, cancellationToken)
+                        .ConfigureAwait(false);
+                    var responseString = await response.Content.ReadAsStringAsync()
+                        .ConfigureAwait(false);
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                        throw new ApiAuthException(JsonSerializer<ApiError>.Deserialize(responseString));
+
+                    var authToken = JsonSerializer<AuthToken>.Deserialize(responseString);
+                    storedAuthToken = new StoredAuthToken
+                    {
+                        AccessToken = authToken.AccessToken,
+                        RefreshToken = authToken.RefreshToken,
+                        TokenExpiration = DateTime.Now.AddSeconds(authToken.ExpiresIn)
+                    };
+
+                    await _setStoredAuthTokenFunc(storedAuthToken, cancellationToken)
+                        .ConfigureAwait(false);
+                }
+
+                return storedAuthToken;
             }
-
-            return storedAuthToken;
+            finally
+            {
+                tokenReadLock.Release();
+            }
         }
     }
 }
