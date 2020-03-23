@@ -16,7 +16,7 @@ namespace I8Beef.Ecobee
         /// <param name="authCode">Code previously provided by Ecobee.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Task"/>.</returns>
-        Task GetAccessTokenAsync(string authCode, CancellationToken cancellationToken = default(CancellationToken));
+        Task GetAccessTokenAsync(string authCode, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Peforms a GET operation against the Ecobee API.
@@ -26,7 +26,7 @@ namespace I8Beef.Ecobee
         /// <param name="request">The request to send to the Ecobee API.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default)
             where TRequest : RequestBase
             where TResponse : Response;
 
@@ -35,7 +35,7 @@ namespace I8Beef.Ecobee
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="Pin"/>.</returns>
-        Task<Pin> GetPinAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<Pin> GetPinAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Peforms a POST operation against the Ecobee API.
@@ -45,7 +45,7 @@ namespace I8Beef.Ecobee
         /// <param name="request">The request to send to the Ecobee API.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The response from the Ecobee API.</returns>
-        Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default)
             where TRequest : RequestBase
             where TResponse : Response;
     }

@@ -1,8 +1,5 @@
-using I8Beef.Ecobee.Messages;
-using I8Beef.Ecobee.Protocol;
 using I8Beef.Ecobee.Protocol.Thermostat;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -14,12 +11,7 @@ namespace I8Beef.Ecobee.TestClient
     {
         private static StoredAuthToken _currentAuthToken;
 
-        static void Main(string[] args)
-        {
-            MainAsync(args).GetAwaiter().GetResult();
-        }
-
-        private static async Task MainAsync(string[] args)
+        private static async Task Main()
         {
             // Setup client
             var appKey = "";
@@ -123,7 +115,7 @@ namespace I8Beef.Ecobee.TestClient
             Console.ReadLine();
         }
 
-        public static async Task WriteTokenFileAsync(StoredAuthToken storedAuthToken, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task WriteTokenFileAsync(StoredAuthToken storedAuthToken, CancellationToken cancellationToken = default)
         {
             // Cache the returned tokens
             _currentAuthToken = storedAuthToken;
@@ -137,7 +129,7 @@ namespace I8Beef.Ecobee.TestClient
             await File.WriteAllTextAsync(@"token.txt", text.ToString());
         }
 
-        public static async Task<StoredAuthToken> ReadTokenFileAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<StoredAuthToken> ReadTokenFileAsync(CancellationToken cancellationToken = default)
         {
             if (_currentAuthToken == null && File.Exists(@"token.txt"))
             {

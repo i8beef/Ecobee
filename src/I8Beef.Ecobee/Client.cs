@@ -13,13 +13,12 @@ namespace I8Beef.Ecobee
     {
         private const string _baseUri = "https://api.ecobee.com/";
         private const int _version = 1;
-        private static HttpClient _httpClient = new HttpClient { Timeout = Timeout.InfiniteTimeSpan };
-        private static SemaphoreSlim tokenReadLock = new SemaphoreSlim(1, 1);
+        private static readonly HttpClient _httpClient = new HttpClient { Timeout = Timeout.InfiniteTimeSpan };
+        private static readonly SemaphoreSlim _tokenReadLock = new SemaphoreSlim(1, 1);
+        private readonly string _appKey;
+        private readonly Func<CancellationToken, Task<StoredAuthToken>> _getStoredAuthTokenFunc;
+        private readonly Func<StoredAuthToken, CancellationToken, Task> _setStoredAuthTokenFunc;
         private TimeSpan _timeout;
-
-        private string _appKey;
-        private Func<CancellationToken, Task<StoredAuthToken>> _getStoredAuthTokenFunc;
-        private Func<StoredAuthToken, CancellationToken, Task> _setStoredAuthTokenFunc;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Client"/> class.
@@ -64,7 +63,7 @@ namespace I8Beef.Ecobee
         /// The HttpClient has a Timout feature that has been poorly implemented in that it raises an ambiguous exception on timeout.
         /// This wraps the HttpClient.SendAsync() and adds a proper timeout option.
         /// </remarks>
-        private async Task<HttpResponseMessage> SendWithTimeoutAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<HttpResponseMessage> SendWithTimeoutAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken = default)
         {
             var timoutCts = new CancellationTokenSource(_timeout);
             var aggregateCts = CancellationTokenSource.CreateLinkedTokenSource(timoutCts.Token, cancellationToken);
@@ -81,7 +80,7 @@ namespace I8Beef.Ecobee
         }
 
         /// <inheritdoc />
-        public async Task<Pin> GetPinAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<Pin> GetPinAsync(CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, _baseUri + "authorize?response_type=ecobeePin&client_id=" + _appKey + "&scope=smartWrite");
             requestMessage.Headers.ExpectContinue = false;
@@ -97,7 +96,7 @@ namespace I8Beef.Ecobee
         }
 
         /// <inheritdoc />
-        public async Task GetAccessTokenAsync(string authCode, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task GetAccessTokenAsync(string authCode, CancellationToken cancellationToken = default)
         {
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=ecobeePin&code=" + authCode + "&client_id=" + _appKey);
             requestMessage.Headers.ExpectContinue = false;
@@ -122,7 +121,7 @@ namespace I8Beef.Ecobee
         }
 
         /// <inheritdoc />
-        public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default)
             where TRequest : RequestBase
             where TResponse : Response
         {
@@ -147,7 +146,7 @@ namespace I8Beef.Ecobee
         }
 
         /// <inheritdoc />
-        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request, CancellationToken cancellationToken = default)
             where TRequest : RequestBase
             where TResponse : Response
         {
@@ -177,9 +176,10 @@ namespace I8Beef.Ecobee
         /// </summary>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="StoredAuthToken"/>.</returns>
-        private async Task<StoredAuthToken> GetCurrentAuthTokenAsync(CancellationToken cancellationToken = default(CancellationToken))
+        private async Task<StoredAuthToken> GetCurrentAuthTokenAsync(CancellationToken cancellationToken = default)
         {
-            await tokenReadLock.WaitAsync();
+            await _tokenReadLock.WaitAsync()
+                .ConfigureAwait(false);
             try
             {
                 var storedAuthToken = await _getStoredAuthTokenFunc(cancellationToken)
@@ -218,7 +218,7 @@ namespace I8Beef.Ecobee
             }
             finally
             {
-                tokenReadLock.Release();
+                _tokenReadLock.Release();
             }
         }
     }
