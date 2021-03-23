@@ -12,19 +12,19 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// <summary>
         /// The temperature to set the cool hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "coolHoldTemp", Required = Required.Always)]
-        public int CoolHoldTemp { get; set; }
+        [JsonProperty(PropertyName = "coolHoldTemp", NullValueHandling = NullValueHandling.Ignore)]
+        public int? CoolHoldTemp { get; set; }
 
         /// <summary>
         /// The temperature to set the heat hold at.
         /// </summary>
-        [JsonProperty(PropertyName = "heatHoldTemp", Required = Required.Always)]
-        public int HeatHoldTemp { get; set; }
+        [JsonProperty(PropertyName = "heatHoldTemp", NullValueHandling = NullValueHandling.Ignore)]
+        public int? HeatHoldTemp { get; set; }
 
         /// <summary>
         /// The fan state.
         /// </summary>
-        [JsonProperty(PropertyName = "fan")]
+        [JsonProperty(PropertyName = "fan", NullValueHandling = NullValueHandling.Ignore)]
         public string Fan { get; set; }
 
         /// <summary>
@@ -32,44 +32,44 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// settings for this hold. If this value is passed the coolHoldTemp and heatHoldTemp
         /// are not required.
         /// </summary>
-        [JsonProperty(PropertyName = "holdClimateRef")]
+        [JsonProperty(PropertyName = "holdClimateRef", NullValueHandling = NullValueHandling.Ignore)]
         public string HoldClimateRef { get; set; }
 
         /// <summary>
         /// The start date in thermostat time.
         /// </summary>
-        [JsonProperty(PropertyName = "startDate")]
+        [JsonProperty(PropertyName = "startDate", NullValueHandling = NullValueHandling.Ignore)]
         public string StartDate { get; set; }
 
         /// <summary>
         /// The start time in thermostat time.
         /// </summary>
-        [JsonProperty(PropertyName = "startTime")]
+        [JsonProperty(PropertyName = "startTime", NullValueHandling = NullValueHandling.Ignore)]
         public string StartTime { get; set; }
 
         /// <summary>
         /// The end date in thermostat time.
         /// </summary>
-        [JsonProperty(PropertyName = "endDate")]
+        [JsonProperty(PropertyName = "endDate", NullValueHandling = NullValueHandling.Ignore)]
         public string EndDate { get; set; }
 
         /// <summary>
         /// The end time in thermostat time.
         /// </summary>
-        [JsonProperty(PropertyName = "endTime")]
+        [JsonProperty(PropertyName = "endTime", NullValueHandling = NullValueHandling.Ignore)]
         public string EndTime { get; set; }
 
         /// <summary>
         /// The hold duration type. Valid values: dateTime, nextTransition, indefinite,
         /// holdHours.
         /// </summary>
-        [JsonProperty(PropertyName = "holdType")]
+        [JsonProperty(PropertyName = "holdType", NullValueHandling = NullValueHandling.Ignore)]
         public string HoldType { get; set; }
 
         /// <summary>
         /// The number of hours to hold for, used and required if holdType='holdHours'.
         /// </summary>
-        [JsonProperty(PropertyName = "holdHours")]
-        public int HoldHours { get; set; }
+        [JsonProperty(PropertyName = "holdHours", NullValueHandling = NullValueHandling.Ignore)]
+        public int? HoldHours { get; set; }
     }
 }

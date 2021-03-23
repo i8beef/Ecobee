@@ -1,6 +1,9 @@
+using I8Beef.Ecobee.Protocol;
 using I8Beef.Ecobee.Protocol.Thermostat;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -86,31 +89,38 @@ namespace I8Beef.Ecobee.TestClient
             //Console.WriteLine();
             //Console.WriteLine(JsonSerializer<ThermostatResponse>.Serialize(thermoResponse));
 
-            // Set thermostat fan
-            //Console.WriteLine("Setting thermostat fan hold");
-
-            //var themroFanRequest = new ThermostatUpdateRequest
+            //var thermostat = thermoResponse.ThermostatList.FirstOrDefault();
+            //if (thermostat != null)
             //{
-            //    Selection = new Protocol.Objects.Selection
+            //    // Set thermostat fan
+            //    Console.WriteLine("Setting thermostat fan hold");
+
+            //    var themroFanRequest = new ThermostatUpdateRequest
             //    {
-            //        SelectionType = "registered"
-            //    },
-            //    Functions = new List<Protocol.Objects.Function>
-            //    {
-            //        new Protocol.Functions.SetHoldFunction
+            //        Selection = new Protocol.Objects.Selection
             //        {
-            //            Params = new Protocol.Functions.SetHoldParams
+            //            SelectionType = "registered"
+            //        },
+            //        Functions = new List<Protocol.Objects.Function>
+            //        {
+            //            new Protocol.Functions.SetHoldFunction
             //            {
-            //                HoldType = "nextTransition",
-            //                Fan = "on"
+            //                Params = new Protocol.Functions.SetHoldParams
+            //                {
+            //                    HoldType = "nextTransition",
+            //                    //CoolHoldTemp = thermostat.Runtime.DesiredCool,
+            //                    //HeatHoldTemp = thermostat.Runtime.DesiredHeat,
+            //                    Fan = "on"
+            //                }
             //            }
             //        }
-            //    }
-            //};
+            //    };
 
-            //var themroFanResponse = await client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest);
-            //Console.WriteLine();
-            //Console.WriteLine(JsonSerializer<Response>.Serialize(themroFanResponse));
+            //    var themroFanResponse = await client.PostAsync<ThermostatUpdateRequest, Response>(themroFanRequest);
+            //    Console.WriteLine();
+            //    Console.WriteLine(JsonSerializer<Response>.Serialize(themroFanResponse));
+            //}
+
 
             Console.ReadLine();
         }
