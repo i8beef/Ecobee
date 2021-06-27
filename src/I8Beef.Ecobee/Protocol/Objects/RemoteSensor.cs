@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class RemoteSensor
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteSensor"/> class.
-        /// </summary>
-        public RemoteSensor()
-        {
-            Capability = new List<RemoteSensorCapability>();
-        }
-
-        /// <summary>
         /// The unique sensor identifier. It is composed of deviceName + deviceId separated
         /// by colons, for example: rs:100
         /// </summary>
@@ -49,7 +41,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// setting. See Climate for more information.
         /// </summary>
         [JsonProperty(PropertyName = "inUse")]
-        public bool InUse { get; set; }
+        public bool? InUse { get; set; }
 
         /// <summary>
         /// The list of remoteSensorCapability objects for the remote sensor.

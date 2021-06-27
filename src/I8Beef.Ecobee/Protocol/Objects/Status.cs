@@ -12,7 +12,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The status code for this status.
         /// </summary>
         [JsonProperty(PropertyName = "code")]
-        public int Code { get; set; }
+        public int? Code { get; set; }
 
         /// <summary>
         /// The detailed message for this status.

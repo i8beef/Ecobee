@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Utility.Demand
     public class IssueDemandManagementRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="IssueDemandManagementRequest"/> class.
-        /// </summary>
-        public IssueDemandManagementRequest()
-        {
-            DmList = new List<DemandManagement>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/demandManagement"; } }

@@ -18,13 +18,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The thermostat zone the output is associated with
         /// </summary>
         [JsonProperty(PropertyName = "zone")]
-        public int Zone { get; set; }
+        public int? Zone { get; set; }
 
         /// <summary>
         /// The unique output identifier number.
         /// </summary>
         [JsonProperty(PropertyName = "outputId")]
-        public int OutputId { get; set; }
+        public int? OutputId { get; set; }
 
         /// <summary>
         /// The type of output. Values: compressor1, compressor2, dehumidifier, economizer, fan, heat1, heat2,
@@ -38,25 +38,25 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether to send an update message.
         /// </summary>
         [JsonProperty(PropertyName = "sendUpdate")]
-        public bool SendUpdate { get; set; }
+        public bool? SendUpdate { get; set; }
 
         /// <summary>
         /// If true, when this output is activated it will close the relay. Otherwise, activating the relay will
         /// open the relay.
         /// </summary>
         [JsonProperty(PropertyName = "activeClosed")]
-        public bool ActiveClosed { get; set; }
+        public bool? ActiveClosed { get; set; }
 
         /// <summary>
         /// Time to activate relay - in seconds.
         /// </summary>
         [JsonProperty(PropertyName = "activationTime")]
-        public int ActivationTime { get; set; }
+        public int? ActivationTime { get; set; }
 
         /// <summary>
         /// Time to deactivate relay - in seconds.
         /// </summary>
         [JsonProperty(PropertyName = "deactivationTime")]
-        public int DeactivationTime { get; set; }
+        public int? DeactivationTime { get; set; }
     }
 }

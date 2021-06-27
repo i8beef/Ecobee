@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class MeterReportData
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MeterReportData"/> class.
-        /// </summary>
-        public MeterReportData()
-        {
-            Data = new List<string>();
-        }
-
-        /// <summary>
         /// The type of meter the data is for.
         /// </summary>
         [JsonProperty(PropertyName = "meterType")]

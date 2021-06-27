@@ -10,15 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Program
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Program"/> class.
-        /// </summary>
-        public Program()
-        {
-            Schedule = new List<string[]>();
-            Climates = new List<Climate>();
-        }
-
-        /// <summary>
         /// The Schedule object defining the program schedule.
         /// </summary>
         [JsonProperty(PropertyName = "schedule", Required = Required.Always)]

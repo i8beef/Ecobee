@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
     public class UserAddRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserAddRequest"/> class.
-        /// </summary>
-        public UserAddRequest()
-        {
-            Users = new List<HierarchyUser>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/hierarchy/user"; } }

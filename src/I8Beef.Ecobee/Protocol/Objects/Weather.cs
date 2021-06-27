@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Weather
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Weather"/> class.
-        /// </summary>
-        public Weather()
-        {
-            Forecasts = new List<WeatherForecast>();
-        }
-
-        /// <summary>
         /// The time stamp in UTC of the weather forecast.
         /// </summary>
         [JsonProperty(PropertyName = "timestamp")]

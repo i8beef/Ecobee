@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class RuntimeReport
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RuntimeReport"/> class.
-        /// </summary>
-        public RuntimeReport()
-        {
-            RowList = new List<string>();
-        }
-
-        /// <summary>
         /// The thermostat identifier for the report.
         /// </summary>
         [JsonProperty(PropertyName = "thermostatIdentifier")]
@@ -27,7 +19,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The number of report rows in this report
         /// </summary>
         [JsonProperty(PropertyName = "rowCount")]
-        public int RowCount { get; set; }
+        public int? RowCount { get; set; }
 
         /// <summary>
         /// A list of CSV report strings based on the columns requested.

@@ -24,7 +24,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the event is currently active or not.
         /// </summary>
         [JsonProperty(PropertyName = "running")]
-        public bool Running { get; set; }
+        public bool? Running { get; set; }
 
         /// <summary>
         /// The event start date in thermostat local time.
@@ -54,31 +54,31 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether there are persons occupying the property during the event.
         /// </summary>
         [JsonProperty(PropertyName = "isOccupied")]
-        public bool IsOccupied { get; set; }
+        public bool? IsOccupied { get; set; }
 
         /// <summary>
         /// Whether cooling will be turned off during the event.
         /// </summary>
         [JsonProperty(PropertyName = "isCoolOff")]
-        public bool IsCoolOff { get; set; }
+        public bool? IsCoolOff { get; set; }
 
         /// <summary>
         /// Whether heating will be turned off during the event.
         /// </summary>
         [JsonProperty(PropertyName = "isHeatOff")]
-        public bool IsHeatOff { get; set; }
+        public bool? IsHeatOff { get; set; }
 
         /// <summary>
         /// The cooling absolute temperature to set.
         /// </summary>
         [JsonProperty(PropertyName = "coolHoldTemp")]
-        public int CoolHoldTemp { get; set; }
+        public int? CoolHoldTemp { get; set; }
 
         /// <summary>
         /// The heating absolute temperature to set.
         /// </summary>
         [JsonProperty(PropertyName = "heatHoldTemp")]
-        public int HeatHoldTemp { get; set; }
+        public int? HeatHoldTemp { get; set; }
 
         /// <summary>
         /// The fan mode during the event. Values: auto, on Default: based on current climate and hvac mode.
@@ -96,73 +96,73 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The minimum amount of time the ventilator equipment must stay on on each duty cycle.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorMinOnTime")]
-        public int VentilatorMinOnTime { get; set; }
+        public int? VentilatorMinOnTime { get; set; }
 
         /// <summary>
         /// Whether this event is mandatory or the end user can cancel it.
         /// </summary>
         [JsonProperty(PropertyName = "isOptional")]
-        public bool IsOptional { get; set; }
+        public bool? IsOptional { get; set; }
 
         /// <summary>
         /// Whether the event is using a relative temperature setting to the currently active program climate.See the Note at the bottom of this page for more information.
         /// </summary>
         [JsonProperty(PropertyName = "isTemperatureRelative")]
-        public bool IsTemperatureRelative { get; set; }
+        public bool? IsTemperatureRelative { get; set; }
 
         /// <summary>
         /// The relative cool temperature adjustment.
         /// </summary>
         [JsonProperty(PropertyName = "coolRelativeTemp")]
-        public int CoolRelativeTemp { get; set; }
+        public int? CoolRelativeTemp { get; set; }
 
         /// <summary>
         /// The relative heat temperature adjustment.
         /// </summary>
         [JsonProperty(PropertyName = "heatRelativeTemp")]
-        public int HeatRelativeTemp { get; set; }
+        public int? HeatRelativeTemp { get; set; }
 
         /// <summary>
         /// Whether the event uses absolute temperatures to set the values.Default: true for DRs.See the Note at the bottom of this page for more information.
         /// </summary>
         [JsonProperty(PropertyName = "isTemperatureAbsolute")]
-        public bool IsTemperatureAbsolute { get; set; }
+        public bool? IsTemperatureAbsolute { get; set; }
 
         /// <summary>
         /// Indicates the % scheduled runtime during a Demand Response event. Valid range is 0 - 100%. Default = 100, indicates no change to schedule.
         /// </summary>
         [JsonProperty(PropertyName = "dutyCyclePercentage")]
-        public int DutyCyclePercentage { get; set; }
+        public int? DutyCyclePercentage { get; set; }
 
         /// <summary>
         /// The minimum number of minutes to run the fan each hour.Range: 0-60, Default: 0
         /// </summary>
         [JsonProperty(PropertyName = "fanMinOnTime")]
-        public int FanMinOnTime { get; set; }
+        public int? FanMinOnTime { get; set; }
 
         /// <summary>
         /// True if this calendar event was created because of the occupied sensor.
         /// </summary>
         [JsonProperty(PropertyName = "occupiedSensorActive")]
-        public bool OccupiedSensorActive { get; set; }
+        public bool? OccupiedSensorActive { get; set; }
 
         /// <summary>
         /// True if this calendar event was created because of the unoccupied sensor
         /// </summary>
         [JsonProperty(PropertyName = "unoccupiedSensorActive")]
-        public bool UnoccupiedSensorActive { get; set; }
+        public bool? UnoccupiedSensorActive { get; set; }
 
         /// <summary>
         /// Unsupported. Future feature.
         /// </summary>
         [JsonProperty(PropertyName = "drRampUpTemp")]
-        public int DrRampUpTemp { get; set; }
+        public int? DrRampUpTemp { get; set; }
 
         /// <summary>
         /// Unsupported.Future feature.
         /// </summary>
         [JsonProperty(PropertyName = "drRampUpTime")]
-        public int DrRampUpTime { get; set; }
+        public int? DrRampUpTime { get; set; }
 
         /// <summary>
         /// Unique identifier set by the server to link one or more events and alerts together.

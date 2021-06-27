@@ -19,7 +19,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// hour, which is specified in the the filterLifeUnits property.
         /// </summary>
         [JsonProperty(PropertyName = "filterLife")]
-        public int FilterLife { get; set; }
+        public int? FilterLife { get; set; }
 
         /// <summary>
         /// The units the filterLife field is measured in. Possible values are: month, hour.
@@ -36,11 +36,11 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string RemindMeDate { get; set; }
 
         /// <summary>
-        /// bool value representing whether or not alerts/reminders are enabled for this
+        /// bool? value representing whether or not alerts/reminders are enabled for this
         /// notification type or not.
         /// </summary>
         [JsonProperty(PropertyName = "enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>
         /// The type of notification. Possible values are: hvac, furnaceFilter, humidifierFilter,
@@ -50,10 +50,10 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string Type { get; set; }
 
         /// <summary>
-        /// bool value representing whether or not alerts/reminders should be sent to the
+        /// bool? value representing whether or not alerts/reminders should be sent to the
         /// technician/contractor assoicated with the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "remindTechnician")]
-        public bool RemindTechnician { get; set; }
+        public bool? RemindTechnician { get; set; }
     }
 }

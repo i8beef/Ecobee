@@ -13,6 +13,6 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// Should the thermostat be resumed to next event (false) or to it's program (true).
         /// </summary>
         [JsonProperty(PropertyName = "resumeAll")]
-        public bool ResumeAll { get; set; }
+        public bool? ResumeAll { get; set; }
     }
 }

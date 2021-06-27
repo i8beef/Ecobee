@@ -31,6 +31,6 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// Whether to remind at a later date, if this is a defer acknowledgement.
         /// </summary>
         [JsonProperty(PropertyName = "remindMeLater")]
-        public bool RemindMeLater { get; set; }
+        public bool? RemindMeLater { get; set; }
     }
 }

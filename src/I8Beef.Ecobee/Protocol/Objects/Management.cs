@@ -48,12 +48,12 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether to show management alerts on the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "showAlertIdt")]
-        public bool ShowAlertIdt { get; set; }
+        public bool? ShowAlertIdt { get; set; }
 
         /// <summary>
         /// Whether to show management alerts in the web portal.
         /// </summary>
         [JsonProperty(PropertyName = "showAlertWeb")]
-        public bool ShowAlertWeb { get; set; }
+        public bool? ShowAlertWeb { get; set; }
     }
 }

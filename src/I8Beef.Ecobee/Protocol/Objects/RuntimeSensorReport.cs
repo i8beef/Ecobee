@@ -10,16 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class RuntimeSensorReport
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RuntimeSensorReport"/> class.
-        /// </summary>
-        public RuntimeSensorReport()
-        {
-            Sensors = new List<RuntimeSensorMetadata>();
-            Columns = new List<string>();
-            Data = new List<string>();
-        }
-
-        /// <summary>
         /// The thermostat identifier for the report.
         /// </summary>
         [JsonProperty(PropertyName = "thermostatIdentifier")]

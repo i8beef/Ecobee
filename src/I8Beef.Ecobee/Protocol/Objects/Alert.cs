@@ -42,7 +42,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The number of the alert.
         /// </summary>
         [JsonProperty(PropertyName = "alertNumber")]
-        public int AlertNumber { get; set; }
+        public int? AlertNumber { get; set; }
 
         /// <summary>
         /// The type of the alert.
@@ -54,7 +54,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether alert is an operator alert.
         /// </summary>
         [JsonProperty(PropertyName = "isOperatorAlert")]
-        public bool IsOperatorAlert { get; set; }
+        public bool? IsOperatorAlert { get; set; }
 
         /// <summary>
         /// The reminder of the alert.
@@ -66,19 +66,19 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether to show the alert in Idt.
         /// </summary>
         [JsonProperty(PropertyName = "showIdt")]
-        public bool ShowIdt { get; set; }
+        public bool? ShowIdt { get; set; }
 
         /// <summary>
         /// Whether to show the alert on the web.
         /// </summary>
         [JsonProperty(PropertyName = "showWeb")]
-        public bool ShowWeb { get; set; }
+        public bool? ShowWeb { get; set; }
 
         /// <summary>
         /// Whether to send and email for the alert.
         /// </summary>
         [JsonProperty(PropertyName = "sendEmail")]
-        public bool SendEmail { get; set; }
+        public bool? SendEmail { get; set; }
 
         /// <summary>
         /// Acknowledgement of the alert.
@@ -90,7 +90,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether to remind about the alert later.
         /// </summary>
         [JsonProperty(PropertyName = "remindMeLater")]
-        public bool RemindMeLater { get; set; }
+        public bool? RemindMeLater { get; set; }
 
         /// <summary>
         /// The thermostat identifier.

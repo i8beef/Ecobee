@@ -31,7 +31,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the user registered the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "isRegistered")]
-        public bool IsRegistered { get; set; }
+        public bool? IsRegistered { get; set; }
 
         /// <summary>
         /// The thermostat model number. Values: idtSmart, idtEms, siSmart, siEms, athenaSmart,

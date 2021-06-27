@@ -10,24 +10,16 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class State
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="State"/> class.
-        /// </summary>
-        public State()
-        {
-            Actions = new List<Action>();
-        }
-
-        /// <summary>
         /// The maximum value the sensor can generate.
         /// </summary>
         [JsonProperty(PropertyName = "maxValue")]
-        public int MaxValue { get; set; }
+        public int? MaxValue { get; set; }
 
         /// <summary>
         /// The minimum value the sensor can generate.
         /// </summary>
         [JsonProperty(PropertyName = "minValue")]
-        public int MinValue { get; set; }
+        public int? MinValue { get; set; }
 
         /// <summary>
         /// Values: coolHigh, coolLow, heatHigh, heatLow, high, low, transitionCount, normal.

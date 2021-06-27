@@ -27,13 +27,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// A flag indicating whether the property is occupied by persons during this climate.
         /// </summary>
         [JsonProperty(PropertyName = "isOccupied")]
-        public bool IsOccupied { get; set; }
+        public bool? IsOccupied { get; set; }
 
         /// <summary>
         /// A flag indicating whether ecobee optimized climate settings are used by this climate.
         /// </summary>
         [JsonProperty(PropertyName = "isOptimized")]
-        public bool IsOptimizedame { get; set; }
+        public bool? IsOptimizedame { get; set; }
 
         /// <summary>
         /// The cooling fan mode. Default: on.Values: auto, on.
@@ -57,7 +57,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The minimum time, in minutes, to run the ventilator each hour.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorMinOnTime")]
-        public int VentilatorMinOnTime { get; set; }
+        public int? VentilatorMinOnTime { get; set; }
 
         /// <summary>
         /// The climate owner.Default: system.Values: adHoc, demandResponse, quickSave, sensorAction, switchOccupancy, system, template, user.
@@ -81,13 +81,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The cool temperature for this climate.
         /// </summary>
         [JsonProperty(PropertyName = "coolTemp")]
-        public int CoolTemp { get; set; }
+        public int? CoolTemp { get; set; }
 
         /// <summary>
         /// The heat temperature for this climate.
         /// </summary>
         [JsonProperty(PropertyName = "heatTemp")]
-        public int HeatTemp { get; set; }
+        public int? HeatTemp { get; set; }
 
         /// <summary>
         /// The list of sensors in use for the specific climate.The sensors listed here are used for temperature

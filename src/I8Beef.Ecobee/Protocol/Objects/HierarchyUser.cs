@@ -42,12 +42,12 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the user is active and permitted to access to the system.
         /// </summary>
         [JsonProperty(PropertyName = "active")]
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
 
         /// <summary>
         /// Whether the user will receive alerts in email.
         /// </summary>
         [JsonProperty(PropertyName = "emailAlerts")]
-        public bool EmailAlerts { get; set; }
+        public bool? EmailAlerts { get; set; }
     }
 }

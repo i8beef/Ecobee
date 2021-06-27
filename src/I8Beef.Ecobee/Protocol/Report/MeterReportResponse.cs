@@ -21,7 +21,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// report start interval.
         /// </summary>
         [JsonProperty(PropertyName = "startInterval")]
-        public int StartInterval { get; set; }
+        public int? StartInterval { get; set; }
 
         /// <summary>
         /// report UTC end date.
@@ -33,7 +33,7 @@ namespace I8Beef.Ecobee.Protocol.Report
         /// report end interval.
         /// </summary>
         [JsonProperty(PropertyName = "endInterval")]
-        public int EndInterval { get; set; }
+        public int? EndInterval { get; set; }
 
         /// <summary>
         /// CSV list of meter types from the request.

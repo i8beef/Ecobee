@@ -13,7 +13,7 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// The climate to use for the temperature, occupied (true) or unoccupied (false).
         /// </summary>
         [JsonProperty(PropertyName = "occupied", Required = Required.Always)]
-        public bool Occupied { get; set; }
+        public bool? Occupied { get; set; }
 
         /// <summary>
         /// The start date in thermostat time.
@@ -49,6 +49,6 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// The number of hours to hold for, used and required if holdType='holdHours'.
         /// </summary>
         [JsonProperty(PropertyName = "holdHours")]
-        public int HoldHours { get; set; }
+        public int? HoldHours { get; set; }
     }
 }

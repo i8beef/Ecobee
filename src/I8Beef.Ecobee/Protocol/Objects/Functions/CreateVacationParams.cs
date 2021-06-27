@@ -19,13 +19,13 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// The temperature to set the cool vacation hold at.
         /// </summary>
         [JsonProperty(PropertyName = "coolHoldTemp", Required = Required.Always)]
-        public int CoolHoldTemp { get; set; }
+        public int? CoolHoldTemp { get; set; }
 
         /// <summary>
         /// The temperature to set the heat vacation hold at.
         /// </summary>
         [JsonProperty(PropertyName = "heatHoldTemp", Required = Required.Always)]
-        public int HeatHoldTemp { get; set; }
+        public int? HeatHoldTemp { get; set; }
 
         /// <summary>
         /// The start date in thermostat time.

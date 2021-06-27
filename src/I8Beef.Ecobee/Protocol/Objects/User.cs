@@ -84,30 +84,30 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether this user has a residential role.
         /// </summary>
         [JsonProperty(PropertyName = "isResidential")]
-        public bool IsResidential { get; set; }
+        public bool? IsResidential { get; set; }
 
         /// <summary>
         /// Whether this user has a developer role.
         /// </summary>
         [JsonProperty(PropertyName = "isDeveloper")]
-        public bool IsDeveloper { get; set; }
+        public bool? IsDeveloper { get; set; }
 
         /// <summary>
         /// Whether this user has a management role.
         /// </summary>
         [JsonProperty(PropertyName = "isManagement")]
-        public bool IsManagement { get; set; }
+        public bool? IsManagement { get; set; }
 
         /// <summary>
         /// Whether this user has a utility role.
         /// </summary>
         [JsonProperty(PropertyName = "isUtility")]
-        public bool IsUtility { get; set; }
+        public bool? IsUtility { get; set; }
 
         /// <summary>
         /// Whether this user has a contractor role.
         /// </summary>
         [JsonProperty(PropertyName = "isContractor")]
-        public bool IsContractor { get; set; }
+        public bool? IsContractor { get; set; }
     }
 }

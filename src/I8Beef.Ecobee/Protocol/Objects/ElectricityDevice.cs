@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class ElectricityDevice
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ElectricityDevice"/> class.
-        /// </summary>
-        public ElectricityDevice()
-        {
-            Tiers = new List<ElectricityTier>();
-        }
-
-        /// <summary>
         /// The name of the device
         /// </summary>
         [JsonProperty(PropertyName = "name")]

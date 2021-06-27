@@ -20,6 +20,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// thermostat function.
         /// </summary>
         [JsonProperty(PropertyName = "enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
     }
 }

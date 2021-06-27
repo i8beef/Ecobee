@@ -10,14 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class DemandManagement
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="DemandManagement"/> class.
-        /// </summary>
-        public DemandManagement()
-        {
-            TempOffsets = new List<int>();
-        }
-
-        /// <summary>
         /// The date(UTC) for the beginning of this day's demand management series.
         /// </summary>
         [JsonProperty(PropertyName = "date", Required = Required.Always)]
@@ -27,7 +19,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The hour in the day this series begins at.Range: 0-23
         /// </summary>
         [JsonProperty(PropertyName = "hour", Required = Required.Always)]
-        public int Hour { get; set; }
+        public int? Hour { get; set; }
 
         /// <summary>
         /// The series of 12, 5 minute interval temperature adjustments in the hour.

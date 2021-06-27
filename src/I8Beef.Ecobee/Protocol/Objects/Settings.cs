@@ -24,13 +24,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether to send an alert when service is required again.
         /// </summary>
         [JsonProperty(PropertyName = "serviceRemindMe")]
-        public bool ServiceRemindMe { get; set; }
+        public bool? ServiceRemindMe { get; set; }
 
         /// <summary>
         /// The user configured monthly interval between HVAC service reminders
         /// </summary>
         [JsonProperty(PropertyName = "monthsBetweenService")]
-        public int MonthsBetweenService { get; set; }
+        public int? MonthsBetweenService { get; set; }
 
         /// <summary>
         /// Date to be reminded about the next HVAC service date.
@@ -49,14 +49,14 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// always guarantee that the ventilator runs for this minimum duration whenever engaged.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorMinOnTime")]
-        public int VentilatorMinOnTime { get; set; }
+        public int? VentilatorMinOnTime { get; set; }
 
         /// <summary>
         /// Whether the technician associated with this thermostat should receive the HVAC service
         /// reminders as well.
         /// </summary>
         [JsonProperty(PropertyName = "serviceRemindTechnician")]
-        public bool ServiceRemindTechnician { get; set; }
+        public bool? ServiceRemindTechnician { get; set; }
 
         /// <summary>
         /// A note about the physical location where the SMART or EMS Equipment Interface module is
@@ -69,115 +69,115 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The temperature at which a cold temp alert is triggered.
         /// </summary>
         [JsonProperty(PropertyName = "coldTempAlert")]
-        public int ColdTempAlert { get; set; }
+        public int? ColdTempAlert { get; set; }
 
         /// <summary>
         /// Whether cold temperature alerts are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "coldTempAlertEnabled")]
-        public bool ColdTempAlertEnabled { get; set; }
+        public bool? ColdTempAlertEnabled { get; set; }
 
         /// <summary>
         /// The temperature at which a hot temp alert is triggered.
         /// </summary>
         [JsonProperty(PropertyName = "hotTempAlert")]
-        public int HotTempAlert { get; set; }
+        public int? HotTempAlert { get; set; }
 
         /// <summary>
         /// Whether hot temperature alerts are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "hotTempAlertEnabled")]
-        public bool HotTempAlertEnabled { get; set; }
+        public bool? HotTempAlertEnabled { get; set; }
 
         /// <summary>
         /// The number of cool stages the connected HVAC equipment supports.
         /// </summary>
         [JsonProperty(PropertyName = "coolStages")]
-        public int CoolStages { get; set; }
+        public int? CoolStages { get; set; }
 
         /// <summary>
         /// The number of heat stages the connected HVAC equipment supports.
         /// </summary>
         [JsonProperty(PropertyName = "heatStages")]
-        public int HeatStages { get; set; }
+        public int? HeatStages { get; set; }
 
         /// <summary>
-        /// The maximum automated set point Set back offset allowed in degrees.
+        /// The maximum automated set point? Set back offset allowed in degrees.
         /// </summary>
         [JsonProperty(PropertyName = "maxSetBack")]
-        public int MaxSetBack { get; set; }
+        public int? MaxSetBack { get; set; }
 
         /// <summary>
-        /// The maximum automated set point Set forward offset allowed in degrees.
+        /// The maximum automated set point? Set forward offset allowed in degrees.
         /// </summary>
         [JsonProperty(PropertyName = "maxSetForward")]
-        public int MaxSetForward { get; set; }
+        public int? MaxSetForward { get; set; }
 
         /// <summary>
-        /// The set point Set back offset, in degrees, configured for a quick save event.
+        /// The set point? Set back offset, in degrees, configured for a quick save event.
         /// </summary>
         [JsonProperty(PropertyName = "quickSaveSetBack")]
-        public int QuickSaveSetBack { get; set; }
+        public int? QuickSaveSetBack { get; set; }
 
         /// <summary>
-        /// The set point Set forward offset, in degrees, configured for a quick save event.
+        /// The set point? Set forward offset, in degrees, configured for a quick save event.
         /// </summary>
         [JsonProperty(PropertyName = "quickSaveSetForward")]
-        public int QuickSaveSetForward { get; set; }
+        public int? QuickSaveSetForward { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling a heat pump.
         /// </summary>
         [JsonProperty(PropertyName = "hasHeatPump")]
-        public bool HasHeatPump { get; set; }
+        public bool? HasHeatPump { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling a forced air furnace.
         /// </summary>
         [JsonProperty(PropertyName = "hasForcedAir")]
-        public bool HasForcedAir { get; set; }
+        public bool? HasForcedAir { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling a boiler.
         /// </summary>
         [JsonProperty(PropertyName = "hasBoiler")]
-        public bool HasBoiler { get; set; }
+        public bool? HasBoiler { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling a humidifier.
         /// </summary>
         [JsonProperty(PropertyName = "hasHumidifier")]
-        public bool HasHumidifier { get; set; }
+        public bool? HasHumidifier { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling an energy recovery ventilator.
         /// </summary>
         [JsonProperty(PropertyName = "hasErv")]
-        public bool HasErv { get; set; }
+        public bool? HasErv { get; set; }
 
         /// <summary>
         /// Whether the thermostat is controlling a heat recovery ventilator.
         /// </summary>
         [JsonProperty(PropertyName = "hasHrv")]
-        public bool HasHrv { get; set; }
+        public bool? HasHrv { get; set; }
 
         /// <summary>
         /// Whether the thermostat is in frost control mode.
         /// </summary>
         [JsonProperty(PropertyName = "condensationAvoid")]
-        public bool CondensationAvoid { get; set; }
+        public bool? CondensationAvoid { get; set; }
 
         /// <summary>
         /// Whether the thermostat is configured to report in degrees Celcius.
         /// </summary>
         [JsonProperty(PropertyName = "useCelsius")]
-        public bool UseCelsius { get; set; }
+        public bool? UseCelsius { get; set; }
 
         /// <summary>
         /// Whether the thermostat is using 12hr time format.
         /// </summary>
         [JsonProperty(PropertyName = "useTimeFormat12")]
-        public bool UseTimeFormat12 { get; set; }
+        public bool? UseTimeFormat12 { get; set; }
 
         /// <summary>
         /// Multilanguage support, currently only "en" - english is supported. In future others
@@ -187,7 +187,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string Locale { get; set; }
 
         /// <summary>
-        /// The minimum humidity level (in percent) set point For the humidifier
+        /// The minimum humidity level (in percent) set point? For the humidifier
         /// </summary>
         [JsonProperty(PropertyName = "humidity")]
         public string Humidity { get; set; }
@@ -203,73 +203,73 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "backlightOnIntensity")]
-        public int BacklightOnIntensity { get; set; }
+        public int? BacklightOnIntensity { get; set; }
 
         /// <summary>
         /// The thermostat backlight intensity when asleep. A value between 0 and 10, with 0 meaning
         /// 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "backlightSleepIntensity")]
-        public int BacklightSleepIntensity { get; set; }
+        public int? BacklightSleepIntensity { get; set; }
 
         /// <summary>
         /// The time in seconds before the thermostat screen goes into sleep mode.
         /// </summary>
         [JsonProperty(PropertyName = "backlightOffTime")]
-        public int BacklightOffTime { get; set; }
+        public int? BacklightOffTime { get; set; }
 
         /// <summary>
         /// The volume level for key presses on the thermostat. A value between 0 and 10, with 0 meaning
         /// 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "soundTickVolume")]
-        public int SoundTickVolume { get; set; }
+        public int? SoundTickVolume { get; set; }
 
         /// <summary>
         /// The volume level for alerts on the thermostat. A value between 0 and 10, with 0 meaning
         /// 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "soundAlertVolume")]
-        public int SoundAlertVolume { get; set; }
+        public int? SoundAlertVolume { get; set; }
 
         /// <summary>
         /// The minimum time the compressor must be off for in order to prevent short-cycling.
         /// </summary>
         [JsonProperty(PropertyName = "compressorProtectionMinTime")]
-        public int CompressorProtectionMinTime { get; set; }
+        public int? CompressorProtectionMinTime { get; set; }
 
         /// <summary>
         /// The minimum outdoor temperature that the compressor can operate at - applies more to air
         /// source heat pumps than geothermal.
         /// </summary>
         [JsonProperty(PropertyName = "compressorProtectionMinTemp")]
-        public int CompressorProtectionMinTemp { get; set; }
+        public int? CompressorProtectionMinTemp { get; set; }
 
         /// <summary>
-        /// The difference between current temperature and set-point That will trigger stage 2 heating.
+        /// The difference between current temperature and set-point? That will trigger stage 2 heating.
         /// </summary>
         [JsonProperty(PropertyName = "stage1HeatingDifferentialTemp")]
-        public int Stage1HeatingDifferentialTemp { get; set; }
+        public int? Stage1HeatingDifferentialTemp { get; set; }
 
         /// <summary>
-        /// The difference between current temperature and set-point That will trigger stage 2 cooling.
+        /// The difference between current temperature and set-point? That will trigger stage 2 cooling.
         /// </summary>
         [JsonProperty(PropertyName = "stage1CoolingDifferentialTemp")]
-        public int Stage1CoolingDifferentialTemp { get; set; }
+        public int? Stage1CoolingDifferentialTemp { get; set; }
 
         /// <summary>
         /// The time after a heating cycle that the fan will run for to extract any heating left in
         /// the system - 30 second default.
         /// </summary>
         [JsonProperty(PropertyName = "stage1HeatingDissipationTime")]
-        public int Stage1HeatingDissipationTime { get; set; }
+        public int? Stage1HeatingDissipationTime { get; set; }
 
         /// <summary>
         /// The time after a cooling cycle that the fan will run for to extract any cooling left in the
         /// system - 30 second default (for not)
         /// </summary>
         [JsonProperty(PropertyName = "stage1CoolingDissipationTime")]
-        public int Stage1CoolingDissipationTime { get; set; }
+        public int? Stage1CoolingDissipationTime { get; set; }
 
         /// <summary>
         /// The flag to tell if the heat pump is in heating mode or in cooling when the relay is engaged.
@@ -277,34 +277,34 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// one - it's the opposite.
         /// </summary>
         [JsonProperty(PropertyName = "heatPumpReversalOnCool")]
-        public bool HeatPumpReversalOnCool { get; set; }
+        public bool? HeatPumpReversalOnCool { get; set; }
 
         /// <summary>
         /// Whether fan control by the Thermostat is required in auxiliary heating (gas/electric/boiler),
         /// otherwise controlled by furnace.
         /// </summary>
         [JsonProperty(PropertyName = "fanControlRequired")]
-        public bool FanControlRequired { get; set; }
+        public bool? FanControlRequired { get; set; }
 
         /// <summary>
         /// The minimum time, in minutes, to run the fan each hour. Value from 1 to 60.
         /// </summary>
         [JsonProperty(PropertyName = "fanMinOnTime")]
-        public int FanMinOnTime { get; set; }
+        public int? FanMinOnTime { get; set; }
 
         /// <summary>
         /// The minimum temperature difference between the heat and cool values. Used to ensure that
         /// when thermostat is in auto mode, the heat and cool values are separated by at least this value.
         /// </summary>
         [JsonProperty(PropertyName = "heatCoolMinDelta")]
-        public int HeatCoolMinDelta { get; set; }
+        public int? HeatCoolMinDelta { get; set; }
 
         /// <summary>
         /// The amount to adjust the temperature reading in degrees F - this value is subtracted from
         /// the temperature read from the sensor.
         /// </summary>
         [JsonProperty(PropertyName = "tempCorrection")]
-        public int TempCorrection { get; set; }
+        public int? TempCorrection { get; set; }
 
         /// <summary>
         /// The default end time setting the thermostat applies to user temperature holds. Values
@@ -317,20 +317,20 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the Thermostat uses a geothermal / ground source heat pump.
         /// </summary>
         [JsonProperty(PropertyName = "heatPumpGroundWater")]
-        public bool HeatPumpGroundWater { get; set; }
+        public bool? HeatPumpGroundWater { get; set; }
 
         /// <summary>
         /// Whether the thermostat is connected to an electric HVAC system.
         /// </summary>
         [JsonProperty(PropertyName = "hasElectric")]
-        public bool HasElectric { get; set; }
+        public bool? HasElectric { get; set; }
 
         /// <summary>
         /// Whether the thermostat is connected to a dehumidifier. If true or dehumidifyOvercoolOffset > 0
         /// then allow setting dehumidifierMode and dehumidifierLevel.
         /// </summary>
         [JsonProperty(PropertyName = "hasDehumidifier")]
-        public bool HasDehumidifier { get; set; }
+        public bool? HasDehumidifier { get; set; }
 
         /// <summary>
         /// The dehumidifier mode. Values: on, off. If set to off then the dehumidifier will not run,
@@ -340,10 +340,10 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public string DehumidifierMode { get; set; }
 
         /// <summary>
-        /// The dehumidification set point in percentage.
+        /// The dehumidification set point? in percentage.
         /// </summary>
         [JsonProperty(PropertyName = "dehumidifierLevel")]
-        public int DehumidifierLevel { get; set; }
+        public int? DehumidifierLevel { get; set; }
 
         /// <summary>
         /// Whether the thermostat should use AC overcool to dehumidify. When set to true a postive
@@ -351,7 +351,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// exception will be thrown.
         /// </summary>
         [JsonProperty(PropertyName = "dehumidifyWithAC")]
-        public bool DehumidifyWithAC { get; set; }
+        public bool? DehumidifyWithAC { get; set; }
 
         /// <summary>
         /// Whether the thermostat should use AC overcool to dehumidify and what that temperature
@@ -360,67 +360,67 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Values should be in the range 0 - 50 and be divisible by 5.
         /// </summary>
         [JsonProperty(PropertyName = "dehumidifyOvercoolOffset")]
-        public int DehumidifyOvercoolOffset { get; set; }
+        public int? DehumidifyOvercoolOffset { get; set; }
 
         /// <summary>
         /// If enabled, allows the Thermostat to be put in HVACAuto mode.
         /// </summary>
         [JsonProperty(PropertyName = "autoHeatCoolFeatureEnabled")]
-        public bool AutoHeatCoolFeatureEnabled { get; set; }
+        public bool? AutoHeatCoolFeatureEnabled { get; set; }
 
         /// <summary>
         /// Whether the alert for when wifi is offline is enabled.
         /// </summary>
         [JsonProperty(PropertyName = "wifiOfflineAlert")]
-        public bool WifiOfflineAlert { get; set; }
+        public bool? WifiOfflineAlert { get; set; }
 
         /// <summary>
-        /// The minimum heat set point Allowed by the thermostat firmware.
+        /// The minimum heat set point? Allowed by the thermostat firmware.
         /// </summary>
         [JsonProperty(PropertyName = "heatMinTemp")]
-        public int HeatMinTemp { get; set; }
+        public int? HeatMinTemp { get; set; }
 
         /// <summary>
-        /// The maximum heat set point Allowed by the thermostat firmware.
+        /// The maximum heat set point? Allowed by the thermostat firmware.
         /// </summary>
         [JsonProperty(PropertyName = "heatMaxTemp")]
-        public int HeatMaxTemp { get; set; }
+        public int? HeatMaxTemp { get; set; }
 
         /// <summary>
-        /// The minimum cool set point Allowed by the thermostat firmware.
+        /// The minimum cool set point? Allowed by the thermostat firmware.
         /// </summary>
         [JsonProperty(PropertyName = "coolMinTemp")]
-        public int CoolMinTemp { get; set; }
+        public int? CoolMinTemp { get; set; }
 
         /// <summary>
-        /// The maximum cool set point Allowed by the thermostat firmware.
+        /// The maximum cool set point? Allowed by the thermostat firmware.
         /// </summary>
         [JsonProperty(PropertyName = "coolMaxTemp")]
-        public int CoolMaxTemp { get; set; }
+        public int? CoolMaxTemp { get; set; }
 
         /// <summary>
-        /// The maximum heat set point Configured by the user's preferences.
+        /// The maximum heat set point? Configured by the user's preferences.
         /// </summary>
         [JsonProperty(PropertyName = "heatRangeHigh")]
-        public int HeatRangeHigh { get; set; }
+        public int? HeatRangeHigh { get; set; }
 
         /// <summary>
-        /// The minimum heat set point Configured by the user's preferences.
+        /// The minimum heat set point? Configured by the user's preferences.
         /// </summary>
         [JsonProperty(PropertyName = "heatRangeLow")]
-        public int HeatRangeLow { get; set; }
+        public int? HeatRangeLow { get; set; }
 
         /// <summary>
-        /// The maximum cool set point Configured by the user's preferences.
+        /// The maximum cool set point? Configured by the user's preferences.
         /// </summary>
         [JsonProperty(PropertyName = "coolRangeHigh")]
-        public int CoolRangeHigh { get; set; }
+        public int? CoolRangeHigh { get; set; }
 
         /// <summary>
-        /// The minimum heat set point Configured by the user's preferences.
+        /// The minimum heat set point? Configured by the user's preferences.
         /// </summary>
         [JsonProperty(PropertyName = "coolRangeLow")]
-        public int CoolRangeLow { get; set; }
+        public int? CoolRangeLow { get; set; }
 
         /// <summary>
         /// The user access code value for this thermostat. See the SecuritySettings object for
@@ -434,67 +434,67 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// for more information.
         /// </summary>
         [JsonProperty(PropertyName = "userAccessSetting")]
-        public int UserAccessSetting { get; set; }
+        public int? UserAccessSetting { get; set; }
 
         /// <summary>
         /// The temperature at which an auxHeat temperature alert is triggered.
         /// </summary>
         [JsonProperty(PropertyName = "auxRuntimeAlert")]
-        public int AuxRuntimeAlert { get; set; }
+        public int? AuxRuntimeAlert { get; set; }
 
         /// <summary>
         /// The temperature at which an auxOutdoor temperature alert is triggered.
         /// </summary>
         [JsonProperty(PropertyName = "auxOutdoorTempAlert")]
-        public int AuxOutdoorTempAlert { get; set; }
+        public int? AuxOutdoorTempAlert { get; set; }
 
         /// <summary>
         /// The maximum outdoor temperature above which aux heat will not run.
         /// </summary>
         [JsonProperty(PropertyName = "auxMaxOutdoorTemp")]
-        public int AuxMaxOutdoorTemp { get; set; }
+        public int? AuxMaxOutdoorTemp { get; set; }
 
         /// <summary>
         /// Whether the auxHeat temperature alerts are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "auxRuntimeAlertNotify")]
-        public bool AuxRuntimeAlertNotify { get; set; }
+        public bool? AuxRuntimeAlertNotify { get; set; }
 
         /// <summary>
         /// Whether the auxOutdoor temperature alerts are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "auxOutdoorTempAlertNotify")]
-        public bool AuxOutdoorTempAlertNotify { get; set; }
+        public bool? AuxOutdoorTempAlertNotify { get; set; }
 
         /// <summary>
         /// Whether the auxHeat temperature alerts for the technician are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "auxRuntimeAlertNotifyTechnician")]
-        public bool AuxRuntimeAlertNotifyTechnician { get; set; }
+        public bool? AuxRuntimeAlertNotifyTechnician { get; set; }
 
         /// <summary>
         /// Whether the auxOutdoor temperature alerts for the technician are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "auxOutdoorTempAlertNotifyTechnician")]
-        public bool AuxOutdoorTempAlertNotifyTechnician { get; set; }
+        public bool? AuxOutdoorTempAlertNotifyTechnician { get; set; }
 
         /// <summary>
-        /// Whether the thermostat should use pre heating to reach the set point on time.
+        /// Whether the thermostat should use pre heating to reach the set point? on time.
         /// </summary>
         [JsonProperty(PropertyName = "disablePreHeating")]
-        public bool DisablePreHeating { get; set; }
+        public bool? DisablePreHeating { get; set; }
 
         /// <summary>
-        /// Whether the thermostat should use pre cooling to reach the set point on time.
+        /// Whether the thermostat should use pre cooling to reach the set point? on time.
         /// </summary>
         [JsonProperty(PropertyName = "disablePreCooling")]
-        public bool DisablePreCooling { get; set; }
+        public bool? DisablePreCooling { get; set; }
 
         /// <summary>
         /// Whether an installer code is required.
         /// </summary>
         [JsonProperty(PropertyName = "installerCodeRequired")]
-        public bool InstallerCodeRequired { get; set; }
+        public bool? InstallerCodeRequired { get; set; }
 
         /// <summary>
         /// Whether Demand Response requests are accepted by this thermostat. Possible values are:
@@ -507,141 +507,141 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the property is a rental, or not.
         /// </summary>
         [JsonProperty(PropertyName = "isRentalProperty")]
-        public bool IsRentalProperty { get; set; }
+        public bool? IsRentalProperty { get; set; }
 
         /// <summary>
         /// Whether to use a zone controller or not.
         /// </summary>
         [JsonProperty(PropertyName = "useZoneController")]
-        public bool UseZoneController { get; set; }
+        public bool? UseZoneController { get; set; }
 
         /// <summary>
         /// Whether random start delay is enabled for cooling.
         /// </summary>
         [JsonProperty(PropertyName = "randomStartDelayCool")]
-        public int RandomStartDelayCool { get; set; }
+        public int? RandomStartDelayCool { get; set; }
 
         /// <summary>
         /// Whether random start delay is enabled for heating.
         /// </summary>
         [JsonProperty(PropertyName = "randomStartDelayHeat")]
-        public int RandomStartDelayHeat { get; set; }
+        public int? RandomStartDelayHeat { get; set; }
 
         /// <summary>
         /// The humidity level to trigger a high humidity alert.
         /// </summary>
         [JsonProperty(PropertyName = "humidityHighAlert")]
-        public int HumidityHighAlert { get; set; }
+        public int? HumidityHighAlert { get; set; }
 
         /// <summary>
         /// The humidity level to trigger a low humidity alert.
         /// </summary>
         [JsonProperty(PropertyName = "humidityLowAlert")]
-        public int HumidityLowAlert { get; set; }
+        public int? HumidityLowAlert { get; set; }
 
         /// <summary>
         /// Whether heat pump alerts are disabled.
         /// </summary>
         [JsonProperty(PropertyName = "disableHeatPumpAlerts")]
-        public bool DisableHeatPumpAlerts { get; set; }
+        public bool? DisableHeatPumpAlerts { get; set; }
 
         /// <summary>
         /// Whether alerts are disabled from showing on the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "disableAlertsOnIdt")]
-        public bool DisableAlertsOnIdt { get; set; }
+        public bool? DisableAlertsOnIdt { get; set; }
 
         /// <summary>
         /// Whether humidification alerts are enabled to the thermsotat owner.
         /// </summary>
         [JsonProperty(PropertyName = "humidityAlertNotify")]
-        public bool HumidityAlertNotify { get; set; }
+        public bool? HumidityAlertNotify { get; set; }
 
         /// <summary>
         /// Whether humidification alerts are enabled to the technician associated with the thermsotat.
         /// </summary>
         [JsonProperty(PropertyName = "humidityAlertNotifyTechnician")]
-        public bool HumidityAlertNotifyTechnician { get; set; }
+        public bool? HumidityAlertNotifyTechnician { get; set; }
 
         /// <summary>
         /// Whether temperature alerts are enabled to the thermsotat owner.
         /// </summary>
         [JsonProperty(PropertyName = "tempAlertNotify")]
-        public bool TempAlertNotify { get; set; }
+        public bool? TempAlertNotify { get; set; }
 
         /// <summary>
         /// Whether temperature alerts are enabled to the technician associated with the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "tempAlertNotifyTechnician")]
-        public bool TempAlertNotifyTechnician { get; set; }
+        public bool? TempAlertNotifyTechnician { get; set; }
 
         /// <summary>
         /// The dollar amount the owner specifies for their desired maximum electricy bill.
         /// </summary>
         [JsonProperty(PropertyName = "monthlyElectricityBillLimit")]
-        public int MonthlyElectricityBillLimit { get; set; }
+        public int? MonthlyElectricityBillLimit { get; set; }
 
         /// <summary>
         /// Whether electricity bill alerts are enabled.
         /// </summary>
         [JsonProperty(PropertyName = "enableElectricityBillAlert")]
-        public bool EnableElectricityBillAlert { get; set; }
+        public bool? EnableElectricityBillAlert { get; set; }
 
         /// <summary>
         /// Whether electricity bill projection alerts are enabled
         /// </summary>
         [JsonProperty(PropertyName = "enableProjectedElectricityBillAlert")]
-        public bool EnableProjectedElectricityBillAlert { get; set; }
+        public bool? EnableProjectedElectricityBillAlert { get; set; }
 
         /// <summary>
         /// The day of the month the owner's electricty usage is billed.
         /// </summary>
         [JsonProperty(PropertyName = "electricityBillingDayOfMonth")]
-        public int ElectricityBillingDayOfMonth { get; set; }
+        public int? ElectricityBillingDayOfMonth { get; set; }
 
         /// <summary>
         /// The owners billing cycle duration in months.
         /// </summary>
         [JsonProperty(PropertyName = "electricityBillCycleMonths")]
-        public int ElectricityBillCycleMonths { get; set; }
+        public int? ElectricityBillCycleMonths { get; set; }
 
         /// <summary>
         /// The annual start month of the owners billing cycle.
         /// </summary>
         [JsonProperty(PropertyName = "electricityBillStartMonth")]
-        public int ElectricityBillStartMonth { get; set; }
+        public int? ElectricityBillStartMonth { get; set; }
 
         /// <summary>
         /// The number of minutes to run ventilator per hour when home.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorMinOnTimeHome")]
-        public int VentilatorMinOnTimeHome { get; set; }
+        public int? VentilatorMinOnTimeHome { get; set; }
 
         /// <summary>
         /// The number of minutes to run ventilator per hour when away.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorMinOnTimeAway")]
-        public int VentilatorMinOnTimeAway { get; set; }
+        public int? VentilatorMinOnTimeAway { get; set; }
 
         /// <summary>
         /// Determines whether or not to turn the backlight off during sleep.
         /// </summary>
         [JsonProperty(PropertyName = "backlightOffDuringSleep")]
-        public bool BacklightOffDuringSleep { get; set; }
+        public bool? BacklightOffDuringSleep { get; set; }
 
         /// <summary>
         /// When set to true if no occupancy motion detected thermostat will go into indefinite
         /// away hold, until either the user presses resume schedule or motion is detected.
         /// </summary>
         [JsonProperty(PropertyName = "autoAway")]
-        public bool AutoAway { get; set; }
+        public bool? AutoAway { get; set; }
 
         /// <summary>
         /// When set to true if a larger than normal delta is found between sensors the fan will be
         /// engaged for 15min/hour.
         /// </summary>
         [JsonProperty(PropertyName = "smartCirculation")]
-        public bool SmartCirculation { get; set; }
+        public bool? SmartCirculation { get; set; }
 
         /// <summary>
         /// When set to true if a sensor has detected presense for more than 10 minutes then include that
@@ -649,7 +649,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// remove this sensor from temperature average.
         /// </summary>
         [JsonProperty(PropertyName = "followMeComfort")]
-        public bool FollowMeComfort { get; set; }
+        public bool? FollowMeComfort { get; set; }
 
         /// <summary>
         /// This read-only field represents the type of ventilator present for the Thermostat. The
@@ -664,7 +664,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// the ventilatorOffDateTime is set to it's default value.
         /// </summary>
         [JsonProperty(PropertyName = "isVentilatorTimerOn")]
-        public bool IsVentilatorTimerOn { get; set; }
+        public bool? IsVentilatorTimerOn { get; set; }
 
         /// <summary>
         /// This read-only field represents the Date and Time the ventilator will run until. The default
@@ -677,35 +677,35 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// This Boolean field represents whether the HVAC system has a UV filter. The default value is true.
         /// </summary>
         [JsonProperty(PropertyName = "hasUVFilter")]
-        public bool HasUVFilter { get; set; }
+        public bool? HasUVFilter { get; set; }
 
         /// <summary>
         /// This field represents whether to permit the cooling to operate when the Outdoor temeperature is
         /// under a specific threshold, currently 55F. The default value is false.
         /// </summary>
         [JsonProperty(PropertyName = "coolingLockout")]
-        public bool CoolingLockout { get; set; }
+        public bool? CoolingLockout { get; set; }
 
         /// <summary>
         /// Whether to use the ventilator to dehumidify when climate or calendar event indicates the owner is
         /// home. The default value is false.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorFreeCooling")]
-        public bool VentilatorFreeCooling { get; set; }
+        public bool? VentilatorFreeCooling { get; set; }
 
         /// <summary>
         /// This field represents whether to permit dehumidifer to operate when the heating is running.
         /// The default value is false.
         /// </summary>
         [JsonProperty(PropertyName = "dehumidifyWhenHeating")]
-        public bool DehumidifyWhenHeating { get; set; }
+        public bool? DehumidifyWhenHeating { get; set; }
 
         /// <summary>
         /// This field represents whether or not to allow dehumification when cooling. The default value
         /// is true.
         /// </summary>
         [JsonProperty(PropertyName = "ventilatorDehumidify")]
-        public bool VentilatorDehumidify { get; set; }
+        public bool? VentilatorDehumidify { get; set; }
 
         /// <summary>
         /// The unique reference to the group this thermostat belongs to, if any. See GET Group request and
@@ -726,6 +726,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// POST Group request for more information.
         /// </summary>
         [JsonProperty(PropertyName = "groupSetting")]
-        public int GroupSetting { get; set; }
+        public int? GroupSetting { get; set; }
     }
 }

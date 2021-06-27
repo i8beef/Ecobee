@@ -40,12 +40,12 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
         /// Whether to include the user privileges.
         /// </summary>
         [JsonProperty(PropertyName = "includePrivileges")]
-        public bool IncludePrivileges { get; set; }
+        public bool? IncludePrivileges { get; set; }
 
         /// <summary>
         /// Whether to also return the children of the children, recursively. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "recursive")]
-        public bool Recursive { get; set; }
+        public bool? Recursive { get; set; }
     }
 }

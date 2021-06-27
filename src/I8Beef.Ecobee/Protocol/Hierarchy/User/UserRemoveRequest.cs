@@ -12,14 +12,6 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.User
     public class UserRemoveRequest : RequestBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserRemoveRequest"/> class.
-        /// </summary>
-        public UserRemoveRequest()
-        {
-            Users = new List<HierarchyUser>();
-        }
-
-        /// <summary>
         /// Request URI.
         /// </summary>
         public override string Uri { get { return "/hierarchy/user"; } }

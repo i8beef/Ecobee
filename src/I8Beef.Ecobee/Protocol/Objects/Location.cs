@@ -12,7 +12,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The timezone offset in minutes from UTC.
         /// </summary>
         [JsonProperty(PropertyName = "timeZoneOffsetMinutes")]
-        public int TimeZoneOffsetMinutes { get; set; }
+        public int? TimeZoneOffsetMinutes { get; set; }
 
         /// <summary>
         /// The Olson timezone the thermostat resides in (e.g America/Toronto).
@@ -24,7 +24,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// Whether the thermostat should factor in daylight savings when displaying the date and time.
         /// </summary>
         [JsonProperty(PropertyName = "isDaylightSaving")]
-        public bool IsDaylightSaving { get; set; }
+        public bool? IsDaylightSaving { get; set; }
 
         /// <summary>
         /// The thermostat location street address.

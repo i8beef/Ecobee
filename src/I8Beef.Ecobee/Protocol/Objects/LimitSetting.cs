@@ -14,14 +14,14 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// from 5 to 95. See here for more information.
         /// </summary>
         [JsonProperty(PropertyName = "limit")]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         /// <summary>
         /// Boolean value representing whether or not alerts/reminders are enabled for this
         /// notification type or not.
         /// </summary>
         [JsonProperty(PropertyName = "enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>
         /// The type of notification. Possible values are: lowTemp, highTemp, lowHumidity,
@@ -35,6 +35,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// technician/contractor associated with the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "remindTechnician")]
-        public bool RemindTechnician { get; set; }
+        public bool? RemindTechnician { get; set; }
     }
 }

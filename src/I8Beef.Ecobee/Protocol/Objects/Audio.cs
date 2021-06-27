@@ -14,27 +14,27 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// assistant. A value between 0 and 100.
         /// </summary>
         [JsonProperty(PropertyName = "playbackVolume")]
-        public int PlaybackVolume { get; set; }
+        public int? PlaybackVolume { get; set; }
 
         /// <summary>
         /// Turn microphone (privacy mode) on and off.
         /// </summary>
         [JsonProperty(PropertyName = "microphoneEnabled	")]
-        public bool MicrophoneEnabled { get; set; }
+        public bool? MicrophoneEnabled { get; set; }
 
         /// <summary>
         /// The volume level for alerts on the thermostat. A value between 0 and 10, with 0
         /// meaning 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "soundAlertVolume")]
-        public int SoundAlertVolume { get; set; }
+        public int? SoundAlertVolume { get; set; }
 
         /// <summary>
         /// The volume level for key presses on the thermostat. A value between 0 and 10,
         /// with 0 meaning 'off' - the zero value may not be honored by all ecobee versions.
         /// </summary>
         [JsonProperty(PropertyName = "soundTickVolume")]
-        public int SoundTickVolume { get; set; }
+        public int? SoundTickVolume { get; set; }
 
         /// <summary>
         /// The list of voice engines compatible with the selected thermostat.

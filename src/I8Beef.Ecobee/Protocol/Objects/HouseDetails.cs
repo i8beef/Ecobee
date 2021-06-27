@@ -19,31 +19,31 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The size of the house in square feet.
         /// </summary>
         [JsonProperty(PropertyName = "size")]
-        public int Size { get; set; }
+        public int? Size { get; set; }
 
         /// <summary>
         /// The number of floors or levels in the house.
         /// </summary>
         [JsonProperty(PropertyName = "numberOfFloors")]
-        public int NumberOfFloors { get; set; }
+        public int? NumberOfFloors { get; set; }
 
         /// <summary>
         /// The number of rooms in the house.
         /// </summary>
         [JsonProperty(PropertyName = "numberOfRooms")]
-        public int NumberOfRooms { get; set; }
+        public int? NumberOfRooms { get; set; }
 
         /// <summary>
         /// The number of occupants living in the house.
         /// </summary>
         [JsonProperty(PropertyName = "numberOfOccupants")]
-        public int NumberOfOccupants { get; set; }
+        public int? NumberOfOccupants { get; set; }
 
         /// <summary>
         /// The age of house in years.
         /// </summary>
         [JsonProperty(PropertyName = "age")]
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         /// <summary>
         /// This field defines the window efficiency of the house. Valid values are in the range 1 - 7.
@@ -51,6 +51,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// when in 'frost Control' mode. See the NOTE above before updating this value.
         /// </summary>
         [JsonProperty(PropertyName = "windowEfficiency")]
-        public int WindowEfficiency { get; set; }
+        public int? WindowEfficiency { get; set; }
     }
 }

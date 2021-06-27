@@ -10,33 +10,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class ExtendedRuntime
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExtendedRuntime"/> class.
-        /// </summary>
-        public ExtendedRuntime()
-        {
-            ActualTemperature = new List<int>();
-            ActualHumidity = new List<int>();
-            DesiredHeat = new List<int>();
-            DesiredCool = new List<int>();
-            DesiredHumidity = new List<int>();
-            DesiredDehumidity = new List<int>();
-            DmOffset = new List<int>();
-            HvacMode = new List<string>();
-            HeatPump1 = new List<int>();
-            HeatPump2 = new List<int>();
-            AuxHeat1 = new List<int>();
-            AuxHeat2 = new List<int>();
-            AuxHeat3 = new List<int>();
-            Cool1 = new List<int>();
-            Cool2 = new List<int>();
-            Fan = new List<int>();
-            Humidifier = new List<int>();
-            Dehumidifier = new List<int>();
-            Economizer = new List<int>();
-            Ventilator = new List<int>();
-        }
-
-        /// <summary>
         /// The UTC timestamp of the last value read. This timestamp is updated at a 15 min interval
         /// by the thermostat. For the 1st value, it is timestamp - 10 mins, for the 2nd value it
         /// is timestamp - 5 mins. Consider day boundaries being straddled when using these values.
@@ -56,7 +29,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// mins to obtain the minutes of the day. Range: 0-287
         /// </summary>
         [JsonProperty(PropertyName = "runtimeInterval")]
-        public int RuntimeInterval { get; set; }
+        public int? RuntimeInterval { get; set; }
 
         /// <summary>
         /// The last three 5 minute actual temperature readings
@@ -199,13 +172,13 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// readings from a paired electricity meter.
         /// </summary>
         [JsonProperty(PropertyName = "currentElectricityBill")]
-        public int CurrentElectricityBill { get; set; }
+        public int? CurrentElectricityBill { get; set; }
 
         /// <summary>
         /// The latest estimate of the projected electricity bill as interpolated from the thermostat's
         /// readings from a paired electricity meter.
         /// </summary>
         [JsonProperty(PropertyName = "projectedElectricityBill")]
-        public int ProjectedElectricityBill { get; set; }
+        public int? ProjectedElectricityBill { get; set; }
     }
 }

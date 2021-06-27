@@ -13,7 +13,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// this notification type or not.
         /// </summary>
         [JsonProperty(PropertyName = "enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>
         /// The type of notification. Possible values are: temp
@@ -26,6 +26,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// to the technician/contractor assoicated with the thermostat.
         /// </summary>
         [JsonProperty(PropertyName = "remindTechnician")]
-        public bool RemindTechnician { get; set; }
+        public bool? RemindTechnician { get; set; }
     }
 }

@@ -55,6 +55,6 @@ namespace I8Beef.Ecobee.Protocol.Functions
         /// The number of hours to hold for, used and required if holdType='holdHours'.
         /// </summary>
         [JsonProperty(PropertyName = "holdHours")]
-        public int HoldHours { get; set; }
+        public int? HoldHours { get; set; }
     }
 }

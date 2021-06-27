@@ -10,19 +10,10 @@ namespace I8Beef.Ecobee.Protocol.Objects
     public class Device
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Device"/> class.
-        /// </summary>
-        public Device()
-        {
-            Sensors = new List<Sensor>();
-            Outputs = new List<Output>();
-        }
-
-        /// <summary>
         /// A unique ID for the device
         /// </summary>
         [JsonProperty(PropertyName = "deviceId")]
-        public int DeviceId { get; set; }
+        public int? DeviceId { get; set; }
 
         /// <summary>
         /// The user supplied device name

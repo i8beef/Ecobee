@@ -27,77 +27,77 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeAlerts")]
-        public bool SynchronizeAlerts { get; set; }
+        public bool? SynchronizeAlerts { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat mode with all other Thermostats in
         /// the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeSystemMode")]
-        public bool SynchronizeSystemMode { get; set; }
+        public bool? SynchronizeSystemMode { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat schedule/Program details with all
         /// other Thermostats in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeSchedule")]
-        public bool SynchronizeSchedule { get; set; }
+        public bool? SynchronizeSchedule { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat quick save settings with all other
         /// Thermostats in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeQuickSave")]
-        public bool SynchronizeQuickSave { get; set; }
+        public bool? SynchronizeQuickSave { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat reminders with all other Thermostats
         /// in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeReminders")]
-        public bool SynchronizeReminders { get; set; }
+        public bool? SynchronizeReminders { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat Technician/Contractor Information with
         /// all other Thermostats in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeContractorInfo")]
-        public bool SynchronizeContractorInfo { get; set; }
+        public bool? SynchronizeContractorInfo { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat user preferences with all other Thermostats
         /// in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeUserPreferences")]
-        public bool SynchronizeUserPreferences { get; set; }
+        public bool? SynchronizeUserPreferences { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat utility information with all other
         /// Thermostats in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeUtilityInfo")]
-        public bool SynchronizeUtilityInfo { get; set; }
+        public bool? SynchronizeUtilityInfo { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat Location with all other Thermostats in
         /// the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeLocation")]
-        public bool SynchronizeLocation { get; set; }
+        public bool? SynchronizeLocation { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat reset with all other Thermostats in the
         /// Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeReset")]
-        public bool SynchronizeReset { get; set; }
+        public bool? SynchronizeReset { get; set; }
 
         /// <summary>
         /// Flag for whether to synchronize the Thermostat vacation Program with all other Thermostats
         /// in the Group. Default is false.
         /// </summary>
         [JsonProperty(PropertyName = "synchronizeVacation")]
-        public bool SynchronizeVacation { get; set; }
+        public bool? SynchronizeVacation { get; set; }
 
         /// <summary>
         /// The list of Thermostat identifiers which belong to the group. If an empty list is sent the

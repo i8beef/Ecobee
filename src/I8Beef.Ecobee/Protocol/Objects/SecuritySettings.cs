@@ -21,7 +21,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// true this value will default to true.
         /// </summary>
         [JsonProperty(PropertyName = "allUserAccess")]
-        public bool AllUserAccess { get; set; }
+        public bool? AllUserAccess { get; set; }
 
         /// <summary>
         /// The flag for determing whether there are any restrictions on the thermostat
@@ -29,7 +29,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// unless allUserAccess is true.
         /// </summary>
         [JsonProperty(PropertyName = "programAccess")]
-        public bool ProgramAccess { get; set; }
+        public bool? ProgramAccess { get; set; }
 
         /// <summary>
         /// The flag for determing whether there are any restrictions on the thermostat
@@ -37,7 +37,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// is false, unless allUserAccess is true.
         /// </summary>
         [JsonProperty(PropertyName = "detailsAccess")]
-        public bool DetailsAccess { get; set; }
+        public bool? DetailsAccess { get; set; }
 
         /// <summary>
         /// The flag for determing whether there are any restrictions on the thermostat
@@ -45,7 +45,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// value is false, unless allUserAccess is true.
         /// </summary>
         [JsonProperty(PropertyName = "quickSaveAccess")]
-        public bool QuickSaveAccess { get; set; }
+        public bool? QuickSaveAccess { get; set; }
 
         /// <summary>
         /// The flag for determing whether there are any restrictions on the thermostat
@@ -53,6 +53,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// value is false, unless allUserAccess is true.
         /// </summary>
         [JsonProperty(PropertyName = "vacationAccess")]
-        public bool VacationAccess { get; set; }
+        public bool? VacationAccess { get; set; }
     }
 }

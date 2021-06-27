@@ -40,18 +40,18 @@ namespace I8Beef.Ecobee.Protocol.Hierarchy.Set
         /// Whether to also return the children of the children, recursively. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "recursive")]
-        public bool Recursive { get; set; }
+        public bool? Recursive { get; set; }
 
         /// <summary>
         /// Whether to include the privileges with each set. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "includePrivileges")]
-        public bool IncludePrivileges { get; set; }
+        public bool? IncludePrivileges { get; set; }
 
         /// <summary>
         /// Whether to include a list of all thermostat identifiers assigned to each set. Default: false
         /// </summary>
         [JsonProperty(PropertyName = "includeThermostats")]
-        public bool IncludeThermostats { get; set; }
+        public bool? IncludeThermostats { get; set; }
     }
 }
