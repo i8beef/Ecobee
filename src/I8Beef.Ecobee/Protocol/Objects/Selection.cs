@@ -148,5 +148,23 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// </summary>
         [JsonProperty(PropertyName = "includeSensors")]
         public bool? IncludeSensors { get; set; }
+
+        /// <summary>
+        /// Include the audio configuration for the selected Thermostat(s). If not specified, defaults to false.
+        /// </summary>
+        [JsonProperty(PropertyName = "includeAudio")]
+        public bool? IncludeAudio { get; set; }
+
+        /// <summary>
+        /// Include the energy configuration for the selected Thermostat(s). If not specified, defaults to false.
+        /// </summary>
+        [JsonProperty(PropertyName = "includeEnergy")]
+        public bool? IncludeEnergy { get; set; }
+
+        /// <summary>
+        /// Include the capabilities for the selected Thermostat(s). If not specified, defaults to false.
+        /// </summary>
+        [JsonProperty(PropertyName = "includeCapabilities")]
+        public bool? IncludeCapabilities { get; set; }
     }
 }

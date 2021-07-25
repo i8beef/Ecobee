@@ -34,8 +34,9 @@ namespace I8Beef.Ecobee.Protocol.Objects
         public bool? IsRegistered { get; set; }
 
         /// <summary>
-        /// The thermostat model number. Values: idtSmart, idtEms, siSmart, siEms, athenaSmart,
-        /// athenaEms, corSmart
+        /// The thermostat model number.
+        ///
+        /// Values: apolloSmart, apolloEms, idtSmart, idtEms, siSmart, siEms, athenaSmart, athenaEms, corSmart, nikeSmart, nikeEms
         /// </summary>
         [JsonProperty(PropertyName = "modelNumber")]
         public string ModelNumber { get; set; }
@@ -219,5 +220,11 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// </summary>
         [JsonProperty(PropertyName = "remoteSensors")]
         public IList<RemoteSensor> RemoteSensors { get; set; }
+
+        /// <summary>
+        /// The capabilities the given thermostat has.
+        /// </summary>
+        [JsonProperty(PropertyName = "capabilities")]
+        public Capabilities Capabilities { get; set; }
     }
 }

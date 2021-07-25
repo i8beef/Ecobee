@@ -12,7 +12,7 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The Integer value used to map to a weatherSymbol. See list of mappings above.
         /// </summary>
         [JsonProperty(PropertyName = "weatherSymbol")]
-        public int? WeatherSymbol { get; set; }
+        public WeatherSymbol? WeatherSymbol { get; set; }
 
         /// <summary>
         /// The time stamp of the weather forecast.
@@ -102,6 +102,6 @@ namespace I8Beef.Ecobee.Protocol.Objects
         /// The cloud cover condition.
         /// </summary>
         [JsonProperty(PropertyName = "sky")]
-        public int? Sky { get; set; }
+        public WeatherSky? Sky { get; set; }
     }
 }
