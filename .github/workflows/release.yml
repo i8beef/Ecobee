@@ -25,14 +25,18 @@ jobs:
           dotnet-version: ${{ env.DOTNETVERSION }}
 
       - name: Get version
-        id: get_version
+        id: version
         uses: battila7/get-version-action@v2
+
+      - name: Get previous release tag
+        id: previousTag
+        uses: sammcoe/get-previous-release-action@v1.0.3
 
       - name: Install dependencies
         run: dotnet restore ${{ env.SOLUTION }}
 
       - name: Build
-        run: dotnet build ${{ env.SOLUTION }} --configuration Release --no-restore /p:Version=${{ steps.get_version.outputs.version-without-v }}
+        run: dotnet build ${{ env.SOLUTION }} --configuration Release --no-restore /p:Version=${{ steps.version.outputs.version-without-v }}
 
       - name: Test
         run: dotnet test ${{ env.SOLUTION }} --no-restore --verbosity normal --logger trx --results-directory "TestResults"
@@ -50,10 +54,11 @@ jobs:
           path: TestResults
 
       - name: Build changelog
-        id: changelog
-        uses: metcalfc/changelog-generator@v1.0.0
+        id: gitLog
+        uses: jarrodparkes/git-log-action@1.0.0
         with:
-          myToken: ${{ secrets.GITHUB_TOKEN }}
+          start: ${{ github.ref }}
+          end: ${{ steps.previousTag.outputs.tag }}
 
       - name: GitHub release
         uses: actions/create-release@v1
@@ -61,14 +66,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_name: ${{ steps.get_version.outputs.version-without-v }}
+          release_name: ${{ steps.version.outputs.version-without-v }}
           tag_name: ${{ github.ref }}
-          body: ${{ steps.changelog.outputs.changelog }}
+          body: ${{ steps.gitLog.outputs.log }}
           draft: false
           prerelease: false
         
       - name: NuGet pack
-        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.get_version.outputs.version-without-v }} -o out
+        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.version.outputs.version-without-v }} -o out
 
       - name: Upload NuGet build artifact
         uses: actions/upload-artifact@v2
@@ -77,4 +82,4 @@ jobs:
           path: out
 
       - name: NuGet push
-        run: dotnet nuget push ".\out\*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_TOKEN}}
+        run: dotnet nuget push ".\out\*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}
