@@ -28,10 +28,6 @@ jobs:
         id: get_version
         uses: battila7/get-version-action@v2
 
-      - name: Get previous release tag
-        id: previous_tag
-        uses: sammcoe/get-previous-release-action@v1.0.3
-
       - name: Install dependencies
         run: dotnet restore ${{ env.SOLUTION }}
 
@@ -53,14 +49,11 @@ jobs:
           name: TestResults
           path: TestResults
 
-      - name: "Build changelog"
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v2.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v1.0.0
         with:
-          fromTag: ${{ steps.previous_tag.outputs.tag }}
-          commitMode: true
+          myToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: GitHub release
         uses: actions/create-release@v1
