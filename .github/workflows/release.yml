@@ -27,7 +27,7 @@ jobs:
 
       - name: Get previous release tag
         id: previous_tag
-        uses: actions/get-previous-release-action@v1
+        uses: sammcoe/get-previous-release-action@v1
 
       - name: Install dependencies
         run: dotnet restore ${{ env.SOLUTION }}
