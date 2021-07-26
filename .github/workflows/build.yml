@@ -1,0 +1,40 @@
+name: build
+on: [push, pull_request]
+
+env:
+  DOTNETVERSION: "5.0.x"
+  APP: "I8Beef.Ecobee"
+  SOLUTION: "./src/I8Beef.Ecobee.sln"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK ${{ env.DOTNETVERSION }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ env.DOTNETVERSION }}
+
+      - name: Install dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION }} --configuration Release --no-restore
+
+      - name: Upload app build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.APP }}
+          path: src\I8Beef.Ecobee\bin\Release\netstandard2.0\publish
+
+      - name: Test
+        run: dotnet test ${{ env.SOLUTION }} --no-restore --verbosity normal --logger trx --results-directory "TestResults"
+
+      - name: Upload TestResults build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestResults
+          path: TestResults

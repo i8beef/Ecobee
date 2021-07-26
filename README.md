@@ -1,7 +1,6 @@
 # Ecobee
 
-[![Build status](https://ci.appveyor.com/api/projects/status/nibvi4x6ynwnu1ao/branch/release?svg=true)](https://ci.appveyor.com/project/i8beef/ecobee/branch/release)
-[![Build status](https://ci.appveyor.com/api/projects/status/nibvi4x6ynwnu1ao/branch/master?svg=true)](https://ci.appveyor.com/project/i8beef/ecobee/branch/master)
+![Build](https://github.com/i8beef/Ecobee/actions/workflows/build.yml/badge.svg?branch=master)
 
 Ecobee is a client library for accessing the Ecobee APIs.
 
