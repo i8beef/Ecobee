@@ -66,8 +66,7 @@ jobs:
         with:
           release_name: ${{ steps.get_version.outputs.version-without-v }}
           tag_name: ${{ github.ref }}
-          body_path: |
-            ${{ steps.build_changelog.outputs.changelog }}
+          body: ${{ steps.build_changelog.outputs.changelog }}
           draft: false
           prerelease: false
         
