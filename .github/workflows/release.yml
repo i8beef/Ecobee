@@ -1,0 +1,80 @@
+name: release
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+.[0-9]+"
+
+env:
+  DOTNETVERSION: "5.0.x"
+  APP: "I8Beef.Ecobee"
+  SOLUTION: "./src/I8Beef.Ecobee.sln"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK ${{ env.DOTNETVERSION }}
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: ${{ env.DOTNETVERSION }}
+
+      - name: Get version
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Install dependencies
+        run: dotnet restore ${{ env.SOLUTION }}
+
+      - name: Build
+        run: dotnet build ${{ env.SOLUTION }} --configuration Release --no-restore /p:Version=${{ steps.get_version.outputs.version-without-v }}
+
+      - name: Test
+        run: dotnet test ${{ env.SOLUTION }} --no-restore --verbosity normal --logger trx --results-directory "TestResults"
+
+      - name: Upload app build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.APP }}
+          path: src\I8Beef.Ecobee\bin\Release\netstandard2.0
+
+      - name: Upload TestResults build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestResults
+          path: TestResults
+
+      - name: "Build changelog"
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: GitHub release
+        uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_name: ${{ steps.get_version.outputs.version-without-v }}
+          tag_name: ${{ github.ref }}
+          body_path: |
+            ${{ steps.build_changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+        
+      - name: NuGet pack
+        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.get_version.outputs.version-without-v }} -o out
+
+      - name: Upload NuGet build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.APP }} NuGet Packages
+          path: out
+
+      - name: NuGet push
+        run: dotnet nuget push ./out/*.nupkg --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate

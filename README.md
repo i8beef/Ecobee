@@ -1,6 +1,7 @@
 # Ecobee
 
 ![Build](https://github.com/i8beef/Ecobee/actions/workflows/build.yml/badge.svg?branch=master)
+![Release](https://github.com/i8beef/Ecobee/actions/workflows/release.yml/badge.svg?branch=master)
 
 Ecobee is a client library for accessing the Ecobee APIs.
 
