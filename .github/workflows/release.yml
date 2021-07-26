@@ -11,7 +11,7 @@ env:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.APP }}
-          path: src\I8Beef.Ecobee\bin\Release\netstandard2.0
+          path: src/I8Beef.Ecobee/bin/Release/netstandard2.0
 
       - name: Upload TestResults build artifact
         uses: actions/upload-artifact@v2
@@ -62,7 +62,7 @@ jobs:
 
       - name: GitHub release
         uses: actions/create-release@v1
-        id: create_release
+        id: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -82,4 +82,4 @@ jobs:
           path: out
 
       - name: NuGet push
-        run: dotnet nuget push ".\out\*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}
+        run: dotnet nuget push "./out/*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}
