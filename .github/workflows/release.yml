@@ -25,6 +25,12 @@ jobs:
         id: get_version
         uses: battila7/get-version-action@v2
 
+      - name: Get previous tag
+        id: get_previous_tag
+        run: |
+          PREV_TAG=$(git describe --abbrev=0 --tags "${{ github.ref }}^")
+          echo "::set-output name=previous_tag::$PREV_TAG"
+
       - name: Install dependencies
         run: dotnet restore ${{ env.SOLUTION }}
 
@@ -51,6 +57,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fromTag: ${{ steps.get_previous_tag.outputs.previous_tag }}
 
       - name: GitHub release
         uses: actions/create-release@v1
@@ -75,4 +83,4 @@ jobs:
           path: out
 
       - name: NuGet push
-        run: dotnet nuget push ./out/*.nupkg --api-key ${{secrets.NUGET_TOKEN}} --skip-duplicate
+        run: dotnet nuget push ./out/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_TOKEN}}
