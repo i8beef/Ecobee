@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.APP }}
-          path: src\I8Beef.Ecobee\bin\Release\netstandard2.0\publish
+          path: src\I8Beef.Ecobee\bin\Release\netstandard2.0
 
       - name: Test
         run: dotnet test ${{ env.SOLUTION }} --no-restore --verbosity normal --logger trx --results-directory "TestResults"
