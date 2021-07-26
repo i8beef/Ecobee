@@ -73,11 +73,11 @@ jobs:
       - name: NuGet pack
         run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.get_version.outputs.version-without-v }} -o out
 
-      - name: NuGet push
-        run: dotnet nuget push out/*.nupkg --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_TOKEN}}
-
       - name: Upload NuGet build artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.APP }} NuGet Packages
           path: out
+
+      - name: NuGet push
+        run: dotnet nuget push ".\out\*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET_TOKEN}}
