@@ -8,6 +8,8 @@ env:
   DOTNETVERSION: "5.0.x"
   APP: "I8Beef.Ecobee"
   SOLUTION: "./src/I8Beef.Ecobee.sln"
+  BUILDOUTPUTPATH: "./src/I8Beef.Ecobee/bin/Release/netstandard2.0"
+  PACKOUTPUTPATH: "./out"
 
 jobs:
   build:
@@ -44,8 +46,8 @@ jobs:
       - name: Upload app build artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.APP }}
-          path: src/I8Beef.Ecobee/bin/Release/netstandard2.0
+          name: ${{ env.APP }}-${{ steps.version.outputs.version-without-v }}
+          path: ${{ env.BUILDOUTPUTPATH }}
 
       - name: Upload TestResults build artifact
         uses: actions/upload-artifact@v2
@@ -71,15 +73,29 @@ jobs:
           body: ${{ env.LOG }}
           draft: false
           prerelease: false
-        
+
+      - name: ZIP release artifact
+        run: zip -r ${{ env.APP }}-${{ steps.version.outputs.version-without-v }}.zip ${{ env.BUILDOUTPUTPATH }}
+
+      - name: GitHub release assets
+        uses: actions/upload-release-asset@v1
+        id: release_assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.release.outputs.upload_url }}
+          asset_path: ${{ env.APP }}-${{ steps.version.outputs.version-without-v }}.zip
+          asset_name: ${{ env.APP }}-${{ steps.version.outputs.version-without-v }}.zip
+          asset_content_type: application/zip
+
       - name: NuGet pack
-        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.version.outputs.version-without-v }} -o out
+        run: dotnet pack ${{ env.SOLUTION }} --configuration Release --no-restore --include-symbols /p:Version=${{ steps.version.outputs.version-without-v }} -o ${{ env.PACKOUTPUTPATH }}
 
       - name: Upload NuGet build artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.APP }} NuGet Packages
-          path: out
+          path: ${{ env.PACKOUTPUTPATH }}
 
       - name: NuGet push
-        run: dotnet nuget push "./out/*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}
+        run: dotnet nuget push "./${{ env.PACKOUTPUTPATH }}/*.nupkg" --skip-duplicate --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_TOKEN }}

@@ -11,6 +11,7 @@ env:
   DOTNETVERSION: "5.0.x"
   APP: "I8Beef.Ecobee"
   SOLUTION: "./src/I8Beef.Ecobee.sln"
+  BUILDOUTPUTPATH: "./src/I8Beef.Ecobee/bin/Release/netstandard2.0"
 
 jobs:
   build:
@@ -34,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.APP }}
-          path: src/I8Beef.Ecobee/bin/Release/netstandard2.0
+          path: ${{ env.BUILDOUTPUTPATH }}
 
       - name: Test
         run: dotnet test ${{ env.SOLUTION }} --no-restore --verbosity normal --logger trx --results-directory "TestResults"
