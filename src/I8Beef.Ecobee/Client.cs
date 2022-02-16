@@ -190,7 +190,8 @@ namespace I8Beef.Ecobee
                     throw new NullReferenceException("Auth token storage delegate failed to provide token.");
                 }
 
-                if (DateTime.Compare(DateTime.Now, storedAuthToken.TokenExpiration) >= 0)
+                // If token expires within 30 seconds, renew to avoid possible subsecond expiration
+                if (DateTime.Compare(DateTime.Now.AddSeconds(30), storedAuthToken.TokenExpiration) >= 0)
                 {
                     var requestMessage = new HttpRequestMessage(HttpMethod.Post, _baseUri + "token?grant_type=refresh_token&refresh_token=" + storedAuthToken.RefreshToken + "&client_id=" + _appKey);
                     requestMessage.Headers.ExpectContinue = false;
